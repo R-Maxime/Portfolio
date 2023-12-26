@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import createHttpError, { HttpError } from 'http-errors';
-import IUserRepository from '../../../database/Portfolio/repositories/IUserRepository';
+import IUserRepository from '../../../database/Portfolio/repositories/User/IUserRepository';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
 import { IUserDocument } from '../../../database/Portfolio/Models/Users';
 

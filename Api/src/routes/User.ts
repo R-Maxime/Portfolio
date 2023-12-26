@@ -1,10 +1,10 @@
 import express from 'express';
 import DBClient from '../database/client';
-import LoginQuery from '../controllers/User/usecase/LoginQuery';
-import IUserRepository from '../database/Portfolio/repositories/IUserRepository';
-import MongoDBUserRepository from '../database/Portfolio/repositories/MongoDBUserRepository';
+import LoginQuery from '../controllers/User/Usecase/LoginQuery';
+import IUserRepository from '../database/Portfolio/repositories/User/IUserRepository';
+import MongoDBUserRepository from '../database/Portfolio/repositories/User/MongoDBUserRepository';
 import UserController from '../controllers/UserController';
-import SignupCommand from '../controllers/User/usecase/SignupCommand';
+import SignupCommand from '../controllers/User/Usecase/SignupCommand';
 
 export default class UserRoutes {
   private readonly router: express.Router;
@@ -30,7 +30,7 @@ export default class UserRoutes {
     this.router.post('/signup', controller.signup.bind(controller));
   }
 
-  getRouter(): express.Router {
+  get Router(): express.Router {
     return this.router;
   }
 }

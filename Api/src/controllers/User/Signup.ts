@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { HttpError } from 'http-errors';
-import SignupCommand from './usecase/SignupCommand';
+import SignupCommand from './Usecase/SignupCommand';
 import HttpStatusCode from '../../enums/HttpStatusCode';
 
 export default class Signup {
@@ -23,7 +23,7 @@ export default class Signup {
       return res.status(HttpStatusCode.CREATED).json(command);
     } catch (error) {
       console.error('Error while signup', error);
-      return res.status(500).json({ message: 'Error while signup', error });
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while signup', error });
     }
   }
 }

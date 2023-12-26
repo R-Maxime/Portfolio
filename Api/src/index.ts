@@ -1,16 +1,11 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import AppConfig from './AppConfig';
-import DBClient from './database/client';
 
 class App {
   private readonly expressApp: Express;
 
   private readonly API_PORT: Number;
-
-  private readonly portfolioDB: DBClient;
-
-  private readonly botDB: DBClient;
 
   constructor() {
     dotenv.config();
@@ -19,12 +14,12 @@ class App {
 
     this.expressApp = express();
 
+    this.setup();
+  }
+
+  async setup(): Promise<void> {
+    await new AppConfig(this.expressApp).setup();
     this.startServer();
-
-    this.portfolioDB = new DBClient(process.env.DB_NAME as string);
-    this.botDB = new DBClient(process.env.DB_SECOND_NAME as string);
-
-    new AppConfig(this.expressApp, this.portfolioDB, this.botDB);
   }
 
   private startServer(): void {

@@ -5,20 +5,23 @@ import { rateLimit } from 'express-rate-limit';
 import NodeEnvEnum from './enums/NodeEnvEnum';
 import DBClient from './database/client';
 import UserRoutes from './routes/User';
+import WorksRoutes from './routes/Work';
 
 export default class AppConfig {
   private readonly expressApp: Express;
 
-  private readonly portfolioDB: DBClient;
+  private readonly portfolioDB = new DBClient(process.env.DB_NAME as string);
 
-  private readonly botDB: DBClient;
+  private readonly botDB = new DBClient(process.env.DB_SECOND_NAME as string);
 
-  constructor(expressApp: Express, portfolioDB: DBClient, botDB: DBClient) {
+  constructor(expressApp: Express) {
     this.expressApp = expressApp;
-    this.portfolioDB = portfolioDB;
-    this.botDB = botDB;
+  }
+
+  async setup(): Promise<void> {
     this.setupMiddleware();
-    this.setupRoutes();
+    await this.connectDBs();
+    await this.setupRoutes();
   }
 
   private setupRateLimit(): void {
@@ -50,7 +53,13 @@ export default class AppConfig {
     this.expressApp.use('/public', express.static('public'));
   }
 
-  private setupRoutes(): void {
-    this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).getRouter());
+  private async connectDBs(): Promise<void> {
+    await this.portfolioDB.connect();
+    await this.botDB.connect();
+  }
+
+  private async setupRoutes(): Promise<void> {
+    this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
+    this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
   }
 }

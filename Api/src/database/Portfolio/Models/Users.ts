@@ -19,7 +19,7 @@ export default class UserModel {
     });
   }
 
-  getSchema(): Model<IUser> {
+  get schema(): Model<IUser> {
     return this.PortfolioDB.client.model<IUser>('User', this.UserSchema);
   }
 }

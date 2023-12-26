@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import LoginQuery from './User/usecase/LoginQuery';
+import LoginQuery from './User/Usecase/LoginQuery';
 import Login from './User/Login';
-import SignupCommand from './User/usecase/SignupCommand';
+import SignupCommand from './User/Usecase/SignupCommand';
 import Signup from './User/Signup';
 
 export default class UserController {

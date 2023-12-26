@@ -11,8 +11,6 @@ export default class DBClient {
     this.MONGO_IP = process.env.MONGO_IP as string;
     this.dbname = dbname;
     this.client = new mongoose.Mongoose();
-
-    this.connect();
   }
 
   async connect(): Promise<void> {

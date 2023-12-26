@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
-import IUser from '../Interfaces/Users';
-import DBClient from '../../client';
-import { IUserDocument } from '../Models/Users';
+import IUser from '../../Interfaces/Users';
+import DBClient from '../../../client';
+import { IUserDocument } from '../../Models/Users';
 
 /**
  * Represents a user repository.

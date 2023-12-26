@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
-import DBClient from '../../client';
-import IUser from '../Interfaces/Users';
-import UserModel, { IUserDocument } from '../Models/Users';
+import DBClient from '../../../client';
+import IUser from '../../Interfaces/Users';
+import UserModel, { IUserDocument } from '../../Models/Users';
 import IUserRepository from './IUserRepository';
 
 export default class MongoDBUserRepository implements IUserRepository {
@@ -12,14 +12,16 @@ export default class MongoDBUserRepository implements IUserRepository {
   constructor(portfolioDB: DBClient) {
     this.portfolioDB = portfolioDB;
 
-    this.userRepository = new UserModel(this.portfolioDB).getSchema();
+    this.userRepository = new UserModel(this.portfolioDB).schema;
   }
 
   async create(user: IUser): Promise<IUserDocument> {
-    return this.userRepository.create(user);
+    const newUser = await this.userRepository.create(user);
+    return newUser;
   }
 
   async findUserByUsername(username: string): Promise<IUserDocument | null> {
-    return this.userRepository.findOne({ username });
+    const user = await this.userRepository.findOne({ username });
+    return user;
   }
 }

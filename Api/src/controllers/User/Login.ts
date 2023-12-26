@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { HttpError } from 'http-errors';
-import LoginQuery from './usecase/LoginQuery';
+import LoginQuery from './Usecase/LoginQuery';
 import HttpStatusCode from '../../enums/HttpStatusCode';
 
 export default class Login {
@@ -23,7 +23,7 @@ export default class Login {
       return res.status(HttpStatusCode.OK).json(query);
     } catch (error) {
       console.error('Error while logging in', error);
-      return res.status(500).json({ message: 'Error while logging in', error });
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while logging in', error });
     }
   }
 }

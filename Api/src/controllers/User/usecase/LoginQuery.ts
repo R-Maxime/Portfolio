@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import createHttpError, { HttpError } from 'http-errors';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
-import IUserRepository from '../../../database/Portfolio/repositories/IUserRepository';
+import IUserRepository from '../../../database/Portfolio/repositories/User/IUserRepository';
 
 interface ILoginResponse {
   token: string,
