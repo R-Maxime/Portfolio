@@ -19,10 +19,15 @@ export default class WorkModel {
       webUrl: { type: String },
       images: { type: [String] },
       createdAt: { type: Date, required: true },
+      updatedAt: { type: Date },
     });
   }
 
-  get schema(): Model<IWork> {
+  get model(): Model<IWork> {
+    if (this.PortfolioDB.client.models.Work) {
+      return this.PortfolioDB.client.models.Work as Model<IWork>;
+    }
+
     return this.PortfolioDB.client.model<IWork>('Work', this.WorkSchema);
   }
 }

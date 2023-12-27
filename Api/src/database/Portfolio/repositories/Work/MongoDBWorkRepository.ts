@@ -12,7 +12,7 @@ export default class MongoDBWorkRepository implements IWorkRepository {
   constructor(portfolioDB: DBClient) {
     this.portfolioDB = portfolioDB;
 
-    this.workRepository = new WorkModel(this.portfolioDB).schema;
+    this.workRepository = new WorkModel(this.portfolioDB).model;
   }
 
   async create(work: IWork): Promise<IWorkDocument> {

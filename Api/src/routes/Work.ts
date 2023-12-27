@@ -4,6 +4,8 @@ import MongoDBWorkRepository from '../database/Portfolio/repositories/Work/Mongo
 import IWorkRepository from '../database/Portfolio/repositories/Work/IWorkRepository';
 import WorkController from '../controllers/WorkController';
 import GetWorkQuery from '../controllers/Work/Usecase/GetWorkQuery';
+import PostWorkCommand from '../controllers/Work/Usecase/PostWorkCommand';
+import AuthMiddleware from '../middlewares/AuthMiddleware';
 
 export default class WorksRoutes {
   private readonly router: express.Router;
@@ -22,10 +24,12 @@ export default class WorksRoutes {
   private setupRoutes(): void {
     const controller = new WorkController(
       new GetWorkQuery(this.workRepository),
+      new PostWorkCommand(this.workRepository),
     );
 
     this.router.get('/', controller.getWorks.bind(controller));
     this.router.get('/:id', controller.getWork.bind(controller));
+    this.router.post('/', AuthMiddleware, controller.createWork.bind(controller));
   }
 
   get Router(): express.Router {

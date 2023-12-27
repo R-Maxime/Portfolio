@@ -12,7 +12,7 @@ export default class MongoDBUserRepository implements IUserRepository {
   constructor(portfolioDB: DBClient) {
     this.portfolioDB = portfolioDB;
 
-    this.userRepository = new UserModel(this.portfolioDB).schema;
+    this.userRepository = new UserModel(this.portfolioDB).model;
   }
 
   async create(user: IUser): Promise<IUserDocument> {

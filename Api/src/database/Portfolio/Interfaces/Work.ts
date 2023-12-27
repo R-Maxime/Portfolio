@@ -3,6 +3,7 @@ export default interface IWork {
   description: string;
   repoUrl?: string;
   webUrl?: string;
-  images?: string[];
+  images?: [string];
   createdAt: Date;
+  updatedAt?: Date;
 }
