@@ -1,8 +1,6 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import { Model, Schema } from 'mongoose';
 import DBClient from '../../client';
-import IWork from '../Interfaces/Work';
-
-export interface IWorkDocument extends IWork, mongoose.Document { }
+import IWork from '../../../business/Models/Work';
 
 export default class WorkModel {
   private readonly PortfolioDB: DBClient;
@@ -13,13 +11,12 @@ export default class WorkModel {
     this.PortfolioDB = PortfolioDB;
 
     this.WorkSchema = new PortfolioDB.client.Schema<IWork>({
+      id: { type: String, required: true, unique: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
       repoUrl: { type: String },
       webUrl: { type: String },
       images: { type: [String] },
-      createdAt: { type: Date, required: true },
-      updatedAt: { type: Date },
     });
   }
 

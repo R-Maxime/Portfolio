@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
-import IWork from '../../Interfaces/Work';
-import IWorkRepository from './IWorkRepository';
 import DBClient from '../../../client';
-import WorkModel, { IWorkDocument } from '../../Models/Work';
+import WorkModel from '../../Models/Work';
+import IWork from '../../../../business/Models/Work';
+import IWorkRepository from '../../../../business/Ports/IWorkRepository';
 
 export default class MongoDBWorkRepository implements IWorkRepository {
   readonly workRepository: Model<IWork>;
@@ -15,22 +15,22 @@ export default class MongoDBWorkRepository implements IWorkRepository {
     this.workRepository = new WorkModel(this.portfolioDB).model;
   }
 
-  async create(work: IWork): Promise<IWorkDocument> {
+  async create(work: IWork): Promise<IWork> {
     const newWork = await this.workRepository.create(work);
     return newWork;
   }
 
-  async getAllWorks(): Promise<IWorkDocument[] | null> {
+  async getAllWorks(): Promise<IWork[] | null> {
     const works = await this.workRepository.find();
     return works;
   }
 
-  async getWorkById(id: string): Promise<IWorkDocument | null> {
-    const work = await this.workRepository.findById(id);
+  async getWorkByWorkId(id: string): Promise<IWork | null> {
+    const work = await this.workRepository.findOne({ id });
     return work;
   }
 
-  async updateWorkById(id: string, work: IWork): Promise<IWorkDocument | null> {
+  async updateWorkById(id: string, work: IWork): Promise<IWork | null> {
     const updatedWork = await this.workRepository.findByIdAndUpdate(id, work);
     return updatedWork;
   }

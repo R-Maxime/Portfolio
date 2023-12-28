@@ -1,10 +1,10 @@
 import express from 'express';
 import DBClient from '../database/client';
 import MongoDBWorkRepository from '../database/Portfolio/repositories/Work/MongoDBWorkRepository';
-import IWorkRepository from '../database/Portfolio/repositories/Work/IWorkRepository';
+import IWorkRepository from '../business/Ports/IWorkRepository';
 import WorkController from '../controllers/WorkController';
-import GetWorkQuery from '../controllers/Work/Usecase/GetWorkQuery';
-import PostWorkCommand from '../controllers/Work/Usecase/PostWorkCommand';
+import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
+import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import AuthMiddleware from '../middlewares/AuthMiddleware';
 
 export default class WorksRoutes {

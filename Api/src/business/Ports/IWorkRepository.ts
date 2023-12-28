@@ -1,35 +1,28 @@
-import { Model } from 'mongoose';
-import DBClient from '../../../client';
-import IWork from '../../Interfaces/Work';
-import { IWorkDocument } from '../../Models/Work';
+import IWork from '../Models/Work';
 
 /**
  * Represents the interface for a work repository.
  */
 export default interface IWorkRepository {
-  readonly workRepository: Model<IWork>;
-
-  readonly portfolioDB: DBClient;
-
   /**
    * Creates a new work.
    * @param work The work to create.
    * @returns A promise that resolves to the created work document.
    */
-  create(work: IWork): Promise<IWorkDocument>;
+  create(work: IWork): Promise<IWork>;
 
   /**
    * Retrieves all works.
    * @returns A promise that resolves to an array of work documents, or null if no works are found.
    */
-  getAllWorks(): Promise<IWorkDocument[] | null>;
+  getAllWorks(): Promise<IWork[] | null>;
 
   /**
    * Retrieves a work by its ID.
    * @param id The ID of the work to retrieve.
    * @returns A promise that resolves to the retrieved work document, or null if no work is found.
    */
-  getWorkById(id: string): Promise<IWorkDocument | null>;
+  getWorkByWorkId(id: string): Promise<IWork | null>;
 
   /**
    * Updates a work by its ID.
@@ -37,7 +30,7 @@ export default interface IWorkRepository {
    * @param work The updated work data.
    * @returns A promise that resolves to the updated work document, or null if no work is found.
    */
-  updateWorkById(id: string, work: IWork): Promise<IWorkDocument | null>;
+  updateWorkById(id: string, work: IWork): Promise<IWork | null>;
 
   /**
    * Deletes a work by its ID.

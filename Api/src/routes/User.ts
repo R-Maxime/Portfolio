@@ -1,10 +1,10 @@
 import express from 'express';
 import DBClient from '../database/client';
-import LoginQuery from '../controllers/User/Usecase/LoginQuery';
-import IUserRepository from '../database/Portfolio/repositories/User/IUserRepository';
+import LoginQuery from '../business/Usecase/User/LoginQuery';
 import MongoDBUserRepository from '../database/Portfolio/repositories/User/MongoDBUserRepository';
 import UserController from '../controllers/UserController';
-import SignupCommand from '../controllers/User/Usecase/SignupCommand';
+import SignupCommand from '../business/Usecase/User/SignupCommand';
+import IUserRepository from '../business/Ports/IUserRepository';
 
 export default class UserRoutes {
   private readonly router: express.Router;

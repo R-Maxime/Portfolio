@@ -1,8 +1,6 @@
-import mongoose, { Model, Schema } from 'mongoose';
-import IUser from '../Interfaces/Users';
+import { Model, Schema } from 'mongoose';
 import DBClient from '../../client';
-
-export interface IUserDocument extends IUser, mongoose.Document { }
+import IUser from '../../../business/Models/Users';
 
 export default class UserModel {
   private readonly PortfolioDB: DBClient;
@@ -13,9 +11,9 @@ export default class UserModel {
     this.PortfolioDB = PortfolioDB;
 
     this.UserSchema = new PortfolioDB.client.Schema<IUser>({
+      id: { type: String, required: true, unique: true },
       username: { type: String, required: true },
       password: { type: String, required: true },
-      createdAt: { type: Date, required: true },
     });
   }
 

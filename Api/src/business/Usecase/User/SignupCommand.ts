@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
 import createHttpError, { HttpError } from 'http-errors';
-import IUserRepository from '../../../database/Portfolio/repositories/User/IUserRepository';
+import { randomUUID } from 'crypto';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
-import { IUserDocument } from '../../../database/Portfolio/Models/Users';
+import IUserRepository from '../../Ports/IUserRepository';
+import IUser from '../../Models/Users';
 
 export default class SignupCommand {
   private readonly userRepository: IUserRepository;
@@ -14,7 +15,7 @@ export default class SignupCommand {
     this.bcrypt = bcrypt;
   }
 
-  public async signup(username: string, password: string): Promise<HttpError | IUserDocument> {
+  public async signup(username: string, password: string): Promise<HttpError | IUser> {
     if (!username || !password) {
       return createHttpError(HttpStatusCode.BAD_REQUEST, 'Username or password is missing');
     }
@@ -31,9 +32,9 @@ export default class SignupCommand {
     }
 
     const user = await this.userRepository.create({
+      id: randomUUID().toString(),
       username,
       password: hash,
-      createdAt: new Date(),
     });
 
     if (!user) {

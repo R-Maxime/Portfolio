@@ -1,7 +1,7 @@
 import createHttpError, { HttpError } from 'http-errors';
-import IWorkRepository from '../../../database/Portfolio/repositories/Work/IWorkRepository';
+import IWorkRepository from '../../Ports/IWorkRepository';
+import IWork from '../../Models/Work';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
-import { IWorkDocument } from '../../../database/Portfolio/Models/Work';
 
 export default class GetWorkQuery {
   workRepository: IWorkRepository;
@@ -10,7 +10,7 @@ export default class GetWorkQuery {
     this.workRepository = workRepository;
   }
 
-  async getAllWorks(): Promise<IWorkDocument[] | HttpError> {
+  async getAllWorks(): Promise<IWork[] | HttpError> {
     const works = await this.workRepository.getAllWorks();
 
     if (!works) {
@@ -20,8 +20,8 @@ export default class GetWorkQuery {
     return Promise.resolve(works);
   }
 
-  async getWork(id: string): Promise<IWorkDocument | HttpError> {
-    const work = await this.workRepository.getWorkById(id);
+  async getWork(id: string): Promise<IWork | HttpError> {
+    const work = await this.workRepository.getWorkByWorkId(id);
 
     if (!work) {
       return createHttpError(HttpStatusCode.NOT_FOUND, 'Work not found');

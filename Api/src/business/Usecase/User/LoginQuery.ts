@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import createHttpError, { HttpError } from 'http-errors';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
-import IUserRepository from '../../../database/Portfolio/repositories/User/IUserRepository';
+import IUserRepository from '../../Ports/IUserRepository';
 
 interface ILoginResponse {
   token: string,
@@ -39,7 +39,7 @@ export default class LoginQuery {
       return createHttpError(HttpStatusCode.BAD_REQUEST, 'Login or password incorrect');
     }
 
-    const token = this.generateToken(user);
+    const token = this.generateToken(user.id);
 
     if (!token) {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while generating token');
@@ -47,7 +47,7 @@ export default class LoginQuery {
 
     return Promise.resolve({
       token,
-      userId: user._id,
+      userId: user.id,
     });
   }
 
@@ -55,9 +55,9 @@ export default class LoginQuery {
     return this.bcrypt.compare(password, hash);
   }
 
-  generateToken(user: any): string {
+  generateToken(userId: string): string {
     return this.jwt.sign(
-      { userId: user._id },
+      { userId },
       process.env.JWT_SECRET as string,
       { expiresIn: '1h' },
     );
