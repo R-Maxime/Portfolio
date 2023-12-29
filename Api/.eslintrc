@@ -15,6 +15,7 @@
     "no-console": "off",
     "no-new": "off",
     "indent": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "max-len": "off"
   }
 }

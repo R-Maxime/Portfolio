@@ -6,6 +6,7 @@ import WorkController from '../controllers/WorkController';
 import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
 import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import AuthMiddleware from '../middlewares/AuthMiddleware';
+import Multer from '../middlewares/Multer';
 
 export default class WorksRoutes {
   private readonly router: express.Router;
@@ -29,7 +30,7 @@ export default class WorksRoutes {
 
     this.router.get('/', controller.getWorks.bind(controller));
     this.router.get('/:id', controller.getWork.bind(controller));
-    this.router.post('/', AuthMiddleware, controller.createWork.bind(controller));
+    this.router.post('/', AuthMiddleware, Multer.any(), controller.createWork.bind(controller));
   }
 
   get Router(): express.Router {

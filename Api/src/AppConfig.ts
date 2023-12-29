@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
+import fs from 'fs';
 import NodeEnvEnum from './enums/NodeEnvEnum';
 import DBClient from './database/client';
 import UserRoutes from './routes/User';
@@ -19,6 +20,9 @@ export default class AppConfig {
   }
 
   async setup(): Promise<void> {
+    if (!fs.existsSync('public')) {
+      fs.mkdirSync('public');
+    }
     this.setupMiddleware();
     await this.connectDBs();
     await this.setupRoutes();
@@ -37,6 +41,13 @@ export default class AppConfig {
     this.expressApp.use(limiter);
   }
 
+  private logRequests(): void {
+    this.expressApp.use((req: Request, res: Response, next) => {
+      console.info(`[Server]: ${req.method} ${req.path}`);
+      next();
+    });
+  }
+
   private setupMiddleware(): void {
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
@@ -44,13 +55,7 @@ export default class AppConfig {
       crossOriginResourcePolicy: { policy: 'cross-origin' },
     }));
     this.setupRateLimit();
-
-    this.expressApp.use((req: Request, res: Response, next) => {
-      console.info(`[Server]: ${req.method} ${req.path}`);
-      next();
-    });
-
-    this.expressApp.use('/public', express.static('public'));
+    this.logRequests();
   }
 
   private async connectDBs(): Promise<void> {
@@ -59,6 +64,7 @@ export default class AppConfig {
   }
 
   private async setupRoutes(): Promise<void> {
+    this.expressApp.use('/public', express.static('public'));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
   }

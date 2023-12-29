@@ -4,6 +4,7 @@ import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
 import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import IWork from '../business/Models/Work';
+import { getFilesUrl } from '../utils/Utils';
 
 export default class WorkController {
   constructor(
@@ -45,8 +46,12 @@ export default class WorkController {
 
   async createWork(req: Request, res: Response): Promise<Response> {
     try {
-      console.log(JSON.stringify(req.body, null, 2));
-      const command = await this.postWorkCommand.createWork(req.body.work as IWork);
+      const work = {
+        ...JSON.parse(req.body.work),
+        images: getFilesUrl(req.files as Express.Multer.File[]),
+      } as IWork;
+
+      const command = await this.postWorkCommand.createWork(work);
 
       if (command instanceof HttpError) {
         return res.status(command.statusCode).json({ error: command.message });

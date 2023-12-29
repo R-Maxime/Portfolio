@@ -6,6 +6,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
   try {
     const { authorization } = req.headers;
     if (!authorization) {
+      console.log('No authorization header');
       res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
       return;
     }
@@ -13,6 +14,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
     const token = authorization.split(' ')[1];
 
     if (!token) {
+      console.log('No token');
       res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
       return;
     }
@@ -25,11 +27,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
       return;
     }
 
-    if (userId !== req.body.userId) {
-      res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
-      return;
-    }
-
+    req.body.userId = userId;
     next();
   } catch (error) {
     console.error('Error while authenticating user: ', error);
