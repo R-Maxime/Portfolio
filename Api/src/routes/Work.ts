@@ -7,6 +7,8 @@ import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
 import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import AuthMiddleware from '../middlewares/AuthMiddleware';
 import Multer from '../middlewares/Multer';
+import PutWorkCommand from '../business/Usecase/Work/PutWorkCommand';
+import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
 
 export default class WorksRoutes {
   private readonly router: express.Router;
@@ -26,11 +28,15 @@ export default class WorksRoutes {
     const controller = new WorkController(
       new GetWorkQuery(this.workRepository),
       new PostWorkCommand(this.workRepository),
+      new PutWorkCommand(this.workRepository),
+      new DeleteWorkCommand(this.workRepository),
     );
 
     this.router.get('/', controller.getWorks.bind(controller));
     this.router.get('/:id', controller.getWork.bind(controller));
     this.router.post('/', AuthMiddleware, Multer.any(), controller.createWork.bind(controller));
+    this.router.put('/:id', AuthMiddleware, Multer.any(), controller.updateWork.bind(controller));
+    this.router.delete('/:id', AuthMiddleware, controller.deleteWork.bind(controller));
   }
 
   get Router(): express.Router {

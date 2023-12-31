@@ -30,13 +30,13 @@ export default class MongoDBWorkRepository implements IWorkRepository {
     return work;
   }
 
-  async updateWorkById(id: string, work: IWork): Promise<IWork | null> {
-    const updatedWork = await this.workRepository.findByIdAndUpdate(id, work);
+  async updateWorkById(work: IWork): Promise<IWork | null> {
+    const updatedWork = await this.workRepository.findOneAndUpdate({ id: work.id }, work, { new: true });
     return updatedWork;
   }
 
   async deleteWorkById(id: string): Promise<void> {
-    await this.workRepository.findByIdAndDelete(id);
+    await this.workRepository.findOneAndDelete({ id });
     return Promise.resolve();
   }
 }

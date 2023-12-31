@@ -30,7 +30,7 @@ export default interface IWorkRepository {
    * @param work The updated work data.
    * @returns A promise that resolves to the updated work document, or null if no work is found.
    */
-  updateWorkById(id: string, work: IWork): Promise<IWork | null>;
+  updateWorkById(work: IWork): Promise<IWork | null>;
 
   /**
    * Deletes a work by its ID.
