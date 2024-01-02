@@ -7,6 +7,7 @@ import NodeEnvEnum from './enums/NodeEnvEnum';
 import DBClient from './database/client';
 import UserRoutes from './routes/User';
 import WorksRoutes from './routes/Work';
+import DiscordRoutes from './routes/Discord';
 
 export default class AppConfig {
   private readonly expressApp: Express;
@@ -54,6 +55,7 @@ export default class AppConfig {
     this.expressApp.use(helmet({
       crossOriginResourcePolicy: { policy: 'cross-origin' },
     }));
+    this.expressApp.disable('x-powered-by');
     this.setupRateLimit();
     this.logRequests();
   }
@@ -67,5 +69,6 @@ export default class AppConfig {
     this.expressApp.use('/public', express.static('public'));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
+    this.expressApp.use('/discordbot', new DiscordRoutes(this.botDB).Router);
   }
 }
