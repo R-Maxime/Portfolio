@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HttpError } from 'http-errors';
 import HttpStatusCode from '../enums/HttpStatusCode';
-import DiscordStatsQuery from '../business/Usecase/Discord/Stats/DiscordStatsQuery';
+import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
 
 export default class DiscordStatsController {
   constructor(

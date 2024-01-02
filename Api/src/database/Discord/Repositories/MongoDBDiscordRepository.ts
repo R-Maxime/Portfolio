@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 import DBClient from '../../client';
 import IDiscordRepository from '../../../business/Ports/IDiscordRepository';
+import DiscordStatsCollection from '../Collections/DiscordStats';
+import DiscordGuildsCollection from '../Collections/DiscordGuilds';
 import { IDiscordStats } from '../../../business/Models/DiscordStats';
-import DiscordStatsCollection from '../Models/DiscordStats';
 import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
-import DiscordGuildsCollection from '../Models/DiscordGuilds';
 
 export default class MongoDBDiscordRepository implements IDiscordRepository {
   private readonly discordStatsRepository: mongoose.Collection<IDiscordStats>;

@@ -1,7 +1,7 @@
 import createHttpError, { HttpError } from 'http-errors';
-import { IGlobalStats } from '../../../Models/Discord';
-import IDiscordRepository from '../../../Ports/IDiscordRepository';
-import HttpStatusCode from '../../../../enums/HttpStatusCode';
+import { IGlobalStats } from '../../Models/Discord';
+import IDiscordRepository from '../../Ports/IDiscordRepository';
+import HttpStatusCode from '../../../enums/HttpStatusCode';
 
 export default class DiscordStatsQuery {
   private readonly discordRepository: IDiscordRepository;

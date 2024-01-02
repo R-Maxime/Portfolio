@@ -1,6 +1,6 @@
 import express from 'express';
 import DBClient from '../database/client';
-import MongoDBWorkRepository from '../database/Portfolio/repositories/MongoDBWorkRepository';
+import MongoDBWorkRepository from '../database/Portfolio/Repositories/MongoDBWorkRepository';
 import IWorkRepository from '../business/Ports/IWorkRepository';
 import WorkController from '../controllers/WorkController';
 import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';

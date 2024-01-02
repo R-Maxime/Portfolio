@@ -1,9 +1,9 @@
 import express from 'express';
 import DBClient from '../database/client';
 import IDiscordRepository from '../business/Ports/IDiscordRepository';
-import MongoDBDiscordRepository from '../database/Portfolio/repositories/MongoDBDiscordRepository';
+import MongoDBDiscordRepository from '../database/Discord/Repositories/MongoDBDiscordRepository';
 import DiscordStatsController from '../controllers/DiscordStatsController';
-import DiscordStatsQuery from '../business/Usecase/Discord/Stats/DiscordStatsQuery';
+import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
 
 export default class DiscordRoutes {
   private readonly router: express.Router;
