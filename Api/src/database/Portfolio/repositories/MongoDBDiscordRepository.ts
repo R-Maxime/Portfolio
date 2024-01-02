@@ -1,22 +1,62 @@
-import { Model } from 'mongoose';
+import mongoose from 'mongoose';
 import DBClient from '../../client';
 import IDiscordRepository from '../../../business/Ports/IDiscordRepository';
-import DiscordStatsModel from '../Models/DiscordStats';
 import { IDiscordStats } from '../../../business/Models/DiscordStats';
+import DiscordStatsCollection from '../Models/DiscordStats';
+import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
+import DiscordGuildsCollection from '../Models/DiscordGuilds';
 
 export default class MongoDBDiscordRepository implements IDiscordRepository {
-  readonly discordStatsRepository: Model<IDiscordStats>;
+  private readonly discordStatsRepository: mongoose.Collection<IDiscordStats>;
 
-  readonly portfolioDB: DBClient;
+  private readonly discordGuildsRepository: mongoose.Collection<IDiscordGuilds>;
 
-  constructor(portfolioDB: DBClient) {
-    this.portfolioDB = portfolioDB;
+  private readonly botDB: DBClient;
 
-    this.discordStatsRepository = new DiscordStatsModel(this.portfolioDB).model;
+  constructor(botDB: DBClient) {
+    this.botDB = botDB;
+
+    this.discordStatsRepository = new DiscordStatsCollection(this.botDB).collection;
+
+    this.discordGuildsRepository = new DiscordGuildsCollection(this.botDB).collection;
   }
 
-  async getAllStats(): Promise<IDiscordStats[] | null> {
-    const stats = await this.discordStatsRepository.find();
-    return stats;
+  async getStatsQuantity(): Promise<number | null> {
+    const statsCount = await this.discordStatsRepository.countDocuments();
+    return statsCount;
+  }
+
+  async getFirstStatDocument(): Promise<IDiscordStats | null> {
+    const firstStat = await this.discordStatsRepository.findOne({}, { sort: { createdAt: 1 } });
+    return firstStat;
+  }
+
+  async getLastStatDocument(): Promise<IDiscordStats | null> {
+    const lastStat = await this.discordStatsRepository.findOne({}, { sort: { createdAt: -1 } });
+    return lastStat;
+  }
+
+  async getGuildsQuantity(): Promise<number | null> {
+    const guildsCount = await this.discordGuildsRepository.countDocuments();
+    return guildsCount;
+  }
+
+  async getPotentialMembersCount(): Promise<number | null> {
+    const potentialMembersCount = await this.discordGuildsRepository.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: {
+            $sum: '$memberCount',
+          },
+        },
+      },
+    ]).toArray();
+
+    if (!potentialMembersCount || !potentialMembersCount.length) {
+      return null;
+    }
+
+    return potentialMembersCount[0].total;
   }
 }

@@ -4,4 +4,6 @@ public/
 dist/
 public/
 .env
-src/business/Models/DiscordStats.ts
+
+src/business/Models/Discord*.ts
+!src/business/Models/Discord.ts

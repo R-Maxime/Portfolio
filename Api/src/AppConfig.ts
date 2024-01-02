@@ -69,6 +69,6 @@ export default class AppConfig {
     this.expressApp.use('/public', express.static('public'));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
-    this.expressApp.use('/discordbot', new DiscordRoutes(this.botDB).Router);
+    this.expressApp.use('/discord', new DiscordRoutes(this.botDB).Router);
   }
 }

@@ -24,7 +24,7 @@ export default class DiscordRoutes {
       new DiscordStatsQuery(this.discordRepository),
     );
 
-    this.router.get('/', controller.getStats.bind(controller));
+    this.router.get('/global', controller.getStatsCount.bind(controller));
   }
 
   get Router(): express.Router {

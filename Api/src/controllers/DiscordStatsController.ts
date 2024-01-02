@@ -8,9 +8,9 @@ export default class DiscordStatsController {
     private readonly discordStatsQuery: DiscordStatsQuery,
   ) { }
 
-  async getStats(req: Request, res: Response): Promise<Response> {
+  async getStatsCount(req: Request, res: Response): Promise<Response> {
     try {
-      const stats = await this.discordStatsQuery.getAllStats();
+      const stats = await this.discordStatsQuery.getGlobalStats();
 
       if (stats instanceof HttpError) {
         return res.status(stats.statusCode).json({ error: stats.message });

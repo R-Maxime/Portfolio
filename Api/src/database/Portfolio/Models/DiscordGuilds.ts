@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import { IDiscordStats } from '../../../business/Models/DiscordStats';
 import DBClient from '../../client';
+import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
 
-export default class DiscordStatsCollection {
+export default class DiscordGuildsCollection {
   private readonly DiscordDB: DBClient;
 
-  private readonly collectionName: string = 'stats';
+  private readonly collectionName: string = 'guilds';
 
   constructor(DiscordDB: DBClient) {
     this.DiscordDB = DiscordDB;
@@ -18,7 +18,7 @@ export default class DiscordStatsCollection {
     */
   }
 
-  get collection(): mongoose.Collection<IDiscordStats> {
-    return this.DiscordDB.client.connection.db.collection<IDiscordStats>(this.collectionName) as mongoose.Collection<IDiscordStats>;
+  get collection(): mongoose.Collection<IDiscordGuilds> {
+    return this.DiscordDB.client.connection.db.collection<IDiscordGuilds>(this.collectionName) as mongoose.Collection<IDiscordGuilds>;
   }
 }
