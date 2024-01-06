@@ -1,6 +1,6 @@
 import express from 'express';
 import DBClient from '../database/client';
-import IDiscordRepository from '../business/Ports/IDiscordBotRepository';
+import IDiscordBotRepository from '../business/Ports/IDiscordBotRepository';
 import MongoDBDiscordRepository from '../database/Discord/Repositories/MongoDBDiscordRepository';
 import DiscordStatsController from '../controllers/DiscordStatsController';
 import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
@@ -10,7 +10,7 @@ export default class DiscordBotRoutes {
 
   private readonly discordDB: DBClient;
 
-  private readonly discordRepository: IDiscordRepository;
+  private readonly discordRepository: IDiscordBotRepository;
 
   constructor(discordDB: DBClient) {
     this.router = express.Router();

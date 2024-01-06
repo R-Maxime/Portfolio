@@ -1,13 +1,13 @@
 import createHttpError, { HttpError } from 'http-errors';
 import { IGlobalStats } from '../../Models/Discord';
-import IDiscordRepository from '../../Ports/IDiscordBotRepository';
+import IDiscordBotRepository from '../../Ports/IDiscordBotRepository';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
 import { IDiscordStats } from '../../Models/DiscordStats';
 
 export default class DiscordStatsQuery {
-  private readonly discordRepository: IDiscordRepository;
+  private readonly discordRepository: IDiscordBotRepository;
 
-  constructor(discordRepository: IDiscordRepository) {
+  constructor(discordRepository: IDiscordBotRepository) {
     this.discordRepository = discordRepository;
   }
 
