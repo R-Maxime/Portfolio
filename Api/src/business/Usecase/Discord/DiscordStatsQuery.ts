@@ -1,7 +1,8 @@
 import createHttpError, { HttpError } from 'http-errors';
 import { IGlobalStats } from '../../Models/Discord';
-import IDiscordRepository from '../../Ports/IDiscordRepository';
+import IDiscordRepository from '../../Ports/IDiscordBotRepository';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
+import { IDiscordStats } from '../../Models/DiscordStats';
 
 export default class DiscordStatsQuery {
   private readonly discordRepository: IDiscordRepository;
@@ -10,23 +11,29 @@ export default class DiscordStatsQuery {
     this.discordRepository = discordRepository;
   }
 
-  async getGlobalStats(): Promise<IGlobalStats | HttpError> {
-    const statsQuantity = await this.discordRepository.getStatsQuantity();
-    const guildsQuantity = await this.discordRepository.getGuildsQuantity();
-    const potentialMembersCount = await this.discordRepository.getPotentialMembersCount();
-    const firstStat = await this.discordRepository.getFirstStatDocument();
-    const lastStat = await this.discordRepository.getLastStatDocument();
-
-    if (!statsQuantity || !guildsQuantity || !potentialMembersCount || !firstStat || !lastStat) {
-      return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while getting stats');
-    }
+  async getGlobalStats(): Promise<IGlobalStats> {
+    const statsQuantity = await this.discordRepository.getStatsQuantity() ?? 0;
+    const guildsQuantity = await this.discordRepository.getGuildsQuantity() ?? 0;
+    const potentialMembersCount = await this.discordRepository.getPotentialMembersCount() ?? 0;
+    const firstStat = await this.discordRepository.getFirstStatDocument() ?? {} as IDiscordStats;
+    const lastStat = await this.discordRepository.getLastStatDocument() ?? {} as IDiscordStats;
 
     return {
       statsCount: statsQuantity,
       guildsCount: guildsQuantity,
       potentialMembersCount: potentialMembersCount - guildsQuantity,
-      firstCreatedAt: firstStat.createdAt,
-      lastCreatedAt: lastStat.createdAt,
+      firstCreatedAt: firstStat?.createdAt,
+      lastCreatedAt: lastStat?.createdAt,
     };
+  }
+
+  async getLastMonthStats(): Promise<{ count: number; startOfWeek: string; endOfWeek: string; week: string }[] | HttpError> {
+    const stats = await this.discordRepository.getInteractionsStatsByWeekOnLastMonth();
+
+    if (!stats) {
+      return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while getting stats');
+    }
+
+    return stats;
   }
 }

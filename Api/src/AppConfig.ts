@@ -7,7 +7,7 @@ import NodeEnvEnum from './enums/NodeEnvEnum';
 import DBClient from './database/client';
 import UserRoutes from './routes/User';
 import WorksRoutes from './routes/Work';
-import DiscordRoutes from './routes/Discord';
+import DiscordBotRoutes from './routes/Discord';
 
 export default class AppConfig {
   private readonly expressApp: Express;
@@ -69,6 +69,6 @@ export default class AppConfig {
     this.expressApp.use('/public', express.static('public'));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
-    this.expressApp.use('/discord', new DiscordRoutes(this.botDB).Router);
+    this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
   }
 }

@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import DBClient from '../../client';
-import IDiscordRepository from '../../../business/Ports/IDiscordRepository';
+import IDiscordBotRepository from '../../../business/Ports/IDiscordBotRepository';
 import DiscordStatsCollection from '../Collections/DiscordStats';
 import DiscordGuildsCollection from '../Collections/DiscordGuilds';
 import { IDiscordStats } from '../../../business/Models/DiscordStats';
 import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
 
-export default class MongoDBDiscordRepository implements IDiscordRepository {
+export default class MongoDBDiscordRepository implements IDiscordBotRepository {
   private readonly discordStatsRepository: mongoose.Collection<IDiscordStats>;
 
   private readonly discordGuildsRepository: mongoose.Collection<IDiscordGuilds>;
@@ -58,5 +58,66 @@ export default class MongoDBDiscordRepository implements IDiscordRepository {
     }
 
     return potentialMembersCount[0].total;
+  }
+
+  async getInteractionsStatsByWeekOnLastMonth(): Promise<{ count: number; startOfWeek: string; endOfWeek: string; week: string }[] | null> {
+    const stats = await this.discordStatsRepository.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: '%Y-%U',
+              date: '$createdAt',
+            },
+          },
+          count: {
+            $sum: 1,
+          },
+          startOfWeek: {
+            $first: {
+              $dateToString: {
+                format: '%Y-%m-%d',
+                date: '$createdAt',
+              },
+            },
+          },
+          endOfWeek: {
+            $last: {
+              $dateToString: {
+                format: '%Y-%m-%d',
+                date: '$createdAt',
+              },
+            },
+          },
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          week: '$_id',
+          count: 1,
+          startOfWeek: 1,
+          endOfWeek: 1,
+        },
+      },
+    ]).toArray() as { count: number; startOfWeek: string; endOfWeek: string; week: string }[];
+
+    if (!stats || !stats.length) {
+      return null;
+    }
+
+    return stats;
   }
 }

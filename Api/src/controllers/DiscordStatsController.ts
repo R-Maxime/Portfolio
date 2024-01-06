@@ -22,4 +22,19 @@ export default class DiscordStatsController {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting stats', error });
     }
   }
+
+  async getLastMonthStats(req: Request, res: Response): Promise<Response> {
+    try {
+      const stats = await this.discordStatsQuery.getLastMonthStats();
+
+      if (stats instanceof HttpError) {
+        return res.status(stats.statusCode).json({ error: stats.message });
+      }
+
+      return res.status(HttpStatusCode.OK).json(stats);
+    } catch (error) {
+      console.error('Error while getting stats', error);
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting stats', error });
+    }
+  }
 }

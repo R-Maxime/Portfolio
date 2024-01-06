@@ -1,11 +1,11 @@
 import express from 'express';
 import DBClient from '../database/client';
-import IDiscordRepository from '../business/Ports/IDiscordRepository';
+import IDiscordRepository from '../business/Ports/IDiscordBotRepository';
 import MongoDBDiscordRepository from '../database/Discord/Repositories/MongoDBDiscordRepository';
 import DiscordStatsController from '../controllers/DiscordStatsController';
 import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
 
-export default class DiscordRoutes {
+export default class DiscordBotRoutes {
   private readonly router: express.Router;
 
   private readonly discordDB: DBClient;
@@ -25,6 +25,7 @@ export default class DiscordRoutes {
     );
 
     this.router.get('/global', controller.getStatsCount.bind(controller));
+    this.router.get('/lastmonth', controller.getLastMonthStats.bind(controller));
   }
 
   get Router(): express.Router {
