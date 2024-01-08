@@ -29,7 +29,11 @@ export default class UserController {
 
   async signup(req: Request, res: Response): Promise<Response> {
     try {
-      const { username, password } = req.body;
+      const { username, password, secretToken } = req.body;
+
+      if (!secretToken || secretToken !== process.env.SECRET_TOKEN) {
+        return res.status(HttpStatusCode.UNAUTHORIZED).json({ error: 'Unauthorized' });
+      }
 
       const command = await this.signupCommand.signup(username, password);
 
