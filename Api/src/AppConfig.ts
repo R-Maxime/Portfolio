@@ -58,7 +58,7 @@ export default class AppConfig {
     this.expressApp.use(express.json());
     this.expressApp.use(cors());
     this.expressApp.use(helmet({
-      crossOriginResourcePolicy: { policy: 'cross-origin' },
+      crossOriginResourcePolicy: false,
     }));
     this.expressApp.disable('x-powered-by');
     this.setupRateLimit();
