@@ -15,7 +15,7 @@ export default class Logger {
   }
 
   log(source: string, message: string): void {
-    const currentDate = new Date().toLocaleString();
+    const currentDate = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
     console.info(`[${source}]: ${currentDate} - ${message}`);
     this.logStream.write(`[${source}]: ${currentDate} - ${message}\n`);
   }
