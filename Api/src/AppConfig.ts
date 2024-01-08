@@ -8,6 +8,7 @@ import DBClient from './database/client';
 import UserRoutes from './routes/User';
 import WorksRoutes from './routes/Work';
 import DiscordBotRoutes from './routes/Discord';
+import Logger from './utils/Logger';
 
 export default class AppConfig {
   private readonly expressApp: Express;
@@ -15,6 +16,8 @@ export default class AppConfig {
   private readonly portfolioDB = new DBClient(process.env.DB_NAME as string);
 
   private readonly botDB = new DBClient(process.env.DB_SECOND_NAME as string);
+
+  private logger = new Logger();
 
   constructor(expressApp: Express) {
     this.expressApp = expressApp;
@@ -44,7 +47,7 @@ export default class AppConfig {
 
   private logRequests(): void {
     this.expressApp.use((req: Request, res: Response, next) => {
-      console.info(`[Server]: ${req.method} ${req.path}`);
+      this.logger.log('Express', `${req.method} ${req.url}`);
       next();
     });
   }

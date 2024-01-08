@@ -3,6 +3,7 @@ package-lock.json
 public/
 dist/
 public/
+logs/
 .env
 
 src/business/Models/Discord*.ts
