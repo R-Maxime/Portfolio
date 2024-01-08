@@ -5,7 +5,7 @@ export default class Logger {
   private readonly logStream: fs.WriteStream;
 
   constructor() {
-    const logsFolderPath = path.join(__dirname, '..', '..', 'logs');
+    const logsFolderPath = process.env.LOGS_PATH || path.join(__dirname, '..', '..', 'logs');
     if (!fs.existsSync(logsFolderPath)) {
       fs.mkdirSync(logsFolderPath);
     }

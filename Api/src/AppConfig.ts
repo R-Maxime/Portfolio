@@ -19,13 +19,15 @@ export default class AppConfig {
 
   private logger = new Logger();
 
+  private readonly publicPath = process.env.PUBLIC_PATH || 'public';
+
   constructor(expressApp: Express) {
     this.expressApp = expressApp;
   }
 
   async setup(): Promise<void> {
-    if (!fs.existsSync('public')) {
-      fs.mkdirSync('public');
+    if (!fs.existsSync(this.publicPath)) {
+      fs.mkdirSync(this.publicPath);
     }
     this.setupMiddleware();
     await this.connectDBs();
