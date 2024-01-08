@@ -71,7 +71,7 @@ export default class AppConfig {
   }
 
   private async setupRoutes(): Promise<void> {
-    this.expressApp.use('/public', express.static('public'));
+    this.expressApp.use(express.static(this.publicPath));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
     this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
