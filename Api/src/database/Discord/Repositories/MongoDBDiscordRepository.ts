@@ -5,6 +5,7 @@ import DiscordStatsCollection from '../Collections/DiscordStats';
 import DiscordGuildsCollection from '../Collections/DiscordGuilds';
 import { IDiscordStats } from '../../../business/Models/DiscordStats';
 import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
+import { IInteractionStatsByWeekOnLastMonth } from '../../../business/Models/Discord';
 
 export default class MongoDBDiscordRepository implements IDiscordBotRepository {
   private readonly discordStatsRepository: mongoose.Collection<IDiscordStats>;
@@ -60,7 +61,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     return potentialMembersCount[0].total;
   }
 
-  async getInteractionsStatsByWeekOnLastMonth(): Promise<{ count: number; startOfWeek: string; endOfWeek: string; week: string }[] | null> {
+  async getInteractionsStatsByWeekOnLastMonth(): Promise<IInteractionStatsByWeekOnLastMonth[] | null> {
     const stats = await this.discordStatsRepository.aggregate([
       {
         $match: {
@@ -112,7 +113,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
           endOfWeek: 1,
         },
       },
-    ]).toArray() as { count: number; startOfWeek: string; endOfWeek: string; week: string }[];
+    ]).toArray() as IInteractionStatsByWeekOnLastMonth[];
 
     if (!stats || !stats.length) {
       return null;

@@ -1,5 +1,5 @@
 import createHttpError, { HttpError } from 'http-errors';
-import { IGlobalStats } from '../../Models/Discord';
+import { IGlobalStats, IInteractionStatsByWeekOnLastMonth } from '../../Models/Discord';
 import IDiscordBotRepository from '../../Ports/IDiscordBotRepository';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
 import { IDiscordStats } from '../../Models/DiscordStats';
@@ -27,7 +27,7 @@ export default class DiscordStatsQuery {
     };
   }
 
-  async getLastMonthStats(): Promise<{ count: number; startOfWeek: string; endOfWeek: string; week: string }[] | HttpError> {
+  async getLastMonthStats(): Promise<IInteractionStatsByWeekOnLastMonth[] | HttpError> {
     const stats = await this.discordRepository.getInteractionsStatsByWeekOnLastMonth();
 
     if (!stats) {

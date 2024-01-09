@@ -1,3 +1,4 @@
+import { IInteractionStatsByWeekOnLastMonth } from '../Models/Discord';
 import { IDiscordStats } from '../Models/DiscordStats';
 
 /**
@@ -38,5 +39,5 @@ export default interface IDiscordBotRepository {
    * Retrieves the interactions statistics by week on the last month.
    * @returns A promise that resolves to an array of objects containing the count, startOfWeek, endOfWeek, and week of the interactions statistics, or null if no statistics are available.
    */
-  getInteractionsStatsByWeekOnLastMonth(): Promise<{ count: number, startOfWeek: string, endOfWeek: string, week: string }[] | null>;
+  getInteractionsStatsByWeekOnLastMonth(): Promise<IInteractionStatsByWeekOnLastMonth[] | null>;
 }
