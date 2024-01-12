@@ -14,11 +14,11 @@ export default class WorkModel {
       id: { type: String, required: true, unique: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
-      repoUrl: { type: String, required: true },
-      webUrl: { type: String, required: true },
-      images: { type: [String], required: true },
-      color: { type: String, required: true },
-      logo: { type: String, required: true },
+      repoUrl: { type: String },
+      webUrl: { type: String },
+      images: { type: [String] },
+      color: { type: String },
+      logo: { type: String },
     });
   }
 

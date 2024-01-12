@@ -10,8 +10,8 @@ export default class PostWorkCommand {
     this.workRepository = workRepository;
   }
 
-  async createWork(workBody: IWork): Promise<IWork | HttpError> {
-    const work = await this.workRepository.create(workBody);
+  async createWork(workData: IWork): Promise<IWork | HttpError> {
+    const work = await this.workRepository.create(workData);
 
     if (!work) {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while creating work');
