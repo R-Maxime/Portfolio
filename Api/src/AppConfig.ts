@@ -55,7 +55,7 @@ export default class AppConfig {
   }
 
   private setupMiddleware(): void {
-    this.expressApp.use(express.json());
+    this.expressApp.use(express.json({ limit: '50mb' }));
     this.expressApp.use(cors());
     this.expressApp.use(helmet({
       crossOriginResourcePolicy: false,

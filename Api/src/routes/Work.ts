@@ -10,6 +10,11 @@ import Multer from '../middlewares/Multer';
 import PutWorkCommand from '../business/Usecase/Work/PutWorkCommand';
 import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
 
+const multerOptions = [
+  { name: 'logo', maxCount: 1 },
+  { name: 'images', maxCount: 10 },
+];
+
 export default class WorksRoutes {
   private readonly router: express.Router;
 
@@ -34,8 +39,8 @@ export default class WorksRoutes {
 
     this.router.get('/', controller.getWorks.bind(controller));
     this.router.get('/:id', controller.getWork.bind(controller));
-    this.router.post('/', AuthMiddleware, Multer.any(), controller.createWork.bind(controller));
-    this.router.put('/:id', AuthMiddleware, Multer.any(), controller.updateWork.bind(controller));
+    this.router.post('/', AuthMiddleware, Multer.fields(multerOptions), controller.createWork.bind(controller));
+    this.router.put('/:id', AuthMiddleware, Multer.fields(multerOptions), controller.updateWork.bind(controller));
     this.router.delete('/:id', AuthMiddleware, controller.deleteWork.bind(controller));
   }
 

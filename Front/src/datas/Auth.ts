@@ -28,6 +28,11 @@ class Auth {
     return parsedUser;
   }
 
+  public static getToken(): string | null {
+    const user = this.getUser();
+    return user ? user.token : null;
+  }
+
   public static isAuthenticated(): boolean {
     const user = this.getUser();
     return !!(user && user.token);

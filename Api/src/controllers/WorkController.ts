@@ -4,7 +4,7 @@ import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
 import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import IWork from '../business/Models/Work';
-import { getFilesUrl } from '../utils/Utils';
+import { getImagesFiles, getLogoFile } from '../utils/Utils';
 import PutWorkCommand from '../business/Usecase/Work/PutWorkCommand';
 import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
 
@@ -51,8 +51,9 @@ export default class WorkController {
   async createWork(req: Request, res: Response): Promise<Response> {
     try {
       const work = {
-        ...JSON.parse(req.body.work),
-        images: req.files?.length ? getFilesUrl(req.files as Express.Multer.File[]) : [],
+        ...req.body,
+        images: getImagesFiles(req.files as Express.Multer.File[]),
+        logo: getLogoFile(req.files as Express.Multer.File[]),
       } as IWork;
 
       const command = await this.postWorkCommand.createWork(work);
@@ -71,8 +72,9 @@ export default class WorkController {
   async updateWork(req: Request, res: Response): Promise<Response> {
     try {
       const work = {
-        ...JSON.parse(req.body.work),
-        images: req.files?.length ? getFilesUrl(req.files as Express.Multer.File[]) : [],
+        ...req.body,
+        images: getImagesFiles(req.files as Express.Multer.File[]),
+        logo: getLogoFile(req.files as Express.Multer.File[]),
       } as IWork;
 
       const command = await this.putWorkCommand.execute(work);
