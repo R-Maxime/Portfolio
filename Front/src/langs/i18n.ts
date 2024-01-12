@@ -17,6 +17,9 @@ export default {
     },
     alreadyConnected: {
       fr: 'Vous êtes déjà connecté'
+    },
+    home: {
+      fr: 'Accueil'
     }
   },
   work: {
@@ -25,7 +28,9 @@ export default {
     },
     noProjects: {
       fr: 'Aucun projet enregistré !'
-    },
+    }
+  },
+  admin: {
     addProject: {
       fr: 'Ajouter un projet'
     },
@@ -43,6 +48,18 @@ export default {
     },
     add: {
       fr: 'Ajouter'
+    },
+    delete: {
+      fr: 'Supprimer'
+    },
+    backToProjects: {
+      fr: 'Retour à la liste des projets'
+    },
+    backToAdmin: {
+      fr: 'Retour à la liste des pages Admin'
+    },
+    admin: {
+      fr: 'Admin'
     }
   }
 };

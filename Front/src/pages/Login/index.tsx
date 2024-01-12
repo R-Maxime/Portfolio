@@ -48,15 +48,28 @@ class Login extends Component<NonNullable<unknown>, LoginState> {
       return (
         <div className='login-container'>
           <h2>{i18n.auth.alreadyConnected.fr}</h2>
-          <button
-            type="button"
-            onClick={() => {
-              Auth.logout();
-              window.location.href = '/';
-            }}
-          >
-            {i18n.auth.logout.fr}
-          </button>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+            marginTop: '10px'
+          }}>
+            <button type="button" onClick={() => { window.location.href = '/'; }}>
+              {i18n.auth.home.fr}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                Auth.logout();
+                window.location.href = '/';
+              }}
+            >
+              {i18n.auth.logout.fr}
+            </button>
+            <button type="button" onClick={() => { window.location.href = '/admin'; }}>
+              {i18n.admin.admin.fr}
+            </button>
+          </div>
         </div>
       );
     }

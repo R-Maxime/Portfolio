@@ -4,20 +4,9 @@ interface IWork {
   description: string;
   repoUrl: string;
   webUrl: string;
-  images: string[];
+  images: string[] | File[];
   color: string;
-  logo: string;
-}
-
-export interface IWorkAddInput {
-  id: string;
-  title: string;
-  description: string;
-  repoUrl: string;
-  webUrl: string;
-  images: File[];
-  color: string;
-  logo: File;
+  logo: string | File;
 }
 
 export default IWork;

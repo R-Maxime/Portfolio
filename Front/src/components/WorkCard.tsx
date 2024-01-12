@@ -35,7 +35,7 @@ class WorkCard extends Component<IWorkCardProps> {
           </a>
         )}
 
-        {work.logo && work.logo !== DEFAULT_LOGO && (
+        {work.logo && work.logo !== DEFAULT_LOGO && typeof work.logo === 'string' && (
           <a href={pageUrl}>
             <img className="work-card__logo" src={work.logo} alt="Logo" />
           </a>

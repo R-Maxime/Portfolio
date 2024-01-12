@@ -12,7 +12,6 @@ class Index extends Component {
     if (Auth.isAuthenticated()) {
       pages.push({ name: 'Admin', path: '/admin' });
       pages.push({ name: 'Works', path: '/admin/works' });
-      pages.push({ name: 'Work by id', path: '/admin/works/:id' });
     }
 
     return (

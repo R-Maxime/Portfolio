@@ -5,6 +5,7 @@ import PageTextHeader from '../../components/PageTextHeader';
 
 function Admin(): React.ReactElement {
   const adminPages = [
+    { name: 'Home', path: '/' },
     { name: 'Works', path: '/admin/works' }
   ];
 
@@ -14,9 +15,9 @@ function Admin(): React.ReactElement {
       <div className='admin-pages pad-16'>
         <ul>
           {adminPages.map((page, index) => (
-            <li key={index} className='ul_butt'>
-              <a href={page.path}>{page.name}</a>
-            </li>
+            <button onClick={() => { window.location.href = page.path; }}>
+              <li key={index}>{page.name}</li>
+            </button>
           ))}
         </ul>
       </div>
