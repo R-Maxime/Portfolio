@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Auth from '../../datas/Auth';
+import DisplayWorks from '../../components/DisplayWorks';
 
 class Index extends Component {
   render() {
@@ -23,6 +24,9 @@ class Index extends Component {
             </li>
           ))}
         </ul>
+        <div className='home_works'>
+          <DisplayWorks admin={Auth.isAuthenticated()} />
+        </div>
       </div>
     );
   }

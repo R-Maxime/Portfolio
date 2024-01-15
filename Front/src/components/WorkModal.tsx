@@ -48,7 +48,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         webUrl: '',
         color: this.defaultColor,
         logo: '',
-        images: []
+        images: [],
+        technologies: []
       }
     };
   }
@@ -63,7 +64,8 @@ class WorkModal extends Component<WorkModalProps, State> {
       webUrl: '',
       color: this.defaultColor,
       logo: this.isPreFilledData ? '' : new File([], ''),
-      images: this.isPreFilledData ? [] : [new File([], '')]
+      images: this.isPreFilledData ? [] : [new File([], '')],
+      technologies: []
     };
   }
 
@@ -78,7 +80,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         webUrl: data.webUrl,
         color: data.color,
         logo: prevState.previewWork.logo ?? '',
-        images: prevState.previewWork.images ?? []
+        images: prevState.previewWork.images ?? [],
+        technologies: data.technologies
       }
     }));
   };
@@ -127,7 +130,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         webUrl: '',
         color: this.defaultColor,
         logo: '',
-        images: []
+        images: [],
+        technologies: []
       }
     });
   }
@@ -167,6 +171,7 @@ class WorkModal extends Component<WorkModalProps, State> {
         <InputField label='Description' id='description' value={workData.description} onChange={(value) => this.setWorksData({ ...workData, description: value })} />
         <InputField label='Repo GitHub' id='repoUrl' value={workData?.repoUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, repoUrl: value })} />
         <InputField label='Site web' id='webUrl' value={workData?.webUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, webUrl: value })} />
+        <InputField label='Technologies (à séparer avec une virgule)' id='technologies' value={workData.technologies?.join(',')} onChange={(value) => this.setWorksData({ ...workData, technologies: value.split(',') })} />
         <div className='flex column gap-8 pad-top-8'>
           <label htmlFor='color'>{i18n.admin.color.fr}</label>
           <input type='text' id='color' value={workData.color} onChange={(e) => {

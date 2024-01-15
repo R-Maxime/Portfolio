@@ -1,11 +1,17 @@
 @import './var.scss';
 
+.home_works {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 .works-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   animation: fadeInAnimation ease 1s;
   gap: 50px;
 }
+
 
 .work-card {
   height: 255px;
@@ -72,9 +78,26 @@
   color: black;
   font-size: 14px;
   font-weight: 400;
-  margin: 10px 0 0 10px;
+  margin: 0 0 0 10px;
+  position: absolute;
+}
+
+.work-card_technologies {
+  display: flex;
   position: absolute;
   bottom: 0;
+  left: 0;
+  margin: 0 0 10px 10px;
+  gap: 10px;
+
+  .word-card_technologie {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: $primary-color;
+    color: white;
+    font-weight: 400;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  }
 }
 
 @keyframes fadeInAnimation {
@@ -84,5 +107,28 @@
 
   to {
     opacity: 1;
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .works-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .home_works {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: $mobil-width) {
+  .works-container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
+
+  .home_works {
+    max-width: 95%;
   }
 }

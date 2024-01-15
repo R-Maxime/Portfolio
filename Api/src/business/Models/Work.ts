@@ -7,4 +7,5 @@ export default interface IWork {
   images: string[];
   color: string;
   logo: string;
+  technologies: string[];
 }

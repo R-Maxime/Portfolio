@@ -23,8 +23,11 @@ class Work {
     formData.append('repoUrl', work.repoUrl);
     formData.append('webUrl', work.webUrl);
     formData.append('color', work.color);
-
     formData.append('logo', work.logo);
+
+    work.technologies.forEach((technology) => {
+      formData.append('technologies', technology);
+    });
 
     work.images.forEach((image) => {
       formData.append('images', image);

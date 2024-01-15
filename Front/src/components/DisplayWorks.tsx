@@ -21,8 +21,7 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
   }, []);
 
   return (
-    <div>
-
+    <>
       {loading && (
         <div>{i18n.work.loading.fr}</div>
       )}
@@ -38,7 +37,7 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

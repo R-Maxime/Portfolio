@@ -110,3 +110,9 @@ a {
   justify-content: center;
 }
 
+
+@media screen and (max-width: $mobil-width) {
+  .content-container {
+    padding: 10px;
+  }
+}

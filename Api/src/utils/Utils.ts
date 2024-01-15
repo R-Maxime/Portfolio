@@ -1,5 +1,5 @@
 export function getFileUrl(file: Express.Multer.File) {
-  return `${process.env.API_URL}/public/${file.mimetype.split('/')[0]}/${file.originalname}`;
+  return `${process.env.API_URL}/public/${file.mimetype.split('/')[0]}/${file.filename}`;
 }
 
 export function getFilesUrl(files: Express.Multer.File[]) {

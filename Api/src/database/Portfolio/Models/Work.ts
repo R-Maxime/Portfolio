@@ -19,6 +19,7 @@ export default class WorkModel {
       images: { type: [String] },
       color: { type: String },
       logo: { type: String },
+      technologies: { type: [String] },
     });
   }
 
