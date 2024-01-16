@@ -1,12 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import { Component } from 'react';
-import IWork from '../datas/Models/Work';
+import IWork, { ITechnologies } from '../datas/Models/Work';
 import InputField from './InputField';
 import WorkCard from './WorkCard';
 import Work from '../datas/Work';
 import i18n from '../langs/i18n';
 import '../styles/Admin.scss';
-import { Navigate } from 'react-router-dom';
 
 const GET_RANDOM_ID = () => Math.floor(Math.random() * 1000000).toString();
 
@@ -65,7 +64,7 @@ class WorkModal extends Component<WorkModalProps, State> {
       color: this.defaultColor,
       logo: this.isPreFilledData ? '' : new File([], ''),
       images: this.isPreFilledData ? [] : [new File([], '')],
-      technologies: []
+      technologies: [] as ITechnologies[]
     };
   }
 
@@ -163,6 +162,67 @@ class WorkModal extends Component<WorkModalProps, State> {
     document.getElementById('color-picker')?.setAttribute('value', this.state.workData.color);
   }
 
+  setNewTechnoData = (data: ITechnologies, index: number) => {
+    const { workData } = this.state;
+    const updatedTechnologies = [...workData.technologies];
+    const updatedTechno = { ...updatedTechnologies[index], ...data };
+
+    updatedTechnologies[index] = updatedTechno;
+    this.setWorksData({ ...workData, technologies: updatedTechnologies });
+  };
+
+  deleteTechno(index: number) {
+    const { workData } = this.state;
+    const updatedTechnologies = [...workData.technologies];
+    updatedTechnologies.splice(index, 1);
+    this.setWorksData({ ...workData, technologies: updatedTechnologies });
+  }
+
+  displayTechnologies() {
+    return (
+      <div className='flex column' style={{
+        gap: '20px',
+        padding: '10px'
+      }}>
+        {this.state.workData.technologies.map((techno, index) => (
+          <div className='flex column gap-8 pad-top-8' key={`${techno.name}-${index}`} style={{
+            border: '1px solid white',
+            borderRadius: '5px',
+            padding: '10px'
+          }}>
+            <div className="flex gap-8">
+              <label htmlFor={`techno-${index}`}>{techno.name} (techno {index + 1}) </label>
+              <div onClick={() => this.deleteTechno(index)} style={{ cursor: 'pointer', fontSize: '20px' }}>🗑️</div>
+            </div>
+            <InputField label='Nom' id='techno-nom' value={techno.name} onChange={(value) => this.setNewTechnoData({
+              ...techno,
+              name: value
+            }, index)} />
+            <InputField label='Icon' id='techno-icon' value={techno.icon} onChange={(value) => this.setNewTechnoData({
+              ...techno,
+              icon: value
+            }, index)} />
+            <InputField label='URL' id='techno-url' value={techno.url} onChange={(value) => this.setNewTechnoData({
+              ...techno,
+              url: value
+            }, index)} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  addNewTechnoModal() {
+    const { workData } = this.state;
+    const updatedTechnologies = [...workData.technologies];
+    updatedTechnologies.push({
+      name: '',
+      icon: '',
+      url: ''
+    });
+    this.setWorksData({ ...workData, technologies: updatedTechnologies });
+  }
+
   renderInput() {
     const { workData } = this.state;
     return (
@@ -171,7 +231,14 @@ class WorkModal extends Component<WorkModalProps, State> {
         <InputField label='Description' id='description' value={workData.description} onChange={(value) => this.setWorksData({ ...workData, description: value })} />
         <InputField label='Repo GitHub' id='repoUrl' value={workData?.repoUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, repoUrl: value })} />
         <InputField label='Site web' id='webUrl' value={workData?.webUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, webUrl: value })} />
-        <InputField label='Technologies (à séparer avec une virgule)' id='technologies' value={workData.technologies?.join(',')} onChange={(value) => this.setWorksData({ ...workData, technologies: value.split(',') })} />
+
+        {workData.technologies && workData.technologies.length > 0 && this.displayTechnologies()}
+        <div className='flex column gap-8 pad-top-8'>
+          <button onClick={() => this.addNewTechnoModal()} type='button'>
+            {i18n.admin.addTechno.fr}
+          </button>
+        </div>
+
         <div className='flex column gap-8 pad-top-8'>
           <label htmlFor='color'>{i18n.admin.color.fr}</label>
           <input type='text' id='color' value={workData.color} onChange={(e) => {
@@ -186,7 +253,11 @@ class WorkModal extends Component<WorkModalProps, State> {
         <label htmlFor='images'>{i18n.admin.images.fr}</label>
         <input type='file' id='images' key={workData.images?.length} multiple onChange={(e) => this.setWorksData({ ...workData, images: Array.from(e.target.files ?? []) })} />
         <label htmlFor='logo'>{i18n.admin.logo.fr}</label>
-        <input type='file' id='logo' onChange={(e) => { if (e.target.files) { this.setWorksData({ ...workData, logo: e.target.files[0] }); } }} />
+        <input type='file' id='logo' onChange={(e) => {
+          if (e.target.files) {
+            this.setWorksData({ ...workData, logo: e.target.files[0] });
+          }
+        }} />
       </div>
     );
   }
@@ -194,32 +265,34 @@ class WorkModal extends Component<WorkModalProps, State> {
   render() {
     const { workData, previewWork } = this.state;
     return (
-      <div className='work-add-container'>
-        <div className='work-modal-container content-container flex width-25 column'>
-          <div className='work-modal-header'>
-            <h3>{i18n.admin.addProject.fr}</h3>
-          </div>
-          {this.renderInput()}
-          <div style={{ paddingTop: '10px', gap: '5px', display: 'flex' }}>
-            <button onClick={() => this.rerender()} type='button'>
-              {i18n.admin.cancel.fr}
-            </button>
-            <button onClick={() => this.isPreFilledData
-              ? Work.updateWork(workData).then(() => this.rerender())
-              : Work.addWork(workData).then(() => this.rerender())} type='button'>
-              {i18n.admin.add.fr}
-            </button>
-            {this.isPreFilledData && (
-              <button onClick={() => Work.deleteWork(Number(workData.id)).then(() => Navigate({ to: '/admin/works' }))} type='button'>
-                {i18n.admin.delete.fr}
-              </button>
-            )}
-          </div>
-        </div>
-        <div className='work-modal-container content-container flex width-25 height-25 column'>
+      <div>
+        <div className='content-container center-50'>
           <WorkCard key={previewWork.id} admin={true} {...previewWork} />
         </div>
-      </div>
+        <div className='center-50'>
+          <div className='content-container flex column'>
+            <div className='work-modal-header'>
+              <h3>{i18n.admin.addProject.fr}</h3>
+            </div>
+            {this.renderInput()}
+            <div style={{ paddingTop: '10px', gap: '5px', display: 'flex' }}>
+              <button onClick={() => this.rerender()} type='button'>
+                {i18n.admin.cancel.fr}
+              </button>
+              <button onClick={() => this.isPreFilledData
+                ? Work.updateWork(workData).then(() => this.rerender())
+                : Work.addWork(workData).then(() => this.rerender())} type='button'>
+                {i18n.admin.add.fr}
+              </button>
+              {this.isPreFilledData && (
+                <button onClick={() => Work.deleteWork(Number(workData.id)).then(() => { window.location.href = '/admin/works'; })} type='button'>
+                  {i18n.admin.delete.fr}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div >
     );
   }
 }

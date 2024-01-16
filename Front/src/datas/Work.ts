@@ -26,7 +26,7 @@ class Work {
     formData.append('logo', work.logo);
 
     work.technologies.forEach((technology) => {
-      formData.append('technologies', technology);
+      formData.append('technologies', JSON.stringify(technology));
     });
 
     work.images.forEach((image) => {

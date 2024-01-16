@@ -46,7 +46,7 @@ class WorkCard extends Component<IWorkCardProps> {
         <p className="work-card__description">{work.description}</p>
 
         {work.technologies.length > 0 && (
-          <TechnoCard technos={work.technologies} />
+          <TechnoCard technologies={work.technologies} />
         )}
       </div>
     );

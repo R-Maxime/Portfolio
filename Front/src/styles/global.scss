@@ -110,9 +110,33 @@ a {
   justify-content: center;
 }
 
+.margin-auto {
+  margin: auto;
+}
+
+.center-50 {
+  margin: auto;
+  width: 50%;
+}
+
+@media screen and (max-width: $tablet-width) {
+  .content-container {
+    padding: 10px;
+  }
+
+  .center-50 {
+    width: 100%;
+  }
+
+}
+
 
 @media screen and (max-width: $mobil-width) {
   .content-container {
     padding: 10px;
+  }
+
+  .center-50 {
+    width: 100%;
   }
 }

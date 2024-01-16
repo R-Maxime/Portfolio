@@ -60,6 +60,9 @@ export default {
     },
     admin: {
       fr: 'Admin'
+    },
+    addTechno: {
+      fr: 'Ajouter une techno'
     }
   }
 };

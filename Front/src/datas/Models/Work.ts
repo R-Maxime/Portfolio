@@ -1,3 +1,9 @@
+export interface ITechnologies {
+  name: string;
+  url: string;
+  icon: string;
+}
+
 interface IWork {
   id: string;
   title: string;
@@ -7,7 +13,7 @@ interface IWork {
   images: string[] | File[];
   color: string;
   logo: string | File;
-  technologies: string[];
+  technologies: ITechnologies[];
 }
 
 export default IWork;

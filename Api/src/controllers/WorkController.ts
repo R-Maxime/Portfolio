@@ -54,6 +54,7 @@ export default class WorkController {
         ...req.body,
         images: getImagesFiles(req.files as Express.Multer.File[]),
         logo: getLogoFile(req.files as Express.Multer.File[]),
+        technologies: JSON.parse(req.body.technologies),
       } as IWork;
 
       const command = await this.postWorkCommand.createWork(work);
@@ -75,6 +76,7 @@ export default class WorkController {
         ...req.body,
         images: getImagesFiles(req.files as Express.Multer.File[]),
         logo: getLogoFile(req.files as Express.Multer.File[]),
+        technologies: JSON.parse(req.body.technologies),
       } as IWork;
 
       const command = await this.putWorkCommand.execute(work);
