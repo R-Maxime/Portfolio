@@ -1,0 +1,26 @@
+@import './var.scss';
+
+.image-card {
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  transition: $transition;
+
+  &:hover {
+    transform: scale(0.95);
+
+    .image-card__image {
+      transform: translate(-50%, -50%) scale(1.1) rotate(15deg)
+    }
+  }
+}
+
+.image-card__image {
+  height: 40%;
+  width: 40%;
+  object-fit: contain;
+  position: relative; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: $transition;
+}

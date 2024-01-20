@@ -14,6 +14,7 @@ export default class WorkModel {
       id: { type: String, required: true, unique: true },
       title: { type: String, required: true },
       description: { type: String, required: true },
+      longDescription: { type: String },
       repoUrl: { type: String },
       webUrl: { type: String },
       images: { type: [String] },

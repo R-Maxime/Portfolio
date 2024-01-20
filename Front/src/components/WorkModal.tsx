@@ -43,6 +43,7 @@ class WorkModal extends Component<WorkModalProps, State> {
         id: this.randomId,
         title: '',
         description: '',
+        longDescription: '',
         repoUrl: '',
         webUrl: '',
         color: this.defaultColor,
@@ -59,6 +60,7 @@ class WorkModal extends Component<WorkModalProps, State> {
       id: randomId,
       title: '',
       description: '',
+      longDescription: '',
       repoUrl: '',
       webUrl: '',
       color: this.defaultColor,
@@ -125,6 +127,7 @@ class WorkModal extends Component<WorkModalProps, State> {
         id: this.randomId,
         title: '',
         description: '',
+        longDescription: '',
         repoUrl: '',
         webUrl: '',
         color: this.defaultColor,
@@ -185,7 +188,7 @@ class WorkModal extends Component<WorkModalProps, State> {
         padding: '10px'
       }}>
         {this.state.workData.technologies.map((techno, index) => (
-          <div className='flex column gap-8 pad-top-8' key={`${techno.name}-${index}`} style={{
+          <div className='flex column gap-8 pad-top-8' key={index} style={{
             border: '1px solid white',
             borderRadius: '5px',
             padding: '10px'
@@ -229,6 +232,7 @@ class WorkModal extends Component<WorkModalProps, State> {
       <div className='flex column'>
         <InputField label='Titre' id='title' value={workData.title} onChange={(value) => this.setWorksData({ ...workData, title: value })} />
         <InputField label='Description' id='description' value={workData.description} onChange={(value) => this.setWorksData({ ...workData, description: value })} />
+        <InputField label='Description longue' id='longDescription' value={workData.longDescription} onChange={(value) => this.setWorksData({ ...workData, longDescription: value })} />
         <InputField label='Repo GitHub' id='repoUrl' value={workData?.repoUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, repoUrl: value })} />
         <InputField label='Site web' id='webUrl' value={workData?.webUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, webUrl: value })} />
 

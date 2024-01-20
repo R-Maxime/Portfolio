@@ -7,18 +7,20 @@ import PageTextHeader from '../../../components/PageTextHeader';
 import '../../../styles/Admin.scss';
 import i18n from '../../../langs/i18n';
 
-function WorkById(): React.ReactElement {
+function AdminWorkById(): React.ReactElement {
   const id = useParams().id;
 
   const [workData, setWork] = useState<IWork>({
     id: '',
     title: '',
     description: '',
+    longDescription: '',
     repoUrl: '',
     webUrl: '',
     images: [],
     color: '',
-    logo: ''
+    logo: '',
+    technologies: []
   });
 
   useEffect(() => {
@@ -38,4 +40,4 @@ function WorkById(): React.ReactElement {
   );
 }
 
-export default WorkById;
+export default AdminWorkById;

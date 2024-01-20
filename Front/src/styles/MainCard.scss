@@ -1,0 +1,65 @@
+@import './var.scss';
+
+
+
+.main-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  animation: fadeInAnimation ease 1s;
+  gap: 25px;
+}
+
+.main-card {
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  transition: $transition;
+
+  &:hover {
+    transform: scale(0.95);
+  }
+}
+
+.main-card__container {
+  padding: 2rem;
+}
+
+.main-card__middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-card__bottom {
+  padding: 25px 0 0 0;
+}
+
+.main-card__image {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  object-fit: contain;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.main-card__link_logo {
+  height: 25px;
+  width: 25px;
+  object-fit: contain;
+  transition: $transition;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.main-card__link_text {
+  padding: 0.5rem;
+  background-color: #ffffff4d;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: $mobil-width) {
+  .main-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

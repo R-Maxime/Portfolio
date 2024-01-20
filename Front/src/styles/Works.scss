@@ -1,13 +1,9 @@
 @import './var.scss';
 
-.home_works {
-  max-width: 80%;
-  margin: 0 auto;
-}
 
 .works-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   animation: fadeInAnimation ease 1s;
   gap: 50px;
 }
@@ -126,10 +122,6 @@
     gap: 20px;
   }
 
-  .home_works {
-    max-width: 95%;
-  }
-
   .work-card__logo {
     height: 33%;
     width: 33%;
@@ -149,10 +141,6 @@
   .works-container {
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
-  }
-
-  .home_works {
-    max-width: 95%;
   }
 
   .work-card__logo {

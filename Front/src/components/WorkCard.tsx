@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import IWork from '../datas/Models/Work';
 import '../styles/Works.scss';
-import GithubLogo from '../assets/github-mark-white.png';
-import Link from '../assets/link.png';
+import GithubLogo from '../../assets/github-mark-white.png';
+import Link from '../../assets/link.png';
 import TechnoCard from './TechnoCard';
 
 const DEFAULT_LOGO = 'data:application/octet-stream;base64,';
