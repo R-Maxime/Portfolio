@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IWork from '../../../datas/Models/Work';
 import Work from '../../../datas/Work';
-import WorkModal from '../../../components/WorkModal';
+import WorkModal from '../../../components/Work/WorkModal';
 import PageTextHeader from '../../../components/PageTextHeader';
 import '../../../styles/Admin.scss';
 import i18n from '../../../langs/i18n';

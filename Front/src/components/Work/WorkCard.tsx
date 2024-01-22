@@ -1,9 +1,10 @@
 import { Component } from 'react';
-import IWork from '../datas/Models/Work';
-import '../styles/Works.scss';
-import GithubLogo from '../../assets/github-mark-white.png';
-import Link from '../../assets/link.png';
+import IWork from '../../datas/Models/Work';
+import GithubLogo from '../../../assets/github-mark-white.png';
+import Link from '../../../assets/link.png';
 import TechnoCard from './TechnoCard';
+
+import '../../styles/Works.scss';
 
 const DEFAULT_LOGO = 'data:application/octet-stream;base64,';
 const WEB_REGEX = /^https?:\/\//;

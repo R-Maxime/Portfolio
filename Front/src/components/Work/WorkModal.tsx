@@ -1,11 +1,12 @@
 /* eslint-disable class-methods-use-this */
 import { Component } from 'react';
-import IWork, { ITechnologies } from '../datas/Models/Work';
-import InputField from './InputField';
+import IWork, { ITechnologies } from '../../datas/Models/Work';
+import InputField from '../InputField';
 import WorkCard from './WorkCard';
-import Work from '../datas/Work';
-import i18n from '../langs/i18n';
-import '../styles/Admin.scss';
+import Work from '../../datas/Work';
+import i18n from '../../langs/i18n';
+
+import '../../styles/Admin.scss';
 
 const GET_RANDOM_ID = () => Math.floor(Math.random() * 1000000).toString();
 

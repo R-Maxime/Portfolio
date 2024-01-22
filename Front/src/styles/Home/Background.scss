@@ -1,0 +1,27 @@
+@import '../var.scss';
+
+.background-container {
+  background-color: #1d82a3;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+
+  transition: $transition;
+
+  &:hover {
+    transform: $transition-scale;
+  }
+}
+
+.background-title {
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 10px;
+}
+
+.background-contents {
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  gap: 1rem;
+}

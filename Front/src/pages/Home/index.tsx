@@ -1,12 +1,13 @@
+/* eslint-disable max-len */
 import React from 'react';
 import Auth from '../../datas/Auth';
 import MainCard from '../../components/MainCard';
-import ImageCard from '../../components/ImageCard';
+import Utils from '../../datas/utils';
+import AboutMe from './AboutMe';
+import MyStacks from './MyStacks';
+import MyBackground from './MyBackground';
 
 function Index(): React.ReactElement {
-  const birthdayDate = new Date('1999-08-08');
-  const age = Math.floor((Date.now() - birthdayDate.getTime()) / 1000 / 60 / 60 / 24 / 365.25);
-
   const pages = [
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' }
@@ -18,11 +19,14 @@ function Index(): React.ReactElement {
   }
 
   return (
-    <>
-      <div className='main-cards'>
+    <div style={{
+      display: 'grid',
+      gap: '25px'
+    }}>
+      <div className='main-cards anim'>
         <MainCard
           title='Maxime R.'
-          description={`Developpeur Full Stack JS/TS de ${age} ans`}
+          description={`Developpeur Full Stack JS/TS de ${Utils.getAge()} ans`}
           color='#009688'
           image='https://faareoh.fr/favicon.ico'
           link='https://github.com/R-Maxime/Portfolio'
@@ -35,19 +39,27 @@ function Index(): React.ReactElement {
           image='/assets/github-mark-white.png'
           link='https://github.com/Faareoh'
         />
-        <ImageCard
-          image='/assets/discord.png'
-          backgroundColor='#5865F2'
-          link='discord://-/users/211543250438193152'
-        />
+        <MyStacks />
         <MainCard
           title='Projets'
           description='Tous mes projets (professionnels et personnels)'
+          image='/assets/dev.png'
           color='#8424e3'
           link='/projects'
         />
+        <AboutMe />
+        <MyBackground />
       </div>
-    </ >
+      <div className='contact-card anim'>
+        <MainCard
+          title='Contact'
+          description="​"
+          image='/assets/contact.png'
+          color='#5865F2'
+          link='/contact'
+        />
+      </div>
+    </div>
   );
 }
 

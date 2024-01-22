@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import IWork from '../datas/Models/Work';
-import Work from '../datas/Work';
+import IWork from '../../datas/Models/Work';
+import Work from '../../datas/Work';
 import WorkCard from './WorkCard';
-import '../styles/Works.scss';
-import i18n from '../langs/i18n';
+import i18n from '../../langs/i18n';
+import '../../styles/Works.scss';
 
 interface DisplayWorksProps {
   admin: boolean;

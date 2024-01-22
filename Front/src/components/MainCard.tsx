@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/MainCard.scss';
 import Link from '../../assets/link.png';
+import '../styles/Home/index.scss';
 
 function AddImage(props: { image?: string }): React.ReactElement {
   const { image } = props;
@@ -39,15 +39,15 @@ function AddLink(props: { link?: string, linkText?: string }): React.ReactElemen
 }
 
 function MainCard(props: {
-  title: string, description: string, color: string, link: string,
-  image?: string, linkText?: string
+  title: string, color: string, link: string,
+  description?: string, image?: string, linkText?: string
 }): React.ReactElement {
   const {
     title, description, image, link, color, linkText
   } = props;
 
   return (
-    <a className="main-card" style={{ backgroundColor: color }} href={link}>
+    <div className="main-card" style={{ backgroundColor: color }}>
       <div className='main-card__container'>
         <div className='main-card__middle'>
           <AddImage image={image} />
@@ -56,10 +56,11 @@ function MainCard(props: {
 
         <div className='main-card__bottom' >
           <div className="main-card__title">{title}</div>
-          <p className="main-card__description">{description}</p>
+          {description && <p className="main-card__description">{description}</p>}
+
         </div>
       </div>
-    </a >
+    </div >
   );
 }
 

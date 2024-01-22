@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IWork from '../../datas/Models/Work';
 import Work from '../../datas/Work';
-import WorkCard from '../../components/WorkCard';
+import WorkCard from '../../components/Work/WorkCard';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;

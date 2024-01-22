@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PageTextHeader from '../../../components/PageTextHeader';
-import DisplayWorks from '../../../components/DisplayWorks';
-import WorkModal from '../../../components/WorkModal';
+import DisplayWorks from '../../../components/Work/DisplayWorks';
+import WorkModal from '../../../components/Work/WorkModal';
 import Auth from '../../../datas/Auth';
 import '../../../styles/Admin.scss';
 import '../../../styles/global.scss';

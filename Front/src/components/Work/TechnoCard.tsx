@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ITechnologies } from '../datas/Models/Work';
+import { ITechnologies } from '../../datas/Models/Work';
 
 class TechnoCard extends Component<{ technologies: ITechnologies[] }> {
   render() {

@@ -1,6 +1,8 @@
-@import './var.scss';
+@import '../var.scss';
 
-
+.anim {
+  animation: fadeInAnimation ease 1s;
+}
 
 .main-cards {
   display: grid;
@@ -15,7 +17,7 @@
   transition: $transition;
 
   &:hover {
-    transform: scale(0.95);
+    transform: $transition-scale;
   }
 }
 
@@ -30,7 +32,14 @@
 }
 
 .main-card__bottom {
+  display: flex;
+  flex-direction: column;
   padding: 25px 0 0 0;
+  position: relative;
+  top: 2.5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: $transition;
 }
 
 .main-card__image {
@@ -38,7 +47,6 @@
   width: 60px;
   border-radius: 100%;
   object-fit: contain;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .main-card__link_logo {
@@ -52,14 +60,32 @@
   }
 }
 
+.contact-card {
+  width: 70%;
+  margin: auto;
+}
+
+
 .main-card__link_text {
   padding: 0.5rem;
   background-color: #ffffff4d;
   border-radius: 5px;
 }
 
+@media screen and (max-width: $tablet-width) {
+
+  .contact-card {
+    width: 80%;
+  }
+
+}
+
 @media screen and (max-width: $mobil-width) {
   .main-cards {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .contact-card {
+    width: 95%;
   }
 }

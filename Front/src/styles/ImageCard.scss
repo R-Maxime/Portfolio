@@ -6,7 +6,7 @@
   transition: $transition;
 
   &:hover {
-    transform: scale(0.95);
+    transform: $transition-scale;
 
     .image-card__image {
       transform: translate(-50%, -50%) scale(1.1) rotate(15deg)

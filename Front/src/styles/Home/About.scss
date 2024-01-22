@@ -1,0 +1,19 @@
+@import '../var.scss';
+
+.about-container {
+  background-color: #475C87;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+  transition: $transition;
+
+  &:hover {
+    transform: $transition-scale;
+  }
+}
+
+.about-title {
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 28px;
+}

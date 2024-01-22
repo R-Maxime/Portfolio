@@ -64,5 +64,13 @@ export default {
     addTechno: {
       fr: 'Ajouter une techno'
     }
+  },
+  home: {
+    about: {
+      fr: 'A propos de moi'
+    },
+    background: {
+      fr: 'Mon parcours professionnel'
+    }
   }
 };

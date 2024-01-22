@@ -1,0 +1,40 @@
+@import '../var.scss';
+
+.stacks-container {
+  background-color: #EDBC60;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 100%;
+  margin: auto;
+  transition: $transition;
+
+  &:hover {
+    transform: $transition-scale;
+  }
+}
+
+.stacks-text {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.stacks-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.stacks-grid-item {
+  width: 40px;
+  margin: auto;
+
+  transition: $transition;
+
+  &:hover {
+    transform:  scale(1.1) rotate(15deg);
+  }
+
+  img {
+    width: 100%;
+  }
+}
