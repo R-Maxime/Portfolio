@@ -15,7 +15,11 @@ function AboutMe(): React.ReactElement {
       </p>
       <br />
       <p>
-        Ma spécialité se situe principalement dans le domaine du Back-End, où je me concentre sur la création de programmes sans interface graphique tels que des interfaces en ligne de commande (CLI) ou des bots Discord. Cependant, mes compétences ne se limitent pas là, car je suis également capable de concevoir des sites web.
+        Ma spécialité se situe principalement dans le domaine du Back-End, où je me concentre sur la création de programmes sans interface graphique tels que des interfaces en ligne de commande (CLI) ou des bots Discord.
+      </p>
+      <br />
+      <p>
+        Cependant, mes compétences ne se limitent pas là, car je suis également capable de concevoir des sites web.
       </p>
     </div>
   );
