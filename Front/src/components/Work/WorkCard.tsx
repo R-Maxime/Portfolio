@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import IWork from '../../datas/Models/Work';
-import GithubLogo from '../../../public/assets/github-mark-white.png';
-import Link from '../../../public/assets/link.png';
+import GithubLogo from '/assets/github-mark-white.png';
+import Link from '/assets/link.png';
 import TechnoCard from './TechnoCard';
 
 import '../../styles/Works.scss';

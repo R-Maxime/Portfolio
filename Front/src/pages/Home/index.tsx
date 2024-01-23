@@ -39,6 +39,8 @@ function Index(): React.ReactElement {
           image='/assets/github-mark-white.png'
           link='https://github.com/Faareoh'
         />
+        <AboutMe />
+        <MyBackground />
         <MyStacks />
         <MainCard
           title='Projets'
@@ -47,8 +49,6 @@ function Index(): React.ReactElement {
           color='#8424e3'
           link='/projects'
         />
-        <AboutMe />
-        <MyBackground />
       </div>
       <div className='contact-card anim'>
         <MainCard

@@ -1,16 +1,16 @@
 import React from 'react';
 import '../../styles/Home/Stacks.scss';
 
-import nodejs from '../../../public/assets/nodejs.png';
-import typescript from '../../../public/assets/typescript.png';
-import discord from '../../../public/assets/discord.png';
-import discordjs from '../../../public/assets/discordjs.png';
-import mongodb from '../../../public/assets/mongodb.png';
-import react from '../../../public/assets/react.png';
-import docker from '../../../public/assets/docker.png';
-import html5 from '../../../public/assets/html5.png';
-import css3 from '../../../public/assets/css3.png';
-import vscode from '../../../public/assets/vscode.png';
+import nodejs from '/assets/nodejs.png';
+import typescript from '/assets/typescript.png';
+import discord from '/assets/discord.png';
+import discordjs from '/assets/discordjs.png';
+import mongodb from '/assets/mongodb.png';
+import react from '/assets/react.png';
+import docker from '/assets/docker.png';
+import html5 from '/assets/html5.png';
+import css3 from '/assets/css3.png';
+import vscode from '/assets/vscode.png';
 
 function MyStacks(): React.ReactElement {
   const stacks = [{

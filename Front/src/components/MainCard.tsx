@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '../../public/assets/link.png';
+import Link from '/assets/link.png';
 import '../styles/Home/index.scss';
 
 function AddImage(props: { image?: string }): React.ReactElement {
