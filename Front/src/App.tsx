@@ -6,9 +6,10 @@ import Auth from './datas/Auth';
 import Admin from './pages/Admin';
 import AdminWorkById from './pages/Admin/Works/WorkById';
 import AdminWorks from './pages/Admin/Works/Work';
-import WorkById from './pages/Work';
+import WorkById from './pages/Work/WorkById';
 import Header from './components/Header';
 import './styles/index.scss';
+import Works from './pages/Work/Works';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/works" element={<Works />} />
             <Route path="/work/:id" element={<WorkById />} />
             {Auth.isAuthenticated() && (
               <>

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import IWork from '../../datas/Models/Work';
 import Work from '../../datas/Work';
 import WorkCard from '../../components/Work/WorkCard';
+import Loader from '../../components/Loader';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;
@@ -37,14 +38,12 @@ function WorkById(): React.ReactElement {
 
   if (isLoaded) {
     return (
-      <div className='pad-16'>
-        <h1>Chargement...</h1>
-      </div>
+      <Loader />
     );
   }
 
   return (
-    <div className='content-container home'>
+    <div className='home'>
       <WorkCard key={workData.id} admin={false} {...workData} />
     </div>
   );

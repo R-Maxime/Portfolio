@@ -14,36 +14,36 @@ function AddImage(props: { image?: string }): React.ReactElement {
   return <div></div>;
 }
 
-function AddLink(props: { link?: string, linkText?: string }): React.ReactElement {
-  if (props.link && props.linkText) {
+function AddLink(props: {
+  link: string, external: boolean, linkText?: string
+}): React.ReactElement {
+  const ifExternal = props.external ? '_blank' : '_self';
+
+  if (props.linkText) {
     return (
-      <a href={props.link} target="_blank" rel="noopener noreferrer" className='main-card__link_text'>
+      <a href={props.link} target={ifExternal} className='main-card__link_text'>
         <div>{props.linkText}</div>
-      </a>
+      </a >
     );
   }
 
-  if (props.link) {
-    return (
-      <a href={props.link} target="_blank" rel="noopener noreferrer">
-        <img
-          className="main-card__link_logo"
-          src={Link}
-          alt="Logo"
-        />
-      </a>
-    );
-  }
-
-  return <></>;
+  return (
+    <a href={props.link} target={ifExternal} rel="noopener noreferrer">
+      <img
+        className="main-card__link_logo"
+        src={Link}
+        alt="Logo"
+      />
+    </a>
+  );
 }
 
 function MainCard(props: {
-  title: string, color: string, link: string,
+  title: string, color: string, link: string, external: boolean,
   description?: string, image?: string, linkText?: string
 }): React.ReactElement {
   const {
-    title, description, image, link, color, linkText
+    title, description, image, link, external, color, linkText
   } = props;
 
   return (
@@ -51,7 +51,7 @@ function MainCard(props: {
       <div className='main-card__container'>
         <div className='main-card__middle'>
           <AddImage image={image} />
-          <AddLink link={link} linkText={linkText} />
+          <AddLink link={link} linkText={linkText} external={external} />
         </div>
 
         <div className='main-card__bottom' >

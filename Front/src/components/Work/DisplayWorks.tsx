@@ -4,6 +4,7 @@ import Work from '../../datas/Work';
 import WorkCard from './WorkCard';
 import i18n from '../../langs/i18n';
 import '../../styles/Works.scss';
+import Loader from '../Loader';
 
 interface DisplayWorksProps {
   admin: boolean;
@@ -23,7 +24,7 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
   return (
     <>
       {loading && (
-        <div>{i18n.work.loading.fr}</div>
+        <Loader />
       )}
 
       {!loading && !works.length && (
@@ -31,7 +32,7 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
       )}
 
       {works.length > 0 && (
-        <div className='works-container content-container'>
+        <div className='works-container'>
           {works.map((work) => (
             <WorkCard key={work.id} admin={admin} {...work} />
           ))}

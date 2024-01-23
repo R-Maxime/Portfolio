@@ -31,6 +31,7 @@ function Index(): React.ReactElement {
           image='https://faareoh.fr/favicon.ico'
           link='https://github.com/R-Maxime/Portfolio'
           linkText='Ce site ↗️'
+          external={true}
         />
         <MainCard
           title='Github personnel'
@@ -38,6 +39,7 @@ function Index(): React.ReactElement {
           color='#24292e'
           image='/assets/github-mark-white.png'
           link='https://github.com/Faareoh'
+          external={true}
         />
         <AboutMe />
         <MyBackground />
@@ -47,7 +49,8 @@ function Index(): React.ReactElement {
           description='Tous mes projets (professionnels et personnels)'
           image='/assets/dev.png'
           color='#8424e3'
-          link='/projects'
+          link='/works'
+          external={false}
         />
       </div>
       <div className='contact-card anim'>
@@ -57,6 +60,7 @@ function Index(): React.ReactElement {
           image='/assets/contact.png'
           color='#5865F2'
           link='/contact'
+          external={false}
         />
       </div>
     </div>
