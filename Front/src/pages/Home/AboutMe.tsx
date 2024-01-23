@@ -11,7 +11,7 @@ function AboutMe(): React.ReactElement {
         {i18n.home.about.fr}
       </h1>
       <p>
-        Je m'appelle Maxime, J'ai <span style={{ fontWeight: 'bold' }}>{Utils.getAge()}</span> ans et je suis un développeur Full Stack JS/TS basé en France.
+        Je m'appelle Maxime, J'ai <span style={{ fontWeight: 'bold' }}>{Utils.getAge()}</span> ans, je suis un développeur Full Stack JS/TS basé en France.
       </p>
       <br />
       <p>
