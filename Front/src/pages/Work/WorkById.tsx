@@ -4,6 +4,7 @@ import IWork from '../../datas/Models/Work';
 import Work from '../../datas/Work';
 import WorkCard from '../../components/Work/WorkCard';
 import Loader from '../../components/Loader';
+import Error from '../../components/Error';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;
@@ -22,15 +23,21 @@ function WorkById(): React.ReactElement {
   });
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
     try {
       Work.getWork(Number(workId)).then((work) => {
+        if (!work.title) {
+          setIsError(true);
+          return;
+        }
+
         setWork(work);
       });
     } catch (error) {
-      console.error(error);
+      setIsError(true);
     } finally {
       setIsLoaded(false);
     }
@@ -39,6 +46,12 @@ function WorkById(): React.ReactElement {
   if (isLoaded) {
     return (
       <Loader />
+    );
+  }
+
+  if (isError) {
+    return (
+      <Error />
     );
   }
 

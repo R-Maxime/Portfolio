@@ -10,6 +10,7 @@
 
 
 .work-card {
+  display: block;
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -44,6 +45,11 @@
   font-weight: 500;
   margin: 10px 0 0 10px;
 }
+
+.change-page:hover {
+  color: whitesmoke;
+}
+
 
 .work-card_github_logo {
   height: 25px;
@@ -96,7 +102,6 @@
     padding: 6px;
     border-radius: 5px;
     background-color: $primary-color;
-    font-weight: 400;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     transition: $transition
   }
@@ -106,8 +111,9 @@
   }
 
   .work-card_technologie__logo {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
   }
 }
 
@@ -159,10 +165,6 @@
     .word-card_technologie {
       font-size: 14px;
       padding: 7px;
-    }
-
-    .work-card_technologie__logo {
-      display: none;
     }
   }
 }

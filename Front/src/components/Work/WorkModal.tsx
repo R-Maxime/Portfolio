@@ -270,31 +270,29 @@ class WorkModal extends Component<WorkModalProps, State> {
   render() {
     const { workData, previewWork } = this.state;
     return (
-      <div>
-        <div className='content-container center-50'>
+      <div className='center-50'>
+        <div style={{ paddingTop: '10px' }}>
           <WorkCard key={previewWork.id} admin={true} {...previewWork} />
         </div>
-        <div className='center-50'>
-          <div className='content-container flex column'>
-            <div className='work-modal-header'>
-              <h3>{i18n.admin.addProject.fr}</h3>
-            </div>
-            {this.renderInput()}
-            <div style={{ paddingTop: '10px', gap: '5px', display: 'flex' }}>
-              <button onClick={() => this.rerender()} type='button'>
-                {i18n.admin.cancel.fr}
+        <div className='content-container flex column'>
+          <div className='work-modal-header'>
+            <h3>{i18n.admin.addProject.fr}</h3>
+          </div>
+          {this.renderInput()}
+          <div style={{ paddingTop: '10px', gap: '5px', display: 'flex' }}>
+            <button onClick={() => this.rerender()} type='button'>
+              {i18n.admin.cancel.fr}
+            </button>
+            <button onClick={() => this.isPreFilledData
+              ? Work.updateWork(workData).then(() => this.rerender())
+              : Work.addWork(workData).then(() => this.rerender())} type='button'>
+              {i18n.admin.add.fr}
+            </button>
+            {this.isPreFilledData && (
+              <button onClick={() => Work.deleteWork(Number(workData.id)).then(() => { window.location.href = '/admin/works'; })} type='button'>
+                {i18n.admin.delete.fr}
               </button>
-              <button onClick={() => this.isPreFilledData
-                ? Work.updateWork(workData).then(() => this.rerender())
-                : Work.addWork(workData).then(() => this.rerender())} type='button'>
-                {i18n.admin.add.fr}
-              </button>
-              {this.isPreFilledData && (
-                <button onClick={() => Work.deleteWork(Number(workData.id)).then(() => { window.location.href = '/admin/works'; })} type='button'>
-                  {i18n.admin.delete.fr}
-                </button>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div >

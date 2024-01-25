@@ -6,6 +6,7 @@ import WorkModal from '../../../components/Work/WorkModal';
 import PageTextHeader from '../../../components/PageTextHeader';
 import '../../../styles/Admin.scss';
 import i18n from '../../../langs/i18n';
+import Gallery from '../../../components/Gallery';
 
 function AdminWorkById(): React.ReactElement {
   const id = useParams().id;
@@ -30,13 +31,17 @@ function AdminWorkById(): React.ReactElement {
   }, [id]);
 
   return (
-    <div className='pad-16'>
+    <>
       <PageTextHeader text='Modification de projet' />
       <button style={{ marginTop: '10px' }} onClick={() => { window.location.href = '/admin/works'; }}>
         {i18n.admin.backToProjects.fr}
       </button>
+
+      {workData.images.length > 0 && (
+        <Gallery images={workData.images as string[]} />
+      )}
       <WorkModal preFilledData={workData} />
-    </div >
+    </>
   );
 }
 

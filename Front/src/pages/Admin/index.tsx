@@ -10,9 +10,9 @@ function Admin(): React.ReactElement {
   ];
 
   return (
-    <div className='pad-16'>
+    <>
       <PageTextHeader text='Admin' />
-      <div className='admin-pages pad-16'>
+      <div className='admin-pages'>
         <ul>
           {adminPages.map((page, index) => (
             <button onClick={() => { window.location.href = page.path; }}>
@@ -21,7 +21,7 @@ function Admin(): React.ReactElement {
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 }
 

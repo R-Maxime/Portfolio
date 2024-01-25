@@ -19,6 +19,11 @@ body {
   background-color: $primary-color;
 }
 
+a:hover {
+  transition: 0.3s;
+  color: $hover-color;
+}
+
 @media screen and (max-width: $tablet-width) {
   .app {
     max-width: 95%;

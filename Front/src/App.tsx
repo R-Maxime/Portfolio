@@ -10,6 +10,7 @@ import WorkById from './pages/Work/WorkById';
 import Header from './components/Header';
 import './styles/index.scss';
 import Works from './pages/Work/Works';
+import Error from './components/Error';
 
 class App extends Component {
   render() {
@@ -30,7 +31,7 @@ class App extends Component {
               </>
             )}
 
-            <Route path="*" element={<h1>404</h1>} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </BrowserRouter>
       </div>

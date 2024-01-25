@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/Header.scss';
+import Auth from '../datas/Auth';
 
 function Header(): React.ReactElement {
   return (
@@ -23,6 +24,13 @@ function Header(): React.ReactElement {
         >
           Projets
         </NavLink>
+        {Auth.isAuthenticated() && (
+          <NavLink
+            to={'/admin'}
+          >
+            Admin
+          </NavLink>
+        )}
       </nav>
     </nav>
   );

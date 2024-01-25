@@ -4,7 +4,7 @@ import GetWorkQuery from '../business/Usecase/Work/GetWorkQuery';
 import PostWorkCommand from '../business/Usecase/Work/PostWorkCommand';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import IWork from '../business/Models/Work';
-import { getImagesFiles, getLogoFile } from '../utils/Utils';
+import Utils from '../utils/Utils';
 import PutWorkCommand from '../business/Usecase/Work/PutWorkCommand';
 import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
 
@@ -52,9 +52,9 @@ export default class WorkController {
     try {
       const work = {
         ...req.body,
-        images: getImagesFiles(req.files as Express.Multer.File[]),
-        logo: getLogoFile(req.files as Express.Multer.File[]),
-        technologies: req.body.technologies ? JSON.parse(req.body.technologies) : [],
+        images: Utils.getImagesFiles(req.files as Express.Multer.File[]),
+        logo: Utils.getLogoFile(req.files as Express.Multer.File[]),
+        technologies: Utils.getTechnologies(req.body.technologies),
       } as IWork;
 
       const command = await this.postWorkCommand.createWork(work);
@@ -74,8 +74,8 @@ export default class WorkController {
     try {
       const work = {
         ...req.body,
-        images: getImagesFiles(req.files as Express.Multer.File[]),
-        logo: getLogoFile(req.files as Express.Multer.File[]),
+        images: Utils.getImagesFiles(req.files as Express.Multer.File[]),
+        logo: Utils.getLogoFile(req.files as Express.Multer.File[]),
         technologies: req.body.technologies ? JSON.parse(req.body.technologies) : [],
       } as IWork;
 

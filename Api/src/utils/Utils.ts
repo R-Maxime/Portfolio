@@ -1,23 +1,35 @@
-export function getFileUrl(file: Express.Multer.File) {
-  return `${process.env.API_URL}/public/${file.mimetype.split('/')[0]}/${file.filename}`;
-}
+import IWork from '../business/Models/Work';
 
-export function getFilesUrl(files: Express.Multer.File[]) {
-  return files.map((image) => getFileUrl(image));
-}
-
-export function getImagesFiles(files: Express.Multer.File[]) {
-  if (files && 'images' in files && (files.images as Express.Multer.File[]).length) {
-    return getFilesUrl(files.images as Express.Multer.File[]);
+export default class Utils {
+  static getFileUrl(file: Express.Multer.File) {
+    return `${process.env.API_URL}/public/${file.mimetype.split('/')[0]}/${file.filename}`;
   }
 
-  return [];
-}
-
-export function getLogoFile(files: Express.Multer.File[]) {
-  if (files && 'logo' in files && (files.logo as Express.Multer.File[]).length) {
-    return getFilesUrl(files.logo as Express.Multer.File[])[0];
+  static getFilesUrl(files: Express.Multer.File[]) {
+    return files.map((image) => this.getFileUrl(image));
   }
 
-  return '';
+  static getImagesFiles(files: Express.Multer.File[]) {
+    if (files && 'images' in files && (files.images as Express.Multer.File[]).length) {
+      return this.getFilesUrl(files.images as Express.Multer.File[]);
+    }
+
+    return [];
+  }
+
+  static getLogoFile(files: Express.Multer.File[]) {
+    if (files && 'logo' in files && (files.logo as Express.Multer.File[]).length) {
+      return this.getFilesUrl(files.logo as Express.Multer.File[])[0];
+    }
+
+    return '';
+  }
+
+  static getTechnologies(technologies: string[]): IWork['technologies'] {
+    if (technologies) {
+      return technologies.map((technology) => JSON.parse(technology));
+    }
+
+    return [];
+  }
 }
