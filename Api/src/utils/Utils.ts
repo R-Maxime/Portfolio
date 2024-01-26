@@ -26,8 +26,12 @@ export default class Utils {
   }
 
   static getTechnologies(technologies: string[]): IWork['technologies'] {
-    if (technologies) {
+    if (technologies && Array.isArray(technologies)) {
       return technologies.map((technology) => JSON.parse(technology));
+    }
+
+    if (technologies && typeof technologies === 'string') {
+      return [JSON.parse(technologies)];
     }
 
     return [];

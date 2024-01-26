@@ -20,6 +20,7 @@ class Work {
     formData.append('id', work.id);
     formData.append('title', work.title);
     formData.append('description', work.description);
+    formData.append('longDescription', work.longDescription);
     formData.append('repoUrl', work.repoUrl);
     formData.append('webUrl', work.webUrl);
     formData.append('color', work.color);

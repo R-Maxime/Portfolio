@@ -174,33 +174,12 @@ $ig-shadow: 0 2px 2px lighten($ig-black, 10%);
   @include vendor-prefix("user-select", none);
   -webkit-tap-highlight-color: $ig-transparent;
   position: relative;
-
-  &.fullscreen-modal {
-    background: $ig-black;
-    bottom: 0;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 5;
-
-    .image-gallery-content {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
 }
 
 .image-gallery-content {
   position: relative;
   line-height: 0;
   top: 0;
-
-  &.fullscreen {
-    background: $ig-black;
-  }
 
   .image-gallery-slide .image-gallery-image {
     max-height: calc(100vh - 80px); // 80 px for the thumbnail space
@@ -238,7 +217,6 @@ $ig-shadow: 0 2px 2px lighten($ig-black, 10%);
   position: relative;
   white-space: nowrap;
   text-align: center;
-  touch-action: none; // prevent scrolling when touching gallery
 }
 
 .image-gallery-slide {
@@ -252,8 +230,13 @@ $ig-shadow: 0 2px 2px lighten($ig-black, 10%);
   }
 
   .image-gallery-image {
-    width: 25%;
+    width: 600px;
+    height: 600px;
     object-fit: contain;
+
+    @media screen and (max-width: 768px) {
+      width: 250px;
+    }
   }
 
   .image-gallery-description {

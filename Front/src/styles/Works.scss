@@ -117,6 +117,22 @@
   }
 }
 
+.work__by-id-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: $transition;
+
+  .work__long-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+
+
 @keyframes fadeInAnimation {
   from {
     opacity: 0;

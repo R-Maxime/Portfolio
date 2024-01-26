@@ -5,6 +5,7 @@ import Work from '../../datas/Work';
 import WorkCard from '../../components/Work/WorkCard';
 import Loader from '../../components/Loader';
 import Error from '../../components/Error';
+import Gallery from '../../components/Gallery';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;
@@ -56,8 +57,18 @@ function WorkById(): React.ReactElement {
   }
 
   return (
-    <div className='home'>
+    <div className='work__by-id-container'>
       <WorkCard key={workData.id} admin={false} {...workData} />
+      {workData.longDescription && (
+        <div className='work__long-description content-container'>
+          {workData.longDescription.split('\\n').map((paragraph, index) => (
+            <p key={index}>{paragraph}<br /></p>
+          ))}
+        </div>
+      )}
+      {workData.images.length > 0 && (
+        <Gallery images={workData.images as string[]} />
+      )}
     </div>
   );
 }
