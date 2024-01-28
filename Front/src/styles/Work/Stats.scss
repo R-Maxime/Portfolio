@@ -1,0 +1,33 @@
+@import '../var.scss';
+
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: $transition;
+  background-color: $primary-color;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.stats__container {
+  width: 75%;
+  height: 25dvh;
+
+  @media screen and (max-width: $mobil-width) {
+    width: 100%;
+    height: 15dvh;
+  }
+}
+
+.stats__tooltip {
+  background-color: $primary-color;
+  opacity: 0.8;
+  padding: 0 5px 0 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}

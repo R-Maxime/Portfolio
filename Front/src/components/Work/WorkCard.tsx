@@ -4,7 +4,7 @@ import GithubLogo from '/assets/github-mark-white.png';
 import Link from '/assets/link.png';
 import TechnoCard from './TechnoCard';
 
-import '../../styles/Works.scss';
+import '../../styles/Work/Works.scss';
 
 const DEFAULT_LOGO = 'data:application/octet-stream;base64,';
 const WEB_REGEX = /^https?:\/\//;

@@ -7,6 +7,7 @@ import PageTextHeader from '../../../components/PageTextHeader';
 import '../../../styles/Admin.scss';
 import i18n from '../../../langs/i18n';
 import Gallery from '../../../components/Gallery';
+import constant from '../../../../constant';
 
 function AdminWorkById(): React.ReactElement {
   const id = useParams().id;
@@ -25,10 +26,16 @@ function AdminWorkById(): React.ReactElement {
   });
 
   useEffect(() => {
-    Work.getWork(Number(id)).then((work) => {
+    Work.getWork(id).then((work) => {
       setWork(work);
     });
   }, [id]);
+
+  useEffect(() => {
+    if (workData.title) {
+      document.title = `${workData.title} - Admin - ${constant.PAGE_DEFAULT_NAME}`;
+    }
+  }, [workData.title]);
 
   return (
     <>

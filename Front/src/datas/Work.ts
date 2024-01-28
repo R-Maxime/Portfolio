@@ -9,7 +9,7 @@ class Work {
     return works;
   }
 
-  static async getWork(id: number): Promise<IWork> {
+  static async getWork(id: string | undefined): Promise<IWork> {
     const response = await fetch(`${constant.API_URL}/${constant.API_ROUTES.WORKS}/${id}`);
     const work = await response.json();
     return work;
@@ -64,7 +64,7 @@ class Work {
     return updatedWork;
   }
 
-  static async deleteWork(id: number): Promise<void> {
+  static async deleteWork(id: string | undefined): Promise<void> {
     await fetch(`${constant.API_URL}/${constant.API_ROUTES.WORKS}/${id}`, {
       method: 'DELETE',
       headers: {

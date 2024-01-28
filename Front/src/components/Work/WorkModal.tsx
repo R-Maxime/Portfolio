@@ -8,8 +8,6 @@ import i18n from '../../langs/i18n';
 
 import '../../styles/Admin.scss';
 
-const GET_RANDOM_ID = () => Math.floor(Math.random() * 1000000).toString();
-
 interface WorkModalProps {
   preFilledData?: IWork;
 }
@@ -21,8 +19,6 @@ interface State {
 }
 
 class WorkModal extends Component<WorkModalProps, State> {
-  randomId: string;
-
   defaultColor: string;
 
   isPreFilledData: boolean;
@@ -30,7 +26,6 @@ class WorkModal extends Component<WorkModalProps, State> {
   constructor(props: WorkModalProps) {
     super(props);
 
-    this.randomId = GET_RANDOM_ID();
     this.defaultColor = '#6366F1';
 
     const preFilledData = props.preFilledData || this.generateDefaultWorkData();
@@ -41,7 +36,7 @@ class WorkModal extends Component<WorkModalProps, State> {
       DEFAULT_WORK_DATA: preFilledData,
       workData: preFilledData,
       previewWork: {
-        id: this.randomId,
+        id: '',
         title: '',
         description: '',
         longDescription: '',
@@ -56,9 +51,8 @@ class WorkModal extends Component<WorkModalProps, State> {
   }
 
   generateDefaultWorkData() {
-    const randomId = GET_RANDOM_ID();
     return {
-      id: randomId,
+      id: '',
       title: '',
       description: '',
       longDescription: '',
@@ -120,12 +114,11 @@ class WorkModal extends Component<WorkModalProps, State> {
   }
 
   rerender() {
-    this.randomId = GET_RANDOM_ID();
     this.setState({
       DEFAULT_WORK_DATA: this.generateDefaultWorkData(),
       workData: this.generateDefaultWorkData(),
       previewWork: {
-        id: this.randomId,
+        id: '',
         title: '',
         description: '',
         longDescription: '',
@@ -231,8 +224,9 @@ class WorkModal extends Component<WorkModalProps, State> {
     const { workData } = this.state;
     return (
       <div className='flex column'>
-        <InputField label='Titre' id='title' value={workData.title} onChange={(value) => this.setWorksData({ ...workData, title: value })} />
-        <InputField label='Description' id='description' value={workData.description} onChange={(value) => this.setWorksData({ ...workData, description: value })} />
+        <InputField label='ID (obligatoire)' id='id' value={workData.id} onChange={(value) => this.setWorksData({ ...workData, id: value })} />
+        <InputField label='Titre (obligatoire)' id='title' value={workData.title} onChange={(value) => this.setWorksData({ ...workData, title: value })} />
+        <InputField label='Description (obligatoire)' id='description' value={workData.description} onChange={(value) => this.setWorksData({ ...workData, description: value })} />
         <InputField label='Description longue' id='longDescription' value={workData.longDescription} onChange={(value) => this.setWorksData({ ...workData, longDescription: value })} />
         <InputField label='Repo GitHub' id='repoUrl' value={workData?.repoUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, repoUrl: value })} />
         <InputField label='Site web' id='webUrl' value={workData?.webUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, webUrl: value })} />
@@ -289,7 +283,7 @@ class WorkModal extends Component<WorkModalProps, State> {
               {i18n.admin.add.fr}
             </button>
             {this.isPreFilledData && (
-              <button onClick={() => Work.deleteWork(Number(workData.id)).then(() => { window.location.href = '/admin/works'; })} type='button'>
+              <button onClick={() => Work.deleteWork(workData.id).then(() => { window.location.href = '/admin/works'; })} type='button'>
                 {i18n.admin.delete.fr}
               </button>
             )}

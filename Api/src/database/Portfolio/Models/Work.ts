@@ -11,7 +11,9 @@ export default class WorkModel {
     this.PortfolioDB = PortfolioDB;
 
     this.WorkSchema = new PortfolioDB.client.Schema<IWork>({
-      id: { type: String, required: true, unique: true },
+      id: {
+        type: String, required: true, unique: true, lowercase: true, trim: true,
+      },
       title: { type: String, required: true },
       description: { type: String, required: true },
       longDescription: { type: String },

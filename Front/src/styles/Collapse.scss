@@ -37,26 +37,36 @@
   align-items: center;
   position: fixed;
   z-index: 1;
-  width: 700px;
-  max-width: 90vw;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
   opacity: 0;
-  transition: $transition;
+  transition: transform 0.3s ease 0s, opacity 0.3s ease 0s;
   padding: 10px;
   border-radius: 15px;
 
   img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
     object-position: center center;
   }
-}
 
-.modal.open {
-  opacity: 1;
+  @media screen and (max-width:$mobil-width) and (max-width:$tablet-width) {
+    width: 700px;
+    max-width: 90vw;
+  }
+
+
+  &.open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  &.close {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
 }
 
 .modal-backdrop {
@@ -65,5 +75,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease 0s;
+
+  &.open {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &.close {
+    background-color: rgba(0, 0, 0, 0);
+  }
 }

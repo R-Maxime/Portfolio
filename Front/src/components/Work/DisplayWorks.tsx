@@ -3,8 +3,8 @@ import IWork from '../../datas/Models/Work';
 import Work from '../../datas/Work';
 import WorkCard from './WorkCard';
 import i18n from '../../langs/i18n';
-import '../../styles/Works.scss';
 import Loader from '../Loader';
+import '../../styles/Work/Works.scss';
 
 interface DisplayWorksProps {
   admin: boolean;

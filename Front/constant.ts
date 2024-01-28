@@ -5,5 +5,6 @@ export default {
     DISCORD_GLOBAL: 'discord/global',
     DISCORD_LAST_MONTH: 'discord/lastmonth'
   },
-  API_URL: 'http://localhost:5000'
+  API_URL: 'https://api.portfolio.faareoh.fr',
+  PAGE_DEFAULT_NAME: 'Portfolio de Maxime R.'
 };

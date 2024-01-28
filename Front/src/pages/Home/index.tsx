@@ -6,8 +6,10 @@ import Utils from '../../datas/utils';
 import AboutMe from './AboutMe';
 import MyStacks from './MyStacks';
 import MyBackground from './MyBackground';
+import constant from '../../../constant';
 
 function Index(): React.ReactElement {
+  document.title = `Accueil - ${constant.PAGE_DEFAULT_NAME}`;
   const pages = [
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' }

@@ -1,4 +1,4 @@
-@import './var.scss';
+@import '../var.scss';
 
 
 .works-container {
@@ -130,26 +130,6 @@
     gap: 5px;
   }
 }
-
-.work__ebou-container {
-  .work__long-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-
-    h1 {
-      font-size: 20px;
-    }
-
-    a {
-      font-size: 16px;
-      text-decoration: underline;
-    }
-  }
-}
-
-
 
 @keyframes fadeInAnimation {
   from {
