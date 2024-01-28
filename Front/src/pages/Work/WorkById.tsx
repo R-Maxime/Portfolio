@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import IWork from '../../datas/Models/Work';
 import Work from '../../datas/Work';
-import WorkCard from '../../components/Work/WorkCard';
 import Loader from '../../components/Loader';
 import Error from '../../components/Error';
-import Gallery from '../../components/Gallery';
+import ClassicalWorkDisplay from './ClassicalWorkDisplay';
+import EbouWorkDisplay from './EbouWorkDisplay';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;
@@ -27,7 +27,8 @@ function WorkById(): React.ReactElement {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    setIsLoaded(false);
+
     try {
       Work.getWork(Number(workId)).then((work) => {
         if (!work.title) {
@@ -40,37 +41,27 @@ function WorkById(): React.ReactElement {
     } catch (error) {
       setIsError(true);
     } finally {
-      setIsLoaded(false);
+      setIsLoaded(true);
     }
   }, [workId]);
 
-  if (isLoaded) {
-    return (
-      <Loader />
-    );
+  if (!isLoaded) {
+    return <Loader />;
   }
 
   if (isError) {
-    return (
-      <Error />
-    );
+    return <Error />;
   }
 
-  return (
-    <div className='work__by-id-container'>
-      <WorkCard key={workData.id} admin={false} {...workData} />
-      {workData.longDescription && (
-        <div className='work__long-description content-container'>
-          {workData.longDescription.split('\\n').map((paragraph, index) => (
-            <p key={index}>{paragraph}<br /></p>
-          ))}
-        </div>
-      )}
-      {workData.images.length > 0 && (
-        <Gallery images={workData.images as string[]} />
-      )}
-    </div>
-  );
+  if (!workData.id) {
+    return <></>;
+  }
+
+  if (workData.title === 'E-bou') {
+    return <EbouWorkDisplay workData={workData} />;
+  }
+
+  return <ClassicalWorkDisplay workData={workData} />;
 }
 
 export default WorkById;

@@ -17,7 +17,7 @@ class TechnoCard extends Component<{ technologies: ITechnologies[] }> {
                 <img
                   className='work-card_technologie__logo'
                   src={techno.icon}
-                  alt={techno.name}
+                  alt={techno.name + ' logo'}
                 />
                 {techno.name}
               </a>
