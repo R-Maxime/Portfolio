@@ -34,19 +34,6 @@ export default class AppConfig {
     await this.setupRoutes();
   }
 
-  private setupRateLimit(): void {
-    if (process.env.NODE_ENV === NodeEnvEnum.DEBUG || process.env.NODE_ENV === NodeEnvEnum.TEST) {
-      return;
-    }
-
-    const limiter = rateLimit({
-      windowMs: 15 * 60 * 1000,
-      max: 100,
-    });
-
-    this.expressApp.use(limiter);
-  }
-
   private logRequests(): void {
     this.expressApp.use((req: Request, res: Response, next) => {
       this.logger.log('Express', `${req.method} ${req.url}`);
@@ -61,7 +48,6 @@ export default class AppConfig {
       crossOriginResourcePolicy: false,
     }));
     this.expressApp.disable('x-powered-by');
-    this.setupRateLimit();
     this.logRequests();
   }
 
