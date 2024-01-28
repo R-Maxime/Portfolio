@@ -6,7 +6,7 @@ import '../../../styles/Collapse.scss';
 
 import Info from './Info';
 import TechnicalDetails from './TechnicalDetails';
-import Fonctionnality from './Fonctionnality';
+import Features from './Features';
 import Statistics from './Statistics';
 
 function EbouWorkDisplay({ workData }: { workData: IWork }): React.ReactElement {
@@ -15,7 +15,7 @@ function EbouWorkDisplay({ workData }: { workData: IWork }): React.ReactElement 
       <WorkCard key={workData.id} admin={false} {...workData} />
       {<Info />}
       {<TechnicalDetails />}
-      {<Fonctionnality />}
+      {<Features />}
       {<Statistics />}
     </div >
   );

@@ -47,7 +47,7 @@ const EbouFeatures: { title: string, description: string, image?: string }[] = [
   }
 ];
 
-function Fonctionnality(): React.ReactElement {
+function Features(): React.ReactElement {
   const [imageOpen, setImageOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState<{ title: string, image?: string } | null>(null);
 
@@ -108,14 +108,14 @@ function Fonctionnality(): React.ReactElement {
           </div>
         </>
       )}
-      <div className='work__long-description content-container fonctionnality_container'>
+      <div className='work__long-description content-container features__container'>
         <h3>Fonctionnalitées</h3>
         <p>Le bot dispose de tout un tas de fonctionnalités, autant pour permettre de récupérer des informations en lien avec le jeu, que pour fournir des informations en temps réel sur l'activité d'Ankama.</p>
         <Collapsible trigger="Fonctionnalités" transitionTime={200}>
           <ul>
             {EbouFeatures.map((feature, index) => (
               <li key={index}>
-                {feature.image && <h4 style={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => openModal(feature)}>{feature.title}</h4>}
+                {feature.image && <h4 className='features__title' onClick={() => openModal(feature)}>{feature.title}</h4>}
                 {!feature.image && <h4>{feature.title}</h4>}
                 {feature.description.split('\\n').map((paragraph, ind) => (
                   <p key={ind}>{paragraph}<br /></p>
@@ -130,4 +130,4 @@ function Fonctionnality(): React.ReactElement {
   );
 }
 
-export default Fonctionnality;
+export default Features;

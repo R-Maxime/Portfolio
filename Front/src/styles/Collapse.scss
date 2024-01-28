@@ -50,6 +50,11 @@
     max-height: 90%;
     object-fit: contain;
     object-position: center center;
+
+    @media screen and (max-width:$mobil-width) {
+      max-width: 90vw;
+      max-height: 90vh;
+    }
   }
 
   @media screen and (max-width:$mobil-width) and (max-width:$tablet-width) {

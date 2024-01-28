@@ -1,3 +1,5 @@
+@import '../var.scss';
+
 .work__ebou-container {
   .work__long-description {
     display: flex;
@@ -15,10 +17,20 @@
     }
   }
 
-  .fonctionnality_container {
+  .features__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 15px;
+
+    .features__title {
+      cursor: pointer;
+      text-decoration: underline;
+      transition: $transition;
+
+      &:hover {
+        color: $hover-color;
+      }
+    }
   }
 }
