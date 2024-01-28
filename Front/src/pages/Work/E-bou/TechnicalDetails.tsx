@@ -16,7 +16,7 @@ function TechnicalDetails(): React.ReactElement {
       <p>Une fois les données converties, un second traitement est effectué (nommé <strong>post-processing</strong>) afin de générer des données supplémentaires et d'optimiser le traitement par le bot Discord, évitant ainsi de les effectuer en temps réel lorsque nécessaire.</p>
       <p>Lors d'une mise à jour, certaines images sont également générées automatiquement. Ankama utilise des données dans le format <strong>SWF</strong>, la librairie <a href='https://github.com/H3r3zy/Jeff' target='_blank'>Jeff</a> est utilisée pour extraire les images de ces fichiers.</p>
       <Collapsible trigger="Processus de mise à jour" transitionTime={200}>
-        <img src={Updater} />
+        <img src={Updater} alt='Image du processus de mise à jour'/>
       </Collapsible>
       <br />
     </div>

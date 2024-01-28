@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/Work/Ebou.scss';
 
-import Item from '/item.jpg';
-import Monster from '/monster.jpg';
-import Spell from '/spell.jpg';
-import Almanax from '/almanax.jpg';
-import Breed from '/breed.jpg';
-import Dungeon from '/dungeon.jpg';
-import Help from '/help.jpg';
+import Item from '/item.webp';
+import Monster from '/monster.webp';
+import Spell from '/spell.webp';
+import Almanax from '/almanax.webp';
+import Breed from '/breed.webp';
+import Dungeon from '/dungeon.webp';
+import Help from '/help.webp';
 import Collapsible from 'react-collapsible';
 
 const EbouFeatures: { title: string, description: string, image?: string }[] = [
@@ -103,7 +103,7 @@ function Features(): React.ReactElement {
           <div className='modal-backdrop' onClick={closeModal}></div>
           <div className={'modal'}>
             <div className='modal-content'>
-              {selectedFeature.image && <img src={selectedFeature.image} alt={selectedFeature.title} />}
+              {selectedFeature.image && <img src={selectedFeature.image} alt={`Image de la commande "${selectedFeature.title}"`} />}
             </div>
           </div>
         </>
