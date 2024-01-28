@@ -1,9 +1,12 @@
 @import '../var.scss';
 
 .background-container {
+  display: flex;
+  flex-direction: column;
   background-color: #1d82a3;
   color: white;
   padding: 25px;
+  gap: 15px;
   border-radius: 10px;
 
   transition: $transition;

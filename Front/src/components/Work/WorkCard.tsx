@@ -12,43 +12,12 @@ const WEB_REGEX = /^https?:\/\//;
 interface IWorkCardProps extends IWork {
   admin: boolean;
 }
-
-function AddWorkLogo(pageUrl: string, logoUrl: string, isSamePage: boolean): React.ReactElement {
-  const Logo = () => (
-    <img className="work-card__logo" src={logoUrl} alt="Logo du projet" />
-  );
-
-  if (!isSamePage) {
-    return (
-      <a href={pageUrl}>
-        {Logo()}
-      </a>
-    );
-  }
-
-  return (
-    Logo()
-  );
-}
-
-function addTitle(title: string, pageUrl: string, isSamePage: boolean): React.ReactElement {
-  if (!isSamePage) {
-    return (
-      <a className="work-card__title change-page" href={pageUrl}>{title}</a>
-    );
-  }
-
-  return (
-    <div className="work-card__title">{title}</div>
-  );
-}
-
 function WorkCard({ admin, ...work }: IWorkCardProps): React.ReactElement {
   const pageUrl = admin ? `/admin/work/${work.id}` : `/work/${work.id}`;
   const isSamePage = window.location.pathname === pageUrl;
 
   return (
-    <div className="work-card" style={{ backgroundColor: work.color }}>
+    <a className="work-card" style={{ backgroundColor: work.color }} href={!isSamePage ? pageUrl : undefined}>
       {work.repoUrl && WEB_REGEX.test(work.repoUrl) && (
         <a href={work.repoUrl} target="_blank" rel="noopener noreferrer">
           <img className="work-card_github_logo" src={GithubLogo} alt="Lien du repository" />
@@ -67,16 +36,16 @@ function WorkCard({ admin, ...work }: IWorkCardProps): React.ReactElement {
       )}
 
       {work.logo && work.logo !== DEFAULT_LOGO && typeof work.logo === 'string' && (
-        AddWorkLogo(pageUrl, work.logo, isSamePage)
+        <img className="work-card__logo" src={work.logo} alt="Logo du projet" />
       )}
 
-      {addTitle(work.title, pageUrl, isSamePage)}
+      <a className="work-card__title change-page" href={pageUrl}>{work.title}</a>
       <p className="work-card__description">{work.description}</p>
 
       {work.technologies.length > 0 && (
         <TechnoCard technologies={work.technologies} />
       )}
-    </div>
+    </a >
   );
 }
 

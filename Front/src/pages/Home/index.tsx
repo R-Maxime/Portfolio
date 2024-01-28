@@ -32,7 +32,7 @@ function Index(): React.ReactElement {
           color='#009688'
           image='https://faareoh.fr/favicon.ico'
           link='https://github.com/R-Maxime/Portfolio'
-          linkText='Ce site ↗️'
+          linkText='Github de ce site/Api ↗️'
           external={true}
         />
         <MainCard
