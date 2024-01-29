@@ -11,6 +11,7 @@ import docker from '/assets/docker.png';
 import html5 from '/assets/html5.png';
 import css3 from '/assets/css3.png';
 import vscode from '/assets/vscode.png';
+import i18n from '../../langs/i18n';
 
 function MyStacks(): React.ReactElement {
   const stacks = [{
@@ -57,7 +58,7 @@ function MyStacks(): React.ReactElement {
 
   return (
     <div className="stacks-container">
-      <h1 className='stacks-text'>Mes stacks</h1>
+      <h1 className='stacks-text'>{i18n.home.stacks.fr}</h1>
       <div className='stacks-grid'>
         {stacks.map((stack, index) => (
           <div key={index} className='stacks-grid-item'>

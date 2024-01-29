@@ -7,6 +7,7 @@ import AboutMe from './AboutMe';
 import MyStacks from './MyStacks';
 import MyBackground from './MyBackground';
 import constant from '../../../constant';
+import i18n from '../../langs/i18n';
 
 function Index(): React.ReactElement {
   document.title = `Accueil - ${constant.PAGE_DEFAULT_NAME}`;
@@ -27,7 +28,7 @@ function Index(): React.ReactElement {
     }}>
       <div className='main-cards anim'>
         <MainCard
-          title='Maxime R.'
+          title={i18n.home.name}
           description={`Developpeur Full Stack JS/TS de ${Utils.getAge()} ans`}
           color='#009688'
           image='https://faareoh.fr/favicon.ico'
@@ -36,7 +37,7 @@ function Index(): React.ReactElement {
           external={true}
         />
         <MainCard
-          title='Github personnel'
+          title={i18n.home.github.fr}
           description='Mes projets personnels'
           color='#24292e'
           image='/assets/github-mark-white.png'
@@ -47,7 +48,7 @@ function Index(): React.ReactElement {
         <MyBackground />
         <MyStacks />
         <MainCard
-          title='Projets'
+          title={i18n.work.projects.fr}
           description='Tous mes projets (professionnels et personnels)'
           image='/assets/dev.png'
           color='#8424e3'
@@ -57,7 +58,7 @@ function Index(): React.ReactElement {
       </div>
       <div className='contact-card anim'>
         <MainCard
-          title='Contact'
+          title={i18n.home.contact.fr}
           description="​"
           image='/assets/contact.png'
           color='#5865F2'

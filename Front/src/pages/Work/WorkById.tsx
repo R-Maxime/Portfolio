@@ -6,7 +6,6 @@ import Loader from '../../components/Loader';
 import Error from '../../components/Error';
 import ClassicalWorkDisplay from './ClassicalWorkDisplay';
 import EbouWorkDisplay from './E-bou/EbouWorkDisplay';
-import constant from '../../../constant';
 
 function WorkById(): React.ReactElement {
   const workId = useParams().id;
@@ -44,12 +43,6 @@ function WorkById(): React.ReactElement {
       setIsLoaded(true);
     }
   }, [workId]);
-
-  useEffect(() => {
-    if (workData.title) {
-      document.title = `${workData.title} - ${constant.PAGE_DEFAULT_NAME}`;
-    }
-  }, [workData.title]);
 
   if (!isLoaded) {
     return <Loader />;

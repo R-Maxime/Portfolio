@@ -26,8 +26,25 @@ export default {
     loading: {
       fr: 'Chargement...'
     },
+    projects: {
+      fr: 'Projets'
+    },
     noProjects: {
       fr: 'Aucun projet enregistré !'
+    },
+    Ebou: {
+      features: {
+        fr: 'Fonctionnalités'
+      },
+      statistics: {
+        fr: 'Statistiques'
+      },
+      technicalDetails: {
+        fr: 'Détails techniques'
+      },
+      updater: {
+        fr: 'Processus de mise à jour'
+      }
     }
   },
   admin: {
@@ -66,11 +83,21 @@ export default {
     }
   },
   home: {
+    name: 'Maxime R.',
+    github: {
+      fr: 'Github personnels'
+    },
+    contact: {
+      fr: 'Contact'
+    },
     about: {
       fr: 'A propos de moi'
     },
     background: {
       fr: 'Mon parcours professionnel'
+    },
+    stacks: {
+      fr: 'Mes stacks'
     }
   }
 };

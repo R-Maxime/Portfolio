@@ -10,6 +10,7 @@ import Breed from '/breed.webp';
 import Dungeon from '/dungeon.webp';
 import Help from '/help.webp';
 import Collapsible from 'react-collapsible';
+import i18n from '../../../langs/i18n';
 
 const EbouFeatures: { title: string, description: string, image?: string }[] = [
   {
@@ -109,9 +110,9 @@ function Features(): React.ReactElement {
         </>
       )}
       <div className='work__long-description content-container features__container'>
-        <h3>Fonctionnalitées</h3>
+        <h3>{i18n.work.Ebou.features.fr}</h3>
         <p>Le bot dispose de tout un tas de fonctionnalités, autant pour permettre de récupérer des informations en lien avec le jeu, que pour fournir des informations en temps réel sur l'activité d'Ankama.</p>
-        <Collapsible trigger="Fonctionnalités" transitionTime={200}>
+        <Collapsible trigger={i18n.work.Ebou.features.fr} transitionTime={200}>
           <ul>
             {EbouFeatures.map((feature, index) => (
               <li key={index}>
