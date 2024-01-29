@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Collapsible from 'react-collapsible';
-import Updater from '/updater.webp';
+import Updater from '/img/updater.webp';
 import i18n from '../../../langs/i18n';
 
 function TechnicalDetails(): React.ReactElement {

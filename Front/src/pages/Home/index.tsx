@@ -8,6 +8,7 @@ import MyStacks from './MyStacks';
 import MyBackground from './MyBackground';
 import constant from '../../../constant';
 import i18n from '../../langs/i18n';
+import HomeMeta from '../../components/Meta/Home';
 
 function Index(): React.ReactElement {
   document.title = `Accueil - ${constant.PAGE_DEFAULT_NAME}`;
@@ -26,6 +27,7 @@ function Index(): React.ReactElement {
       display: 'grid',
       gap: '25px'
     }}>
+      <HomeMeta />
       <div className='main-cards anim'>
         <MainCard
           title={i18n.home.name}

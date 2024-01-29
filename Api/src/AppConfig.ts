@@ -1,14 +1,13 @@
 import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { rateLimit } from 'express-rate-limit';
 import fs from 'fs';
-import NodeEnvEnum from './enums/NodeEnvEnum';
 import DBClient from './database/client';
 import UserRoutes from './routes/User';
 import WorksRoutes from './routes/Work';
 import DiscordBotRoutes from './routes/Discord';
 import Logger from './utils/Logger';
+import ContactRoute from './routes/Contact';
 
 export default class AppConfig {
   private readonly expressApp: Express;
@@ -61,5 +60,6 @@ export default class AppConfig {
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
     this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
+    this.expressApp.use('/contact', new ContactRoute().Router);
   }
 }

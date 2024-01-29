@@ -8,12 +8,12 @@ import Info from './Info';
 import TechnicalDetails from './TechnicalDetails';
 import Features from './Features';
 import Statistics from './Statistics';
-import WorkMeta from '../../Meta/Work';
+import WorkByIdMeta from '../../../components/Meta/WorkById';
 
 function EbouWorkDisplay({ workData }: { workData: IWork }): React.ReactElement {
   return (
     <div className='work__ebou-container'>
-      <WorkMeta {...workData} />
+      <WorkByIdMeta {...workData} />
       <WorkCard key={workData.id} admin={false} {...workData} />
       {<Info />}
       {<TechnicalDetails />}

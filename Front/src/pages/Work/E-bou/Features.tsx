@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/Work/Ebou.scss';
 
-import Item from '/item.webp';
-import Monster from '/monster.webp';
-import Spell from '/spell.webp';
-import Almanax from '/almanax.webp';
-import Breed from '/breed.webp';
-import Dungeon from '/dungeon.webp';
-import Help from '/help.webp';
+import Item from '/img/item.webp';
+import Monster from '/img/monster.webp';
+import Spell from '/img/spell.webp';
+import Almanax from '/img/almanax.webp';
+import Breed from '/img/breed.webp';
+import Dungeon from '/img/dungeon.webp';
+import Help from '/img/help.webp';
 import Collapsible from 'react-collapsible';
 import i18n from '../../../langs/i18n';
 

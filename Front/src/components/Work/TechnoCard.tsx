@@ -9,19 +9,18 @@ class TechnoCard extends Component<{ technologies: ITechnologies[] }> {
       <div className="work-card_technologies ">
         {technologies.map((techno, index) => (
           techno && (
-            <div
+            <a
               key={`${techno}-${index}`}
               className='word-card_technologie'
+              href={techno.url}
             >
-              <a href={techno.url} target="_blank">
-                <img
-                  className='work-card_technologie__logo'
-                  src={techno.icon}
-                  alt={techno.name + ' logo'}
-                />
-                {techno.name}
-              </a>
-            </div>
+              <img
+                className='work-card_technologie__logo'
+                src={techno.icon}
+                alt={techno.name + ' logo'}
+              />
+              {techno.name}
+            </a>
           )
         ))}
       </div>

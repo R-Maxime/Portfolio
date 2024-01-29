@@ -2,12 +2,12 @@ import React from 'react';
 import Gallery from '../../components/Gallery';
 import WorkCard from '../../components/Work/WorkCard';
 import IWork from '../../datas/Models/Work';
-import WorkMeta from '../Meta/Work';
+import WorkByIdMeta from '../../components/Meta/WorkById';
 
 function ClassicalWorkDisplay({ workData }: { workData: IWork }): React.ReactElement {
   return (
     <div className='work__by-id-container'>
-      <WorkMeta {...workData} />
+      <WorkByIdMeta {...workData} />
       <WorkCard key={workData.id} admin={false} {...workData} />
       {workData.longDescription && (
         <div className='work__long-description content-container'>

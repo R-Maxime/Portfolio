@@ -12,12 +12,21 @@ const WEB_REGEX = /^https?:\/\//;
 interface IWorkCardProps extends IWork {
   admin: boolean;
 }
+
 function WorkCard({ admin, ...work }: IWorkCardProps): React.ReactElement {
   const pageUrl = admin ? `/admin/work/${work.id}` : `/work/${work.id}`;
   const isSamePage = window.location.pathname === pageUrl;
 
-  return (
-    <a className="work-card" style={{ backgroundColor: work.color }} href={!isSamePage ? pageUrl : undefined}>
+  const mainTag = isSamePage ? 'div' : 'a';
+
+  return React.createElement(
+    mainTag,
+    {
+      className: 'work-card',
+      style: { backgroundColor: work.color },
+      href: !isSamePage ? pageUrl : undefined
+    },
+    <>
       {work.repoUrl && WEB_REGEX.test(work.repoUrl) && (
         <a href={work.repoUrl} target="_blank" rel="noopener noreferrer">
           <img className="work-card_github_logo" src={GithubLogo} alt="Lien du repository" />
@@ -45,7 +54,7 @@ function WorkCard({ admin, ...work }: IWorkCardProps): React.ReactElement {
       {work.technologies.length > 0 && (
         <TechnoCard technologies={work.technologies} />
       )}
-    </a >
+    </>
   );
 }
 
