@@ -30,7 +30,7 @@ const EbouFeatures: { title: string, description: string, image?: string }[] = [
   },
   {
     title: 'Almanax',
-    description: 'L\'Almanax est un événement journalier commun à tous les serveurs de jeux DOFUS.\\nChaque jour, à minuit, un nouveau bonus est disponibles. Les utilisateurs, on soit le choix de lancer chaque jour la commande eux même pour obtenir le nouveau bonus ainsi que l\'offrande à faire, soit de configurer grâce à la commande "Almanax-Setup" un envoi automatique de l\'Almanax chaque jour à minuit.\\nPrès de 500 serveurs différents reçoit chaque jour l\'Almanax automatiquement.',
+    description: 'L\'Almanax est un événement journalier commun à tous les serveurs de jeux DOFUS.\\n\\nLes utilisateurs ont la possibilité d\'effectuer manuellement une commande pour obtenir le bonus du jour, ou bien, à l\'aide de la commande "Almanax-Setup", de configurer un envoi automatique de l\'Almanax chaque jour à minuit.\\n\\nPrès de 500 serveurs différents reçoit quotidiennement l\'Almanax automatiquement.',
     image: Almanax
   },
   {

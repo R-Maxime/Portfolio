@@ -23,6 +23,10 @@
     grid-template-columns: repeat(2, 1fr);
     animation: fadeInAnimation ease 1s;
     gap: 25px;
+
+    @media screen and (max-width: $tablet-width) and (max-width: $mobil-width) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }
 
@@ -65,7 +69,7 @@
 }
 
 .change-page:hover {
-  color: $tertiary-color;	
+  color: $tertiary-color;
 }
 
 
