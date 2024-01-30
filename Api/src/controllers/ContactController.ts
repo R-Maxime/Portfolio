@@ -9,13 +9,20 @@ export default class ContactController {
 
   async sendContactMessage(req: Request, res: Response): Promise<Response> {
     try {
-      const { user, mail, message } = req.body;
+      const {
+        name, mail, message, phone,
+      } = req.body;
 
-      if (!user || !mail || !message) {
+      if (phone) {
+        console.log('Phone number detected, aborting (probably a bot)');
+        return res.status(HttpStatusCode.OK).json({ message: 'OK' });
+      }
+
+      if (!name || !mail || !message) {
         return res.status(HttpStatusCode.BAD_REQUEST).json({ message: 'Missing fields' });
       }
 
-      await this.discordWebhookContact.sendContactMessage(user, mail, message);
+      await this.discordWebhookContact.sendContactMessage(name, mail, message);
 
       return res.status(HttpStatusCode.OK).json({ message: 'OK' });
     } catch (error) {

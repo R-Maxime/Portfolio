@@ -45,7 +45,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         color: this.defaultColor,
         logo: '',
         images: [],
-        technologies: []
+        technologies: [],
+        personal: false
       }
     };
   }
@@ -61,7 +62,8 @@ class WorkModal extends Component<WorkModalProps, State> {
       color: this.defaultColor,
       logo: this.isPreFilledData ? '' : new File([], ''),
       images: this.isPreFilledData ? [] : [new File([], '')],
-      technologies: [] as ITechnologies[]
+      technologies: [] as ITechnologies[],
+      personal: false
     };
   }
 
@@ -77,7 +79,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         color: data.color,
         logo: prevState.previewWork.logo ?? '',
         images: prevState.previewWork.images ?? [],
-        technologies: data.technologies
+        technologies: data.technologies,
+        personal: data.personal
       }
     }));
   };
@@ -127,7 +130,8 @@ class WorkModal extends Component<WorkModalProps, State> {
         color: this.defaultColor,
         logo: '',
         images: [],
-        technologies: []
+        technologies: [],
+        personal: false
       }
     });
   }
@@ -230,6 +234,14 @@ class WorkModal extends Component<WorkModalProps, State> {
         <InputField label='Description longue' id='longDescription' value={workData.longDescription} onChange={(value) => this.setWorksData({ ...workData, longDescription: value })} />
         <InputField label='Repo GitHub' id='repoUrl' value={workData?.repoUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, repoUrl: value })} />
         <InputField label='Site web' id='webUrl' value={workData?.webUrl ?? ''} onChange={(value) => this.setWorksData({ ...workData, webUrl: value })} />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <label htmlFor='personal'>Projet perso ?</label>
+          <input type='checkbox' id='personal' checked={workData.personal} onChange={(e) => this.setWorksData({ ...workData, personal: e.target.checked })} />
+        </div>
 
         {workData.technologies && workData.technologies.length > 0 && this.displayTechnologies()}
         <div className='flex column gap-8 pad-top-8'>
@@ -264,10 +276,8 @@ class WorkModal extends Component<WorkModalProps, State> {
   render() {
     const { workData, previewWork } = this.state;
     return (
-      <div className='center-50'>
-        <div style={{ paddingTop: '10px' }}>
-          <WorkCard key={previewWork.id} admin={true} {...previewWork} />
-        </div>
+      <div style={{ paddingTop: '10px' }}>
+        <WorkCard key={previewWork.id} admin={true} {...previewWork} />
         <div className='content-container flex column'>
           <div className='work-modal-header'>
             <h3>{i18n.admin.addProject.fr}</h3>
@@ -289,7 +299,7 @@ class WorkModal extends Component<WorkModalProps, State> {
             )}
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }

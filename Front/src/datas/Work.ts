@@ -25,6 +25,7 @@ class Work {
     formData.append('webUrl', work.webUrl);
     formData.append('color', work.color);
     formData.append('logo', work.logo);
+    formData.append('personal', work.personal.toString());
 
     work.technologies.forEach((technology) => {
       formData.append('technologies', JSON.stringify(technology));

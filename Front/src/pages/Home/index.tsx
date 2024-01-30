@@ -9,6 +9,7 @@ import MyBackground from './MyBackground';
 import constant from '../../../constant';
 import i18n from '../../langs/i18n';
 import HomeMeta from '../../components/Meta/Home';
+import ContactForm from './Contact';
 
 function Index(): React.ReactElement {
   document.title = `Accueil - ${constant.PAGE_DEFAULT_NAME}`;
@@ -33,7 +34,6 @@ function Index(): React.ReactElement {
           title={i18n.home.name}
           description={`Developpeur Full Stack JS/TS de ${Utils.getAge()} ans`}
           color='#009688'
-          image='https://faareoh.fr/favicon.ico'
           link='https://github.com/R-Maxime/Portfolio'
           linkText='Github de ce site/Api ↗️'
           external={true}
@@ -58,16 +58,7 @@ function Index(): React.ReactElement {
           external={false}
         />
       </div>
-      <div className='contact-card anim'>
-        <MainCard
-          title={i18n.home.contact.fr}
-          description="​"
-          image='/assets/contact.png'
-          color='#5865F2'
-          link='/contact'
-          external={false}
-        />
-      </div>
+      {<ContactForm />}
     </div>
   );
 }

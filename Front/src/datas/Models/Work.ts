@@ -15,6 +15,7 @@ interface IWork {
   color: string;
   logo: string | File;
   technologies: ITechnologies[];
+  personal: boolean;
 }
 
 export default IWork;

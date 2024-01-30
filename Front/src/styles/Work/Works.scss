@@ -1,11 +1,29 @@
 @import '../var.scss';
 
 
-.works-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.works__container {
   animation: fadeInAnimation ease 1s;
+  display: flex;
+  flex-direction: column;
   gap: 25px;
+
+  .works__container-title {
+    font-size: 25px;
+    font-weight: 500;
+    background-color: $secondary-color;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    color: $tertiary-color
+  }
+
+  .works__personals-cards,
+  .works__professionals-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    animation: fadeInAnimation ease 1s;
+    gap: 25px;
+  }
 }
 
 
@@ -47,7 +65,7 @@
 }
 
 .change-page:hover {
-  color: whitesmoke;
+  color: $tertiary-color;	
 }
 
 
@@ -142,8 +160,7 @@
 }
 
 @media screen and (max-width: $tablet-width) {
-  .works-container {
-    grid-template-columns: repeat(2, 1fr);
+  .works__container {
     gap: 20px;
   }
 
@@ -163,8 +180,7 @@
 }
 
 @media screen and (max-width: $mobil-width) {
-  .works-container {
-    grid-template-columns: repeat(1, 1fr);
+  .works__container {
     gap: 20px;
   }
 

@@ -7,9 +7,9 @@ export default class DiscordWebhookContact {
     this.webhook = new WebhookClient({ url: process.env.DISCORD_WEBHOOK_URL as string });
   }
 
-  async sendContactMessage(user: string, mail: string, message: string): Promise<void> {
+  async sendContactMessage(name: string, mail: string, message: string): Promise<void> {
     const embed = new EmbedBuilder()
-      .setTitle(`Message de: ${user} - ${mail}`)
+      .setTitle(`Message de: ${name} - ${mail}`)
       .setDescription(message)
       .setColor('DarkBlue')
       .setFooter({

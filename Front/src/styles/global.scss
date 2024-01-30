@@ -1,5 +1,32 @@
 @import './var.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color-scheme: light dark;
+  color: $tertiary-color;
+  background-color: $primary-color;
+}
+
+input,
+textarea {
+  padding: 15px 20px 15px 20px;
+  border-radius: 8px;
+  background-color: $primary-color;
+  border: none;
+}
+
 button,
 .ul_butt {
   border-radius: 8px;
@@ -24,7 +51,12 @@ button,
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: $tertiary-color;
+}
+
+a:hover {
+  transition: 0.3s;
+  color: $quaternary-color;
 }
 
 .page-text-header {
@@ -124,6 +156,9 @@ a {
     width: 100%;
   }
 
+  .app {
+    max-width: 95%;
+  }
 }
 
 
@@ -134,5 +169,9 @@ a {
 
   .center-50 {
     width: 100%;
+  }
+
+  .app {
+    max-width: 95%;
   }
 }

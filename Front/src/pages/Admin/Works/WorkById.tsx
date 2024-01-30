@@ -22,7 +22,8 @@ function AdminWorkById(): React.ReactElement {
     images: [],
     color: '',
     logo: '',
-    technologies: []
+    technologies: [],
+    personal: false
   });
 
   useEffect(() => {

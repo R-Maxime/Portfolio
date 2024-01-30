@@ -8,9 +8,9 @@ import AdminWorkById from './pages/Admin/Works/WorkById';
 import AdminWorks from './pages/Admin/Works/Work';
 import WorkById from './pages/Work/WorkById';
 import Header from './components/Header';
-import './styles/index.scss';
 import Works from './pages/Work/Works';
 import Error from './components/Error';
+import './styles/global.scss';
 
 class App extends Component {
   render() {

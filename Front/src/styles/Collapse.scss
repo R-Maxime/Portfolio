@@ -12,7 +12,6 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   transition: $transition;
   background-color: $primary-color;
-  color: white;
 
   .Collapsible__trigger {
     font-size: 18px;
@@ -22,7 +21,7 @@
     transition: $transition;
 
     &:hover {
-      color: $hover-color;
+      color: $quaternary-color;
     }
   }
 

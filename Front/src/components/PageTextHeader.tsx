@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/global.scss';
 
 function PageTextHeader(props: { text: string }): React.ReactElement {
   return (

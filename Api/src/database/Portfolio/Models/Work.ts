@@ -29,6 +29,7 @@ export default class WorkModel {
           icon: { type: String },
         }],
       },
+      personal: { type: Boolean, default: false },
     });
   }
 

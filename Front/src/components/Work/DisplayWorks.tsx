@@ -32,10 +32,19 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
       )}
 
       {works.length > 0 && (
-        <div className='works-container'>
-          {works.map((work) => (
-            <WorkCard key={work.id} admin={admin} {...work} />
-          ))}
+        <div className='works__container'>
+          <h2 className='works__container-title'>Projets personnels</h2>
+          <div className='works__personals-cards'>
+            {...works.filter((work) => work.personal).map((work) => (
+              <WorkCard key={work.id} admin={admin} {...work} />
+            ))}
+          </div>
+          <h2 className='works__container-title'>Projets professionnels</h2>
+          <div className='works__professionals-cards'>
+            {...works.filter((work) => !work.personal).map((work) => (
+              <WorkCard key={work.id} admin={admin} {...work} />
+            ))}
+          </div>
         </div>
       )}
     </>

@@ -9,6 +9,7 @@ export default interface IWork {
   color: string;
   logo: string;
   technologies: ITechnologies[];
+  personal: boolean;
 }
 
 interface ITechnologies {

@@ -20,7 +20,8 @@ function WorkById(): React.ReactElement {
     images: [],
     color: '',
     logo: '',
-    technologies: []
+    technologies: [],
+    personal: false
   });
 
   const [isLoaded, setIsLoaded] = useState(false);
