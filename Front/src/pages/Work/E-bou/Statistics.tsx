@@ -7,7 +7,7 @@ import StatisticsGraph from './StatisticsGraph';
 import i18n from '../../../langs/i18n';
 
 function getDate(date: Date): string {
-  const day = date.getDate();
+  const day = (date.getDate()).toString().padStart(2, '0');
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const year = date.getFullYear();
   const hours = date.getHours().toString().padStart(2, '0');
