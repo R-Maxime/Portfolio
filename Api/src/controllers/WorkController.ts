@@ -7,6 +7,7 @@ import IWork from '../business/Models/Work';
 import Utils from '../utils/Utils';
 import PutWorkCommand from '../business/Usecase/Work/PutWorkCommand';
 import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
+import Logger from '../utils/Logger';
 
 export default class WorkController {
   constructor(
@@ -26,7 +27,7 @@ export default class WorkController {
 
       return res.status(HttpStatusCode.OK).json(query);
     } catch (error) {
-      console.error('Error while getting all works: ', error);
+      Logger.error('Error while getting all works', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting all works', error });
     }
   }
@@ -43,7 +44,7 @@ export default class WorkController {
 
       return res.status(HttpStatusCode.OK).json(query);
     } catch (error) {
-      console.error('Error while getting work: ', error);
+      Logger.error('Error while getting work', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting work', error });
     }
   }
@@ -66,7 +67,7 @@ export default class WorkController {
 
       return res.status(HttpStatusCode.CREATED).json(command);
     } catch (error) {
-      console.error('Error while creating work: ', error);
+      Logger.error('Error while creating work', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while creating work', error });
     }
   }
@@ -89,7 +90,7 @@ export default class WorkController {
 
       return res.status(HttpStatusCode.OK).json(command);
     } catch (error) {
-      console.error('Error while updating work: ', error);
+      Logger.error('Error while updating work', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while updating work', error });
     }
   }
@@ -108,7 +109,7 @@ export default class WorkController {
 
       return res.status(HttpStatusCode.OK).json(command);
     } catch (error) {
-      console.error('Error while deleting work: ', error);
+      Logger.error('Error while deleting work', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while deleting work', error });
     }
   }

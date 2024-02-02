@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { HttpError } from 'http-errors';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
+import Logger from '../utils/Logger';
 
 export default class DiscordStatsController {
   constructor(
@@ -18,7 +19,7 @@ export default class DiscordStatsController {
 
       return res.status(HttpStatusCode.OK).json(stats);
     } catch (error) {
-      console.error('Error while getting stats', error);
+      Logger.error('Error while getting stats', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting stats', error });
     }
   }
@@ -33,7 +34,7 @@ export default class DiscordStatsController {
 
       return res.status(HttpStatusCode.OK).json(stats);
     } catch (error) {
-      console.error('Error while getting stats', error);
+      Logger.error('Error while getting stats', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting stats', error });
     }
   }

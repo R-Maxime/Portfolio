@@ -12,11 +12,11 @@ import ContactRoute from './routes/Contact';
 export default class AppConfig {
   private readonly expressApp: Express;
 
+  private readonly BOT_DB_ACTIVE: boolean = process.env.BOT_DB_ACTIVE === 'true';
+
   private readonly portfolioDB = new DBClient(process.env.DB_NAME as string);
 
-  private readonly botDB = new DBClient(process.env.DB_SECOND_NAME as string);
-
-  private logger = new Logger();
+  private readonly botDB = new DBClient(process.env.BOT_DB_NAME as string);
 
   private readonly publicPath = process.env.PUBLIC_PATH || 'public';
 
@@ -35,7 +35,7 @@ export default class AppConfig {
 
   private logRequests(): void {
     this.expressApp.use((req: Request, res: Response, next) => {
-      this.logger.log('Express', `${req.method} ${req.url}`);
+      Logger.log(`${req.method} ${req.url}`);
       next();
     });
   }
@@ -52,14 +52,18 @@ export default class AppConfig {
 
   private async connectDBs(): Promise<void> {
     await this.portfolioDB.connect();
-    await this.botDB.connect();
+    if (this.BOT_DB_ACTIVE) {
+      await this.botDB.connect();
+    }
   }
 
   private async setupRoutes(): Promise<void> {
     this.expressApp.use('/public', express.static(this.publicPath));
     this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
     this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
-    this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
     this.expressApp.use('/contact', new ContactRoute().Router);
+    if (this.BOT_DB_ACTIVE) {
+      this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
+    }
   }
 }

@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import HttpStatusCode from '../enums/HttpStatusCode';
+import Logger from '../utils/Logger';
 
 export default function AuthMiddleware(req: Request, res: Response, next: NextFunction): void {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
-      console.log('No authorization header');
+      Logger.warn('No authorization header');
       res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
       return;
     }
@@ -14,7 +15,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
     const token = authorization.split(' ')[1];
 
     if (!token) {
-      console.log('No token');
+      Logger.warn('No token');
       res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
       return;
     }
@@ -30,7 +31,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
     req.body.userId = userId;
     next();
   } catch (error) {
-    console.error('Error while authenticating user: ', error);
+    Logger.error('Error while authenticating user: ', error);
     res.status(500).json({ message: 'Error while authenticating user', error });
   }
 }

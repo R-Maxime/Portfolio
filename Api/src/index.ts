@@ -9,8 +9,6 @@ class App {
 
   private readonly API_PORT: Number;
 
-  private logger = new Logger();
-
   constructor() {
     dotenv.config();
 
@@ -29,11 +27,11 @@ class App {
   private startServer(): void {
     this.expressApp.listen(this.API_PORT, () => {
       if (process.env.NODE_ENV === NodeEnvEnum.PRODUCTION) {
-        this.logger.log('Express', `I am running at ${process.env.API_URL}:${this.API_PORT}`);
+        Logger.log(`I am running at ${process.env.API_URL}:${this.API_PORT}`);
         return;
       }
 
-      this.logger.log('Express', `I am running at ${process.env.API_URL}`);
+      Logger.log(`I am running at ${process.env.API_URL}`);
     });
   }
 }

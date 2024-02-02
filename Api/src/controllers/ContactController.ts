@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import DiscordWebhookContact from '../business/Usecase/Contact/DiscordWebhookContact';
+import Logger from '../utils/Logger';
 
 export default class ContactController {
   constructor(
@@ -14,7 +15,7 @@ export default class ContactController {
       } = req.body;
 
       if (phone) {
-        console.log('Phone number detected, aborting (probably a bot)');
+        Logger.warn('Phone number detected, aborting (probably a bot)');
         return res.status(HttpStatusCode.OK).json({ message: 'OK' });
       }
 
@@ -26,7 +27,7 @@ export default class ContactController {
 
       return res.status(HttpStatusCode.OK).json({ message: 'OK' });
     } catch (error) {
-      console.error('Error while sending contact message: ', error);
+      Logger.error('Error while sending contact message', error);
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while sending contact message' });
     }
   }
