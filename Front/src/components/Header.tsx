@@ -5,7 +5,7 @@ import Auth from '../datas/Auth';
 
 function Header(): React.ReactElement {
   return (
-    <nav className="header">
+    <header className="header">
       <div className="header_name">
         <NavLink
           to={'/'}
@@ -32,7 +32,7 @@ function Header(): React.ReactElement {
           </NavLink>
         )}
       </nav>
-    </nav>
+    </header>
   );
 }
 

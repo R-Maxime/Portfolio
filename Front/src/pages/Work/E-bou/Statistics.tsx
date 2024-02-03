@@ -22,13 +22,20 @@ function Statistics(): React.ReactElement {
   const [interactionStats, setInteractionStats] = useState<IInteractionStatsByWeekOnLastMonth[] | null>(null);
 
   useEffect(() => {
-    Discord.getGlobalStats().then((stats) => {
-      setGlobalStats(stats);
-    });
+    const fetchData = async () => {
+      const global = await Discord.getGlobalStats();
+      const interactions = await Discord.getLastMonthStats();
+      setGlobalStats(global);
+      setInteractionStats(interactions);
+    };
 
-    Discord.getLastMonthStats().then((stats) => {
-      setInteractionStats(stats);
-    });
+    fetchData();
+
+    const interval = setInterval(fetchData, 60000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   if (!globalStats || !interactionStats) {
