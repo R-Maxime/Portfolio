@@ -7,6 +7,7 @@ import Work from '../../datas/Work';
 import i18n from '../../langs/i18n';
 
 import '../../styles/Admin.scss';
+import WorkLongDescription from './WorkLongDescription';
 
 interface WorkModalProps {
   preFilledData?: IWork;
@@ -278,6 +279,7 @@ class WorkModal extends Component<WorkModalProps, State> {
     return (
       <div style={{ paddingTop: '10px' }}>
         <WorkCard key={previewWork.id} admin={true} {...previewWork} />
+        <WorkLongDescription longDescription={workData.longDescription} />
         <div className='content-container flex column'>
           <div className='work-modal-header'>
             <h3>{i18n.admin.addProject.fr}</h3>

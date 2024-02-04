@@ -36,21 +36,21 @@ function DisplayWorks({ admin }: DisplayWorksProps): React.ReactElement {
     <>
       {works.length > 0 && (
         <div className='works__container'>
-          {professionalWorks.length > 0 && (
+          {personalWorks.length > 0 && (
             <>
               <h2 className='works__container-title'>Projets personnels</h2>
               <div className='works__personals-cards'>
-                {works.filter((work) => work.personal).map((work) => (
+                {personalWorks.map((work) => (
                   <WorkCard key={work.id} admin={admin} {...work} />
                 ))}
               </div>
             </>
           )}
-          {personalWorks.length > 0 && (
+          {professionalWorks.length > 0 && (
             <>
               <h2 className='works__container-title'>Projets professionnels</h2>
               <div className='works__professionals-cards'>
-                {personalWorks.map((work) => (
+                {professionalWorks.map((work) => (
                   <WorkCard key={work.id} admin={admin} {...work} />
                 ))}
               </div>
