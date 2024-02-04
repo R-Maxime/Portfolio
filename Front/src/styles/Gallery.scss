@@ -50,9 +50,12 @@ $ig-shadow: 0 2px 2px lighten($ig-black, 10%);
   }
 }
 
+.image-gallery-fullscreen-button {
+  display: none;
+}
+
 .image-gallery-fullscreen-button,
 .image-gallery-play-button {
-  display: none;
   bottom: 0;
   padding: 20px;
 
@@ -230,8 +233,8 @@ $ig-shadow: 0 2px 2px lighten($ig-black, 10%);
   }
 
   .image-gallery-image {
-    width: 600px;
-    height: 600px;
+    width: 80%;
+    height: 80%;
     object-fit: contain;
 
     @media screen and (max-width: 768px) {
