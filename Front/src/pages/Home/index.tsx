@@ -42,7 +42,7 @@ function Index(): React.ReactElement {
           title={i18n.home.github.fr}
           description='Mes projets personnels'
           color='#24292e'
-          image='/assets/github-mark-white.png'
+          image='/assets/github-mark-white.webp'
           link='https://github.com/Faareoh'
           external={true}
         />
@@ -52,7 +52,7 @@ function Index(): React.ReactElement {
         <MainCard
           title={i18n.work.projects.fr}
           description='Tous mes projets (professionnels et personnels)'
-          image='/assets/dev.png'
+          image='/assets/dev.webp'
           color='#8424e3'
           link='/works'
           external={false}

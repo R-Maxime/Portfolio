@@ -1,16 +1,16 @@
 import React from 'react';
 import '../../styles/Home/Stacks.scss';
 
-import nodejs from '/assets/nodejs.png';
-import typescript from '/assets/typescript.png';
-import discord from '/assets/discord.png';
-import discordjs from '/assets/discordjs.png';
-import mongodb from '/assets/mongodb.png';
-import react from '/assets/react.png';
-import docker from '/assets/docker.png';
-import html5 from '/assets/html5.png';
-import css3 from '/assets/css3.png';
-import vscode from '/assets/vscode.png';
+import nodejs from '/assets/nodejs.webp';
+import typescript from '/assets/typescript.webp';
+import discord from '/assets/discord.webp';
+import discordjs from '/assets/discordjs.webp';
+import mongodb from '/assets/mongodb.webp';
+import react from '/assets/react.webp';
+import docker from '/assets/docker.webp';
+import html5 from '/assets/html5.webp';
+import css3 from '/assets/css3.webp';
+import express from '/assets/express.webp';
 import i18n from '../../langs/i18n';
 
 function MyStacks(): React.ReactElement {
@@ -51,9 +51,9 @@ function MyStacks(): React.ReactElement {
     url: 'https://developer.mozilla.org/fr/docs/Web/CSS',
     icon: css3
   }, {
-    name: 'VSCode',
-    url: 'https://code.visualstudio.com/',
-    icon: vscode
+    name: 'ExpressJS',
+    url: 'https://expressjs.com/',
+    icon: express
   }];
 
   return (
