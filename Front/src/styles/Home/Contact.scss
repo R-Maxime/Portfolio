@@ -17,6 +17,11 @@
       flex-direction: column;
       gap: 0.5rem;
 
+      & input::placeholder,
+      & textarea::placeholder {
+        color: $tertiary-color;
+      }
+
       .mail-error {
         justify-content: flex-start;
         color: red;
