@@ -32,7 +32,7 @@ function Index(): React.ReactElement {
       <div className='main-cards anim'>
         <MainCard
           title={i18n.home.name}
-          description={`Developpeur Full Stack JS/TS de ${Utils.getAge()} ans`}
+          description={`Développeur Full Stack JS/TS de ${Utils.getAge()} ans`}
           color='#009688'
           link='https://github.com/R-Maxime/Portfolio'
           linkText='Github de ce site/Api ↗️'
