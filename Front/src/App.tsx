@@ -11,14 +11,11 @@ import Header from './components/Header';
 import Works from './pages/Work/Works';
 import Error from './components/Error';
 import './styles/global.scss';
-import ReactGA from 'react-ga';
-import constant from '../constant.js';
-
-ReactGA.initialize(constant.TRACKING_ID);
+import ReactGA from 'react-ga4';
 
 function App(): React.ReactElement {
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
   }, []);
 
   return (

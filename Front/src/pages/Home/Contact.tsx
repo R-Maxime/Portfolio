@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Contact from '../../datas/Contact';
 import '../../styles/Home/Contact.scss';
-import useAnalyticsEventTracker from '../../AnalyticsEventTracker';
 
 const isMailValid = (email: string): boolean => {
   const regex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
@@ -9,7 +8,6 @@ const isMailValid = (email: string): boolean => {
 };
 
 function ContactForm(): React.ReactElement {
-  const gaEvent = useAnalyticsEventTracker('Contact');
   const [mailError, setMailError] = useState<boolean>(false);
   const [submitError, setSubmitError] = useState<boolean>(false);
   const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
@@ -24,7 +22,6 @@ function ContactForm(): React.ReactElement {
     const phone = data.get('phone')?.toString() || '';
 
     if (mail && !isMailValid(mail)) {
-      gaEvent('Error', 'Mail');
       setMailError(true);
       return;
     }
@@ -43,7 +40,6 @@ function ContactForm(): React.ReactElement {
       if (response?.status === 200) {
         setSubmitSuccess(true);
         setSubmitError(false);
-        gaEvent('Success', 'Send');
         return;
       }
 

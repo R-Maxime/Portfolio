@@ -3,10 +3,8 @@ import React from 'react';
 import Collapsible from 'react-collapsible';
 import Updater from '/img/updater.webp';
 import i18n from '../../../langs/i18n';
-import useAnalyticsEventTracker from '../../../AnalyticsEventTracker';
 
 function TechnicalDetails(): React.ReactElement {
-  const gaEvent = useAnalyticsEventTracker('TechnicalDetails');
   return (
     <div className='work__long-description content-container'>
       <h2>{i18n.work.Ebou.technicalDetails.fr}</h2>

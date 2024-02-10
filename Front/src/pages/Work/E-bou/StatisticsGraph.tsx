@@ -5,7 +5,6 @@ import {
 import { IInteractionStatsByWeekOnLastMonth } from '../../../datas/Models/Discord';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import '../../../styles/Work/Stats.scss';
-import useAnalyticsEventTracker from '../../../AnalyticsEventTracker';
 
 const CustomLegend = ({ data }: {
   data: IInteractionStatsByWeekOnLastMonth[]
@@ -22,12 +21,9 @@ const CustomLegend = ({ data }: {
 
 const CustomTooltip = ({ active, payload }:
   TooltipProps<ValueType, NameType>): React.ReactElement => {
-  const gaEvent = useAnalyticsEventTracker('StatisticsGraph');
   if (!active || !payload) {
     return <></>;
   }
-
-  gaEvent('show', 'tooltip');
 
   const startOfWeek = payload[0].payload.startOfWeek;
   const endOfWeek = payload[0].payload.endOfWeek;

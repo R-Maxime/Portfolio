@@ -6,10 +6,8 @@ import Loader from '../../components/Loader';
 import Error from '../../components/Error';
 import ClassicalWorkDisplay from './ClassicalWorkDisplay';
 import EbouWorkDisplay from './E-bou/EbouWorkDisplay';
-import useAnalyticsEventTracker from '../../AnalyticsEventTracker';
 
 function WorkById(): React.ReactElement {
-  const gaEvent = useAnalyticsEventTracker('WorkById');
   const workId = useParams().id;
 
   const [workData, setWork] = useState<IWork>({
@@ -60,11 +58,9 @@ function WorkById(): React.ReactElement {
   }
 
   if (workData.title === 'E-bou') {
-    gaEvent('View E-bou', workData.title);
     return <EbouWorkDisplay workData={workData} />;
   }
 
-  gaEvent('View', workData.title);
   return <ClassicalWorkDisplay workData={workData} />;
 }
 

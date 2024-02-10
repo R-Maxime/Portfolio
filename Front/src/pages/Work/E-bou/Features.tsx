@@ -11,7 +11,6 @@ import Dungeon from '/img/dungeon.webp';
 import Help from '/img/help.webp';
 import Collapsible from 'react-collapsible';
 import i18n from '../../../langs/i18n';
-import useAnalyticsEventTracker from '../../../AnalyticsEventTracker';
 
 const EbouFeatures: { title: string, description: string, image?: string }[] = [
   {
@@ -50,14 +49,12 @@ const EbouFeatures: { title: string, description: string, image?: string }[] = [
 ];
 
 function Features(): React.ReactElement {
-  const gaEvent = useAnalyticsEventTracker('Features');
   const [imageOpen, setImageOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState<{ title: string, image?: string } | null>(null);
 
   const openModal = (feature: { title: string, image?: string }) => {
     setImageOpen(true);
     setSelectedFeature(feature);
-    gaEvent('Click', feature.title);
 
     setTimeout(() => {
       document.querySelector('.modal')?.classList.add('open');
