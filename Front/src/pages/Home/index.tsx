@@ -10,9 +10,11 @@ import constant from '../../../constant';
 import i18n from '../../langs/i18n';
 import HomeMeta from '../../components/Meta/Home';
 import ContactForm from './Contact';
+import useAnalyticsEventTracker from '../../AnalyticsEventTracker';
 
 function Index(): React.ReactElement {
   document.title = `Accueil - ${constant.PAGE_DEFAULT_NAME}`;
+  useAnalyticsEventTracker('Home')('View', 'Home');
   const pages = [
     { name: 'Home', path: '/' },
     { name: 'Login', path: '/login' }
