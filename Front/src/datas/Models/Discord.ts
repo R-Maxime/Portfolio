@@ -6,9 +6,9 @@ export interface IGlobalStats {
   lastCreatedAt: Date;
 }
 
-export interface IInteractionStatsByWeekOnLastMonth {
+export interface IInteractionStatsByWeekOnLastFiveWeeks {
   count: number;
   startOfWeek: string;
   endOfWeek: string;
-  week: string;
+  weekNumber: string;
 }

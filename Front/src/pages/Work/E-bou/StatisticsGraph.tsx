@@ -2,12 +2,12 @@ import React from 'react';
 import {
   Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis
 } from 'recharts';
-import { IInteractionStatsByWeekOnLastMonth } from '../../../datas/Models/Discord';
+import { IInteractionStatsByWeekOnLastFiveWeeks } from '../../../datas/Models/Discord';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import '../../../styles/Work/Stats.scss';
 
 const CustomLegend = ({ data }: {
-  data: IInteractionStatsByWeekOnLastMonth[]
+  data: IInteractionStatsByWeekOnLastFiveWeeks[]
 }): React.ReactElement => {
   const totalInteractions = data.reduce((acc, curr) => acc + curr.count, 0);
   const firstInteraction = data[0]?.startOfWeek;
@@ -35,7 +35,7 @@ const CustomTooltip = ({ active, payload }:
 };
 
 function StatisticsGraph({ interactionStats }: {
-  interactionStats: IInteractionStatsByWeekOnLastMonth[]
+  interactionStats: IInteractionStatsByWeekOnLastFiveWeeks[]
 }): React.ReactElement {
   return (
     <div className='stats'>
@@ -43,7 +43,7 @@ function StatisticsGraph({ interactionStats }: {
         <ResponsiveContainer>
           <BarChart width={250} height={250} data={interactionStats}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="week" />
+            <XAxis dataKey="weekNumber" />
             <YAxis />
             <Tooltip content={<CustomTooltip />} />
             <Bar dataKey="count" fill="#8884d8" />

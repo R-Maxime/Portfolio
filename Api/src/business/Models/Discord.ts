@@ -6,14 +6,14 @@ interface IGlobalStats {
   lastCreatedAt: Date;
 }
 
-interface IInteractionStatsByWeekOnLastMonth {
+interface IInteractionStatsByWeekOnLastFiveWeeks {
   count: number;
   startOfWeek: string;
   endOfWeek: string;
-  week: string;
+  weekNumber: string;
 }
 
 export {
   IGlobalStats,
-  IInteractionStatsByWeekOnLastMonth,
+  IInteractionStatsByWeekOnLastFiveWeeks,
 };

@@ -1,5 +1,5 @@
 import createHttpError, { HttpError } from 'http-errors';
-import { IGlobalStats, IInteractionStatsByWeekOnLastMonth } from '../../Models/Discord';
+import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from '../../Models/Discord';
 import IDiscordBotRepository from '../../Ports/IDiscordBotRepository';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
 import { IDiscordStats } from '../../Models/DiscordStats';
@@ -27,8 +27,8 @@ export default class DiscordStatsQuery {
     };
   }
 
-  async getLastMonthStats(): Promise<IInteractionStatsByWeekOnLastMonth[] | HttpError> {
-    const stats = await this.discordRepository.getInteractionsStatsByWeekOnLastMonth();
+  async getLastFiveWeeksStats(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[] | HttpError> {
+    const stats = await this.discordRepository.getInteractionsStatsByWeekOnLastFiveWeeks();
 
     if (!stats) {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while getting stats');

@@ -25,7 +25,7 @@ export default class DiscordBotRoutes {
     );
 
     this.router.get('/global', controller.getStatsCount.bind(controller));
-    this.router.get('/lastmonth', controller.getLastMonthStats.bind(controller));
+    this.router.get('/stats', controller.getLastFiveWeeksStats.bind(controller));
   }
 
   get Router(): express.Router {

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { IGlobalStats, IInteractionStatsByWeekOnLastMonth } from '../../../datas/Models/Discord';
+import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from '../../../datas/Models/Discord';
 import Discord from '../../../datas/Discord';
 import Loader from '../../../components/Loader';
 import StatisticsGraph from './StatisticsGraph';
@@ -19,12 +19,12 @@ function getDate(date: Date): string {
 
 function Statistics(): React.ReactElement {
   const [globalStats, setGlobalStats] = useState<IGlobalStats | null>(null);
-  const [interactionStats, setInteractionStats] = useState<IInteractionStatsByWeekOnLastMonth[] | null>(null);
+  const [interactionStats, setInteractionStats] = useState<IInteractionStatsByWeekOnLastFiveWeeks[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const global = await Discord.getGlobalStats();
-      const interactions = await Discord.getLastMonthStats();
+      const interactions = await Discord.getLastFiveWeeksStats();
       setGlobalStats(global);
       setInteractionStats(interactions);
     };

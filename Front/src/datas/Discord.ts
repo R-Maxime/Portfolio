@@ -1,4 +1,4 @@
-import { IGlobalStats, IInteractionStatsByWeekOnLastMonth } from './Models/Discord';
+import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from './Models/Discord';
 import constant from '../../constant';
 
 class Discord {
@@ -8,8 +8,8 @@ class Discord {
     return globalStats;
   }
 
-  static async getLastMonthStats(): Promise<IInteractionStatsByWeekOnLastMonth[]> {
-    const response = await fetch(`${constant.API_URL}/${constant.API_ROUTES.DISCORD_LAST_MONTH}`);
+  static async getLastFiveWeeksStats(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]> {
+    const response = await fetch(`${constant.API_URL}/${constant.API_ROUTES.DISCORD_LAST_FIVE_WEEKS}`);
     const interactionStatsByWeekOnLastMonth = await response.json();
     return interactionStatsByWeekOnLastMonth;
   }

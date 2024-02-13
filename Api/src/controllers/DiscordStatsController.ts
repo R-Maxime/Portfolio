@@ -24,9 +24,9 @@ export default class DiscordStatsController {
     }
   }
 
-  async getLastMonthStats(req: Request, res: Response): Promise<Response> {
+  async getLastFiveWeeksStats(req: Request, res: Response): Promise<Response> {
     try {
-      const stats = await this.discordStatsQuery.getLastMonthStats();
+      const stats = await this.discordStatsQuery.getLastFiveWeeksStats();
 
       if (stats instanceof HttpError) {
         return res.status(stats.statusCode).json({ error: stats.message });
