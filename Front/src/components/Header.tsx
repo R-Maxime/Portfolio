@@ -10,7 +10,7 @@ function Header(): React.ReactElement {
         <NavLink
           to={'/'}
         >
-          <h1>Faareoh</h1>
+          <h1>Maxime R.</h1>
         </NavLink>
       </div>
       <nav className="header_nav">

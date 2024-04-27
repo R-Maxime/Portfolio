@@ -1,4 +1,4 @@
-FROM node:20.5.0 as build
+FROM oven/bun:latest as build
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN bun run build
 
 FROM nginx:1.25.0-alpine as production
 

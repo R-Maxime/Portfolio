@@ -16,9 +16,9 @@ function EbouWorkDisplay({ workData }: { workData: IWork }): React.ReactElement 
       <WorkByIdMeta {...workData} />
       <WorkCard key={workData.id} admin={false} {...workData} />
       {<Info />}
+      {<Statistics />}
       {<TechnicalDetails />}
       {<Features />}
-      {<Statistics />}
     </div >
   );
 }
