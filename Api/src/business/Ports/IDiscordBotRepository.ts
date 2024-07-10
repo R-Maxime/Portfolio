@@ -9,7 +9,7 @@ export default interface IDiscordBotRepository {
    * Retrieves the total quantity of Discord statistics.
    * @returns A promise that resolves to the total quantity of Discord statistics, or null if no statistics are available.
    */
-  getStatsQuantity(): Promise<number | null>;
+  getStatsQuantity(): Promise<number>;
 
   /**
    * Retrieves the first Discord statistics document.
@@ -27,17 +27,17 @@ export default interface IDiscordBotRepository {
    * Retrieves the total quantity of guilds.
    * @returns A promise that resolves to the total quantity of guilds, or null if no guilds are available.
    */
-  getGuildsQuantity(): Promise<number | null>;
+  getGuildsQuantity(): Promise<number>;
 
   /**
    * Retrieves the total quantity of potential members.
    * @returns A promise that resolves to the total quantity of potential members, or null if no potential members are available.
    */
-  getPotentialMembersCount(): Promise<number | null>;
+  getPotentialMembersCount(): Promise<number>;
 
   /**
    * Retrieves the interaction statistics by week on the last five weeks.
    * @returns A promise that resolves to an array of interaction statistics, or null if no statistics are available.
    */
-  getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[] | null>;
+  getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]>;
 }

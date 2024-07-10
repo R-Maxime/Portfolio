@@ -14,8 +14,9 @@
   "rules": {
     "no-console": "off",
     "no-new": "off",
-    "indent": "off",
-    "no-underscore-dangle": "off",
-    "max-len": "off"
+    "no-continue": "off",
+    "max-len": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off"
   }
 }

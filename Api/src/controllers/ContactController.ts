@@ -4,11 +4,13 @@ import DiscordWebhookContact from '../business/Usecase/Contact/DiscordWebhookCon
 import Logger from '../utils/Logger';
 
 export default class ContactController {
-  constructor(
-    private readonly discordWebhookContact: DiscordWebhookContact,
-  ) { }
+  private readonly discordWebhookContact: DiscordWebhookContact;
 
-  async sendContactMessage(req: Request, res: Response): Promise<Response> {
+  constructor(discordWebhookContact: DiscordWebhookContact) {
+    this.discordWebhookContact = discordWebhookContact;
+  }
+
+  public async sendContactMessage(req: Request, res: Response): Promise<Response> {
     try {
       const {
         name, mail, message, phone,

@@ -1,7 +1,6 @@
 import express, { Express } from 'express';
 import AppConfig from './AppConfig';
 import Logger from './utils/Logger';
-import NodeEnvEnum from './enums/NodeEnvEnum';
 
 class App {
   private readonly expressApp: Express;
@@ -22,14 +21,7 @@ class App {
   }
 
   private startServer(): void {
-    this.expressApp.listen(this.API_PORT, () => {
-      if (process.env.NODE_ENV === NodeEnvEnum.PRODUCTION) {
-        Logger.log(`I am running at ${process.env.API_URL}:${this.API_PORT}`);
-        return;
-      }
-
-      Logger.log(`I am running at ${process.env.API_URL}`);
-    });
+    this.expressApp.listen(this.API_PORT, () => Logger.log(`I am running at ${process.env.API_URL}:${this.API_PORT}`));
   }
 }
 

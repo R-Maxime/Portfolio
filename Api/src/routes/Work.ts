@@ -16,7 +16,7 @@ const multerOptions = [
 ];
 
 export default class WorksRoutes {
-  private readonly router: express.Router;
+  public readonly router: express.Router;
 
   private readonly portfolioDB: DBClient;
 
@@ -42,9 +42,5 @@ export default class WorksRoutes {
     this.router.post('/', AuthMiddleware, Multer.fields(multerOptions), controller.createWork.bind(controller));
     this.router.put('/:id', AuthMiddleware, Multer.fields(multerOptions), controller.updateWork.bind(controller));
     this.router.delete('/:id', AuthMiddleware, controller.deleteWork.bind(controller));
-  }
-
-  get Router(): express.Router {
-    return this.router;
   }
 }

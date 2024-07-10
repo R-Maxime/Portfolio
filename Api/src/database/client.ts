@@ -6,7 +6,7 @@ export default class DBClient {
 
   private readonly dbname: string;
 
-  client: mongoose.Mongoose;
+  public readonly client: mongoose.Mongoose;
 
   constructor(dbname: string) {
     this.MONGO_IP = process.env.MONGO_IP as string;
@@ -14,7 +14,7 @@ export default class DBClient {
     this.client = new mongoose.Mongoose();
   }
 
-  async connect(): Promise<void> {
+  public async connect(): Promise<void> {
     await this.client.connect(this.MONGO_IP, { dbName: this.dbname });
     Logger.log(`Connecté à la base de données ${this.dbname}`);
   }

@@ -6,6 +6,7 @@ import Logger from '../utils/Logger';
 export default function AuthMiddleware(req: Request, res: Response, next: NextFunction): void {
   try {
     const { authorization } = req.headers;
+
     if (!authorization) {
       Logger.warn('No authorization header');
       res.status(HttpStatusCode.UNAUTHORIZED).json({ message: 'Unauthorized' });
@@ -20,7 +21,7 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
       return;
     }
 
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string) as jwt.JwtPayload;
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
     const { userId } = decodedToken as { userId: string };
 
     if (!userId) {

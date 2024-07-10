@@ -9,13 +9,13 @@ export default interface IWorkRepository {
    * @param work The work to create.
    * @returns A promise that resolves to the created work document.
    */
-  create(work: IWork): Promise<IWork>;
+  create(work: IWork): Promise<IWork | null>;
 
   /**
    * Retrieves all works.
    * @returns A promise that resolves to an array of work documents, or null if no works are found.
    */
-  getAllWorks(): Promise<IWork[] | null>;
+  getAllWorks(): Promise<IWork[]>;
 
   /**
    * Retrieves a work by its ID.

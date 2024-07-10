@@ -7,7 +7,7 @@ import SignupCommand from '../business/Usecase/User/SignupCommand';
 import IUserRepository from '../business/Ports/IUserRepository';
 
 export default class UserRoutes {
-  private readonly router: express.Router;
+  public readonly router: express.Router;
 
   private readonly portfolioDB: DBClient;
 
@@ -28,9 +28,5 @@ export default class UserRoutes {
 
     this.router.post('/login', controller.login.bind(controller));
     this.router.post('/signup', controller.signup.bind(controller));
-  }
-
-  get Router(): express.Router {
-    return this.router;
   }
 }

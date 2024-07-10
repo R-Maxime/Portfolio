@@ -1,7 +1,7 @@
 import { EmbedBuilder, WebhookClient, userMention } from 'discord.js';
 
 export default class DiscordWebhookContact {
-  webhook: WebhookClient;
+  private readonly webhook: WebhookClient;
 
   constructor() {
     this.webhook = new WebhookClient({ url: process.env.DISCORD_WEBHOOK_URL as string });
@@ -12,9 +12,7 @@ export default class DiscordWebhookContact {
       .setTitle(`Message de: ${name} - ${mail}`)
       .setDescription(message)
       .setColor('DarkBlue')
-      .setFooter({
-        text: 'Portfolio - Contact',
-      })
+      .setFooter({ text: 'Portfolio - Contact' })
       .setTimestamp(new Date());
 
     await this.webhook.send({

@@ -10,7 +10,7 @@ export default class PutWorkCommand {
     this.workRepository = workRepository;
   }
 
-  async execute(work: IWork): Promise<IWork | HttpError> {
+  public async execute(work: IWork): Promise<IWork | HttpError> {
     const updatedWork = await this.workRepository.updateWorkById(work);
 
     if (!updatedWork) {

@@ -45,17 +45,17 @@ export default class LoginQuery {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while generating token');
     }
 
-    return Promise.resolve({
+    return {
       token,
       userId: user.id,
-    });
+    };
   }
 
-  comparePassword(password: string, hash: string): Promise<boolean> {
+  private comparePassword(password: string, hash: string): Promise<boolean> {
     return this.bcrypt.compare(password, hash);
   }
 
-  generateToken(userId: string): string {
+  private generateToken(userId: string): string {
     return this.jwt.sign(
       { userId },
       process.env.JWT_SECRET as string,

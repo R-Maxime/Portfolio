@@ -28,6 +28,7 @@ export default class AppConfig {
     if (!fs.existsSync(this.publicPath)) {
       fs.mkdirSync(this.publicPath);
     }
+
     this.setupMiddleware();
     await this.connectDBs();
     await this.setupRoutes();
@@ -35,23 +36,26 @@ export default class AppConfig {
 
   private logRequests(): void {
     this.expressApp.use((req: Request, res: Response, next) => {
-      Logger.log(`${req.method} ${req.url}`);
+      const start = performance.now();
       next();
+
+      res.on('finish', () => {
+        Logger.log(`[${req.method} - ${res.statusCode}] ${req.originalUrl} executed in ${(performance.now() - start).toFixed(2)}ms`);
+      });
     });
   }
 
   private setupMiddleware(): void {
     this.expressApp.use(express.json({ limit: '50mb' }));
     this.expressApp.use(cors());
-    this.expressApp.use(helmet({
-      crossOriginResourcePolicy: false,
-    }));
+    this.expressApp.use(helmet({ crossOriginResourcePolicy: false }));
     this.expressApp.disable('x-powered-by');
     this.logRequests();
   }
 
   private async connectDBs(): Promise<void> {
     await this.portfolioDB.connect();
+
     if (this.BOT_DB_ACTIVE) {
       await this.botDB.connect();
     }
@@ -59,11 +63,12 @@ export default class AppConfig {
 
   private async setupRoutes(): Promise<void> {
     this.expressApp.use('/public', express.static(this.publicPath));
-    this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).Router);
-    this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).Router);
-    this.expressApp.use('/contact', new ContactRoute().Router);
+    this.expressApp.use('/auth', new UserRoutes(this.portfolioDB).router);
+    this.expressApp.use('/work', new WorksRoutes(this.portfolioDB).router);
+    this.expressApp.use('/contact', new ContactRoute().router);
+
     if (this.BOT_DB_ACTIVE) {
-      this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).Router);
+      this.expressApp.use('/discord', new DiscordBotRoutes(this.botDB).router);
     }
   }
 }

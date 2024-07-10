@@ -33,11 +33,7 @@ export default class WorkModel {
     });
   }
 
-  get model(): Model<IWork> {
-    if (this.PortfolioDB.client.models.Work) {
-      return this.PortfolioDB.client.models.Work as Model<IWork>;
-    }
-
+  public getModel(): Model<IWork> {
     return this.PortfolioDB.client.model<IWork>('Work', this.WorkSchema);
   }
 }

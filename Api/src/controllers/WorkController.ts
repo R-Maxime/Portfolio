@@ -10,12 +10,20 @@ import DeleteWorkCommand from '../business/Usecase/Work/DeleteWorkCommand';
 import Logger from '../utils/Logger';
 
 export default class WorkController {
-  constructor(
-    private readonly getWorkQuery: GetWorkQuery,
-    private readonly postWorkCommand: PostWorkCommand,
-    private readonly putWorkCommand: PutWorkCommand,
-    private readonly deleteWorkCommand: DeleteWorkCommand,
-  ) { }
+  private readonly getWorkQuery: GetWorkQuery;
+
+  private readonly postWorkCommand: PostWorkCommand;
+
+  private readonly putWorkCommand: PutWorkCommand;
+
+  private readonly deleteWorkCommand: DeleteWorkCommand;
+
+  constructor(getWorkQuery: GetWorkQuery, postWorkCommand: PostWorkCommand, putWorkCommand: PutWorkCommand, deleteWorkCommand: DeleteWorkCommand) {
+    this.getWorkQuery = getWorkQuery;
+    this.postWorkCommand = postWorkCommand;
+    this.putWorkCommand = putWorkCommand;
+    this.deleteWorkCommand = deleteWorkCommand;
+  }
 
   async getWorks(req: Request, res: Response): Promise<Response> {
     try {

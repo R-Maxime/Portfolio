@@ -6,10 +6,14 @@ import HttpStatusCode from '../enums/HttpStatusCode';
 import Logger from '../utils/Logger';
 
 export default class UserController {
-  constructor(
-    private readonly loginQuery: LoginQuery,
-    private readonly signupCommand: SignupCommand,
-  ) { }
+  private readonly loginQuery: LoginQuery;
+
+  private readonly signupCommand: SignupCommand;
+
+  constructor(loginQuery: LoginQuery, signupCommand: SignupCommand) {
+    this.loginQuery = loginQuery;
+    this.signupCommand = signupCommand;
+  }
 
   async login(req: Request, res: Response): Promise<Response> {
     try {

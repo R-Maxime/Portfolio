@@ -17,11 +17,7 @@ export default class UserModel {
     });
   }
 
-  get model(): Model<IUser> {
-    if (this.PortfolioDB.client.models.User) {
-      return this.PortfolioDB.client.models.User as Model<IUser>;
-    }
-
+  public getModel(): Model<IUser> {
     return this.PortfolioDB.client.model<IUser>('User', this.UserSchema);
   }
 }

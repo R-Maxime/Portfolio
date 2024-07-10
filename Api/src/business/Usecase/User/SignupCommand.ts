@@ -27,6 +27,7 @@ export default class SignupCommand {
     }
 
     const hash = await this.hashPassword(password);
+
     if (!hash) {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while hashing password');
     }
@@ -44,7 +45,7 @@ export default class SignupCommand {
     return user;
   }
 
-  async hashPassword(password: string): Promise<string> {
+  private async hashPassword(password: string): Promise<string> {
     return this.bcrypt.hash(password, Number(process.env.SALT_ROUNDS));
   }
 }

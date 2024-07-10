@@ -10,7 +10,7 @@ export default class PostWorkCommand {
     this.workRepository = workRepository;
   }
 
-  async createWork(workData: IWork): Promise<IWork | HttpError> {
+  public async createWork(workData: IWork): Promise<IWork | HttpError> {
     const work = await this.workRepository.create(workData);
 
     if (!work) {

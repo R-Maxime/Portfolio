@@ -10,7 +10,7 @@ export default class GetWorkQuery {
     this.workRepository = workRepository;
   }
 
-  async getAllWorks(): Promise<IWork[] | HttpError> {
+  public async getAllWorks(): Promise<IWork[] | HttpError> {
     const works = await this.workRepository.getAllWorks();
 
     if (!works) {
@@ -20,7 +20,7 @@ export default class GetWorkQuery {
     return Promise.resolve(works);
   }
 
-  async getWork(id: string): Promise<IWork | HttpError> {
+  public async getWork(id: string): Promise<IWork | HttpError> {
     const work = await this.workRepository.getWorkByWorkId(id);
 
     if (!work) {

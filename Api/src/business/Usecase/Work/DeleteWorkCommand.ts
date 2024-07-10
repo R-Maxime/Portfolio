@@ -7,7 +7,7 @@ export default class DeleteWorkCommand {
     this.workRepository = workRepository;
   }
 
-  async execute(workId: string): Promise<void> {
+  public async execute(workId: string): Promise<void> {
     await this.workRepository.deleteWorkById(workId);
     return Promise.resolve();
   }

@@ -6,7 +6,7 @@ import DiscordStatsController from '../controllers/DiscordStatsController';
 import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
 
 export default class DiscordBotRoutes {
-  private readonly router: express.Router;
+  public readonly router: express.Router;
 
   private readonly discordDB: DBClient;
 
@@ -26,9 +26,5 @@ export default class DiscordBotRoutes {
 
     this.router.get('/global', controller.getStatsCount.bind(controller));
     this.router.get('/stats', controller.getLastFiveWeeksStats.bind(controller));
-  }
-
-  get Router(): express.Router {
-    return this.router;
   }
 }
