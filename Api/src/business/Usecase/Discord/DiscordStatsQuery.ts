@@ -30,7 +30,24 @@ export default class DiscordStatsQuery {
   }
 
   public async getLastFiveWeeksStats(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[] | HttpError> {
-    const stats = await this.discordRepository.getInteractionsStatsByWeekOnLastFiveWeeks();
-    return stats;
+    const promises = [
+      this.discordRepository.getInteractionsStatsByWeekOnLastFiveWeeks(),
+      this.discordRepository.getMessagesStatsByWeekOnLastFiveWeeks(),
+    ];
+
+    const [interactionsStats, messagesStats] = await Promise.all(promises);
+
+    return interactionsStats.map((i) => {
+      const currentMsg = messagesStats.find((m) => m.startOfWeek === i.startOfWeek);
+
+      return {
+        ...i,
+        count: i.count + (currentMsg?.count || 0),
+      };
+    });
+  }
+
+  public async getTotalAlmanaxServersCount(): Promise<number> {
+    return this.discordRepository.getTotalAlmanaxServersCount();
   }
 }

@@ -8,11 +8,15 @@ import { IDiscordStats } from '../../../business/Models/DiscordStats';
 import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
 import { IInteractionStatsByWeekOnLastFiveWeeks } from '../../../business/Models/Discord';
 import Logger from '../../../utils/Logger';
+import { IDBMessageStats } from '../../../business/Models/MessageStats';
+import MessageStatsCollection from '../Collections/MessageStats';
 
 export default class MongoDBDiscordRepository implements IDiscordBotRepository {
   private readonly discordStatsRepository: mongoose.mongo.Collection<IDiscordStats>;
 
   private readonly discordGuildsRepository: mongoose.mongo.Collection<IDiscordGuilds>;
+
+  private readonly discordMessageStatsRepository: mongoose.mongo.Collection<IDBMessageStats>;
 
   private readonly botDB: DBClient;
 
@@ -22,9 +26,11 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     this.discordStatsRepository = new DiscordStatsCollection(this.botDB).getCollection();
 
     this.discordGuildsRepository = new DiscordGuildsCollection(this.botDB).getCollection();
+
+    this.discordMessageStatsRepository = new MessageStatsCollection(this.botDB).getCollection();
   }
 
-  async getStatsQuantity(): Promise<number> {
+  public async getStatsQuantity(): Promise<number> {
     try {
       const statsCount = await this.discordStatsRepository.countDocuments();
       return statsCount || 0;
@@ -34,7 +40,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     }
   }
 
-  async getFirstStatDocument(): Promise<IDiscordStats | null> {
+  public async getFirstStatDocument(): Promise<IDiscordStats | null> {
     try {
       const firstStat = await this.discordStatsRepository.findOne({}, { sort: { createdAt: 1 } });
       return firstStat;
@@ -44,7 +50,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     }
   }
 
-  async getLastStatDocument(): Promise<IDiscordStats | null> {
+  public async getLastStatDocument(): Promise<IDiscordStats | null> {
     try {
       const lastStat = await this.discordStatsRepository.findOne({}, { sort: { createdAt: -1 } });
       return lastStat;
@@ -54,7 +60,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     }
   }
 
-  async getGuildsQuantity(): Promise<number> {
+  public async getGuildsQuantity(): Promise<number> {
     try {
       const guildsCount = await this.discordGuildsRepository.countDocuments();
       return guildsCount || 0;
@@ -64,7 +70,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     }
   }
 
-  async getPotentialMembersCount(): Promise<number> {
+  public async getPotentialMembersCount(): Promise<number> {
     try {
       const potentialMembersCount = await this.discordGuildsRepository.aggregate([
         {
@@ -110,7 +116,7 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     return `${date.getFullYear()}-${weekNumber}`;
   }
 
-  async getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]> {
+  public async getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]> {
     try {
       const today = new Date();
 
@@ -156,6 +162,88 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
     } catch (error) {
       Logger.error('Error while getting interactions stats by week on last five weeks', error);
       return [];
+    }
+  }
+
+  public async getMessagesStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]> {
+    try {
+      const today = new Date();
+      const promises = [];
+
+      for (let i = 0; i < 5; i += 1) {
+        const startOfWeek = MongoDBDiscordRepository.getStartOfWeek(new Date(today.getTime() - (i * 7 * 24 * 60 * 60 * 1000)));
+        const endOfWeek = MongoDBDiscordRepository.getEndOfWeek(startOfWeek);
+
+        const weekData = {
+          startOfWeek: startOfWeek.toISOString().split('T')[0],
+          endOfWeek: endOfWeek.toISOString().split('T')[0],
+        };
+
+        const promise = this.discordMessageStatsRepository.aggregate([
+          {
+            $match: {
+              createdAt: {
+                $gte: startOfWeek,
+                $lte: endOfWeek,
+              },
+            },
+          },
+          {
+            $group: {
+              _id: null,
+              totalSum: { $sum: '$successCount' },
+            },
+          },
+        ]).toArray().then((stat) => ({
+          count: stat[0]?.totalSum || 0,
+          startOfWeek: weekData.startOfWeek,
+          endOfWeek: weekData.endOfWeek,
+          weekNumber: MongoDBDiscordRepository.getWeekNumber(startOfWeek),
+        }));
+
+        promises.push(promise);
+      }
+
+      const stats = await Promise.all(promises);
+
+      if (!stats) {
+        return [];
+      }
+
+      return stats.reverse();
+    } catch (error) {
+      Logger.error('Error while getting interactions stats by week on last five weeks', error);
+      return [];
+    }
+  }
+
+  public async getTotalAlmanaxServersCount(): Promise<number> {
+    try {
+      const totalAlmanaxServersCount = await this.discordGuildsRepository.aggregate([
+        {
+          $match: {
+            Almanax: {
+              $ne: [],
+            },
+          },
+        },
+        {
+          $project: {
+            almanaxCount: { $size: '$Almanax' },
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            total: { $sum: '$almanaxCount' },
+          },
+        },
+      ]).toArray();
+
+      return totalAlmanaxServersCount && totalAlmanaxServersCount.length ? totalAlmanaxServersCount[0].total : 0;
+    } catch (error) {
+      Logger.error('Error while getting total almanax servers count', error);
+      return 0;
     }
   }
 }

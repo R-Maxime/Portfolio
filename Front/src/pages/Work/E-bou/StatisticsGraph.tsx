@@ -14,7 +14,7 @@ const CustomLegend = ({ data }: {
   const lastInteraction = data[data.length - 1]?.endOfWeek;
   return (
     <div>
-      <p>{`${totalInteractions} interactions entre le ${firstInteraction} et le ${lastInteraction}`}</p>
+      <p>{`${totalInteractions.toLocaleString()} interactions entre le ${firstInteraction} et le ${lastInteraction}`}</p>
     </div>
   );
 };
@@ -30,7 +30,7 @@ const CustomTooltip = ({ active, payload }:
   const count = payload[0].payload.count;
 
   return (
-    <div className="stats__tooltip">{`${count} interactions réalisées entre le ${startOfWeek} et le ${endOfWeek}`}</div>
+    <div className="stats__tooltip">{`${count.toLocaleString()} interactions réalisées entre le ${startOfWeek} et le ${endOfWeek}`}</div>
   );
 };
 

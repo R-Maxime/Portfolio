@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
 import DBClient from '../../client';
+import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
 
 export default class DiscordGuildsCollection {
   private readonly DiscordDB: DBClient;
@@ -12,6 +12,6 @@ export default class DiscordGuildsCollection {
   }
 
   public getCollection(): mongoose.mongo.Collection<IDiscordGuilds> {
-    return this.DiscordDB.client.connection.db.collection<IDiscordGuilds>(this.collectionName);
+    return this.DiscordDB.getDatabase().collection<IDiscordGuilds>(this.collectionName);
   }
 }

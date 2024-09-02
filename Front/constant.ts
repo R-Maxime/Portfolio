@@ -4,6 +4,7 @@ export default {
     WORKS: 'work',
     DISCORD_GLOBAL: 'discord/global',
     DISCORD_LAST_FIVE_WEEKS: 'discord/stats',
+    DISCORD_ALMANAX_QUANTITY: 'discord/almanax',
     CONTACT: 'contact'
   },
   API_URL: 'https://api.portfolio.faareoh.fr',

@@ -40,4 +40,6 @@ export default interface IDiscordBotRepository {
    * @returns A promise that resolves to an array of interaction statistics, or null if no statistics are available.
    */
   getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]>;
+  getMessagesStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]>;
+  getTotalAlmanaxServersCount(): Promise<number>;
 }

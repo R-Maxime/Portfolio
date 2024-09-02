@@ -1,6 +1,3 @@
 public/
 logs/
 .env
-
-src/business/Models/Discord*.ts
-!src/business/Models/Discord.ts

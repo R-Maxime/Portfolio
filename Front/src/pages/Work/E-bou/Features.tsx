@@ -11,6 +11,7 @@ import Dungeon from '/img/dungeon.webp';
 import Help from '/img/help.webp';
 import Collapsible from 'react-collapsible';
 import i18n from '../../../langs/i18n';
+import Discord from '../../../datas/Discord';
 
 const EbouFeatures: { title: string, description: string, image?: string }[] = [
   {
@@ -30,7 +31,7 @@ const EbouFeatures: { title: string, description: string, image?: string }[] = [
   },
   {
     title: 'Almanax',
-    description: 'L\'Almanax est un événement journalier commun à tous les serveurs de jeux DOFUS.\\n\\nLes utilisateurs ont la possibilité d\'effectuer manuellement une commande pour obtenir le bonus du jour, ou bien, à l\'aide de la commande "Almanax-Setup", de configurer un envoi automatique de l\'Almanax chaque jour à minuit.\\n\\nPrès de 500 serveurs différents reçoit quotidiennement l\'Almanax automatiquement.',
+    description: 'L\'Almanax est un événement journalier commun à tous les serveurs de jeux DOFUS.\\n\\nLes utilisateurs ont la possibilité d\'effectuer manuellement une commande pour obtenir le bonus du jour, ou bien, à l\'aide de la commande "/almanax setup", de configurer un envoi automatique de l\'Almanax chaque jour à minuit.\\n\\n%1 serveurs différents reçoivent quotidiennement l\'Almanax automatiquement.',
     image: Almanax
   },
   {
@@ -51,6 +52,7 @@ const EbouFeatures: { title: string, description: string, image?: string }[] = [
 function Features(): React.ReactElement {
   const [imageOpen, setImageOpen] = useState(false);
   const [selectedFeature, setSelectedFeature] = useState<{ title: string, image?: string } | null>(null);
+  const [almanaxQuantity, setAlmanaxQuantity] = useState<number | undefined>(undefined);
 
   const openModal = (feature: { title: string, image?: string }) => {
     setImageOpen(true);
@@ -97,6 +99,30 @@ function Features(): React.ReactElement {
     });
   }, []);
 
+  useEffect(() => {
+    Discord.getAlmanaxQuantity().then((quantity) => setAlmanaxQuantity(quantity));
+  }, []);
+
+  const handleFeature = (feature: { title: string, description: string, image?: string }, index: number) => {
+    if (feature.title === 'Almanax') {
+      if (almanaxQuantity === undefined) {
+        return null;
+      }
+
+      feature.description = feature.description.replace('%1', almanaxQuantity?.toLocaleString() || '0');
+    }
+
+    return (
+      <li key={index}>
+        {feature.image && <h4 className='features__title' onClick={() => openModal(feature)}>{feature.title}</h4>}
+        {!feature.image && <h4>{feature.title}</h4>}
+        {feature.description.split('\\n').map((paragraph, ind) => (
+          <p key={ind}> {paragraph}<br /></p>
+        ))}
+      </li>
+    );
+  }
+
   return (
     <>
       {imageOpen && selectedFeature && (
@@ -111,21 +137,13 @@ function Features(): React.ReactElement {
       )}
       <div className='work__long-description content-container features__container'>
         <h3>{i18n.work.Ebou.features.fr}</h3>
-        <p>Le bot dispose de tout un tas de fonctionnalités, autant pour permettre de récupérer des informations en lien avec le jeu, que pour fournir des informations en temps réel sur l'activité d'Ankama.</p>
+        <p>L'application dispose de tout un tas de fonctionnalités, autant pour permettre de récupérer des informations en lien avec le jeu, que pour fournir des informations en temps réel sur l'activité d'Ankama.</p>
         <Collapsible trigger={i18n.work.Ebou.features.fr} transitionTime={200}>
           <ul>
-            {EbouFeatures.map((feature, index) => (
-              <li key={index}>
-                {feature.image && <h4 className='features__title' onClick={() => openModal(feature)}>{feature.title}</h4>}
-                {!feature.image && <h4>{feature.title}</h4>}
-                {feature.description.split('\\n').map((paragraph, ind) => (
-                  <p key={ind}>{paragraph}<br /></p>
-                ))}
-              </li>
-            ))}
+            {EbouFeatures.map((feature, index) => handleFeature(feature, index))}
           </ul>
         </Collapsible>
-        <p>L'ensemble des commandes sont totalement interactives et reliées entre elles, si la commande en cours va avoir un quelconque lien avec une des fonctionnalités du bot, il est possible grâce à un menu déroulant ou des boutons de naviguer vers la fonctionnalité en question, sans aucune difficulté.</p>
+        <p>L'ensemble des commandes sont totalement interactives et reliées entre elles, si la commande en cours va avoir un quelconque lien avec une des fonctionnalités de l'application, il est possible grâce à un menu déroulant ou des boutons de naviguer vers la fonctionnalité en question, sans aucune difficulté.</p>
       </div>
     </>
   );

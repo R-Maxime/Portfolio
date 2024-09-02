@@ -18,4 +18,14 @@ export default class DBClient {
     await this.client.connect(this.MONGO_IP, { dbName: this.dbname });
     Logger.log(`Connecté à la base de données ${this.dbname}`);
   }
+
+  public getDatabase(): mongoose.mongo.Db {
+    const { db } = this.client.connection;
+
+    if (!db) {
+      throw new Error('Database not connected');
+    }
+
+    return db;
+  }
 }

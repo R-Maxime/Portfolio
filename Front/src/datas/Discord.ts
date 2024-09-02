@@ -13,6 +13,12 @@ class Discord {
     const interactionStatsByWeekOnLastMonth = await response.json();
     return interactionStatsByWeekOnLastMonth;
   }
+
+  static async getAlmanaxQuantity(): Promise<number> {
+    const response = await fetch(`${constant.API_URL}/${constant.API_ROUTES.DISCORD_ALMANAX_QUANTITY}`);
+    const almanaxQuantity = await response.json().then((data: { count: number }) => data.count);
+    return almanaxQuantity;
+  }
 }
 
 export default Discord;

@@ -29,4 +29,14 @@ export default class DiscordStatsController {
       return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting stats', error });
     }
   }
+
+  public async getTotalAlmanaxServersCount(req: Request, res: Response): Promise<Response> {
+    try {
+      const count = await this.discordStatsQuery.getTotalAlmanaxServersCount();
+      return res.status(HttpStatusCode.OK).json({ count });
+    } catch (error) {
+      Logger.error('Error while getting count', error);
+      return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ message: 'Error while getting count', error });
+    }
+  }
 }

@@ -45,8 +45,8 @@ function Statistics(): React.ReactElement {
   return (
     <div className='work__long-description content-container'>
       <h3>{i18n.work.Ebou.statistics.fr}</h3>
-      <p>Le bot est actuellement déployé sur <strong>{globalStats.guildsCount.toLocaleString()}</strong> serveurs Discord distincts, touchant ainsi une audience potentielle de <strong>{globalStats.potentialMembersCount}</strong> utilisateurs.</p>
-      <p>Entre le <strong>{getDate(new Date(globalStats.firstCreatedAt))}</strong> et le <strong>{getDate(new Date(globalStats.lastCreatedAt))}</strong> un total de <strong>{globalStats.statsCount.toLocaleString()}</strong> interactions manuelles ont été faites avec le bot.</p>
+      <p>L'application est actuellement déployée sur <strong>{globalStats.guildsCount.toLocaleString()}</strong> serveurs Discord distincts, touchant ainsi une audience potentielle de <strong>{globalStats.potentialMembersCount.toLocaleString()}</strong> utilisateurs.</p>
+      <p>Entre le <strong>{getDate(new Date(globalStats.firstCreatedAt))}</strong> et le <strong>{getDate(new Date(globalStats.lastCreatedAt))}</strong> un total de <strong>{globalStats.statsCount.toLocaleString()}</strong> interactions manuelles ont été réalisées sur l'application.</p>
       {<StatisticsGraph interactionStats={interactionStats} />}
     </div>
   );

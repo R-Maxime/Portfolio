@@ -26,5 +26,6 @@ export default class DiscordBotRoutes {
 
     this.router.get('/global', controller.getStatsCount.bind(controller));
     this.router.get('/stats', controller.getLastFiveWeeksStats.bind(controller));
+    this.router.get('/almanax', controller.getTotalAlmanaxServersCount.bind(controller));
   }
 }
