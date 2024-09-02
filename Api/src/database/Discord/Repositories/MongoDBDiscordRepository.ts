@@ -33,7 +33,9 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
   public async getStatsQuantity(): Promise<number> {
     try {
       const statsCount = await this.discordStatsRepository.countDocuments();
-      return statsCount || 0;
+      const messageStatCount = await this.getTotalMessageStatsCount();
+
+      return statsCount + messageStatCount || 0;
     } catch (error) {
       Logger.error('Error while getting stats count', error);
       return 0;
@@ -243,6 +245,24 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
       return totalAlmanaxServersCount && totalAlmanaxServersCount.length ? totalAlmanaxServersCount[0].total : 0;
     } catch (error) {
       Logger.error('Error while getting total almanax servers count', error);
+      return 0;
+    }
+  }
+
+  public async getTotalMessageStatsCount(): Promise<number> {
+    try {
+      const totalMessageCount = await this.discordMessageStatsRepository.aggregate([
+        {
+          $group: {
+            _id: null,
+            totalSum: { $sum: '$successCount' },
+          },
+        },
+      ]).toArray();
+
+      return totalMessageCount && totalMessageCount.length ? totalMessageCount[0].totalSum : 0;
+    } catch (error) {
+      Logger.error('Error while getting total message count', error);
       return 0;
     }
   }

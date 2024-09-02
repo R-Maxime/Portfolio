@@ -7,7 +7,7 @@ export default {
     DISCORD_ALMANAX_QUANTITY: 'discord/almanax',
     CONTACT: 'contact'
   },
-  API_URL: 'https://api.portfolio.faareoh.fr',
+  API_URL: 'http://localhost:5000',
   PAGE_DEFAULT_NAME: 'Portfolio de Maxime R.',
   TRACKING_ID: 'G-NLSKNYX1Q5'
 };

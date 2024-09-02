@@ -42,4 +42,5 @@ export default interface IDiscordBotRepository {
   getInteractionsStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]>;
   getMessagesStatsByWeekOnLastFiveWeeks(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]>;
   getTotalAlmanaxServersCount(): Promise<number>;
+  getTotalMessageStatsCount(): Promise<number>;
 }
