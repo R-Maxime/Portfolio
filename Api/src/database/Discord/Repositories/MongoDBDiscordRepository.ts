@@ -32,8 +32,10 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
 
   public async getStatsQuantity(): Promise<number> {
     try {
-      const statsCount = await this.discordStatsRepository.countDocuments();
-      const messageStatCount = await this.getTotalMessageStatsCount();
+      const [statsCount, messageStatCount] = await Promise.all([
+        this.discordStatsRepository.countDocuments(),
+        this.getTotalMessageStatsCount(),
+      ]);
 
       return statsCount + messageStatCount || 0;
     } catch (error) {
