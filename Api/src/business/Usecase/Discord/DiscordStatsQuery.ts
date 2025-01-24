@@ -1,4 +1,3 @@
-import { HttpError } from 'http-errors';
 import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from '../../Models/Discord';
 import IDiscordBotRepository from '../../Ports/IDiscordBotRepository';
 
@@ -29,7 +28,7 @@ export default class DiscordStatsQuery {
     return data;
   }
 
-  public async getLastFiveWeeksStats(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[] | HttpError> {
+  public async getLastFiveWeeksStats(): Promise<IInteractionStatsByWeekOnLastFiveWeeks[]> {
     const promises = [
       this.discordRepository.getInteractionsStatsByWeekOnLastFiveWeeks(),
       this.discordRepository.getMessagesStatsByWeekOnLastFiveWeeks(),
