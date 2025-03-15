@@ -1,4 +1,4 @@
-export interface IDiscordStats {
+export default interface IDiscordStats {
   id: string;
   createdAt: Date;
 }

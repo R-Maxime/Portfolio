@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import HttpStatusCode from '../enums/HttpStatusCode';
 import DiscordStatsQuery from '../business/Usecase/Discord/DiscordStatsQuery';
 import Logger from '../utils/Logger';
-import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from '../business/Models/Discord';
+import IGlobalStats, { IInteractionStatsByWeekOnLastFiveWeeks } from '../business/Models/Discord';
 
 const cache: { globalStats: IGlobalStats | null, lastFiveWeeksStats: IInteractionStatsByWeekOnLastFiveWeeks[] | null, totalAlmanaxServersCount: number | null } = { globalStats: null, lastFiveWeeksStats: null, totalAlmanaxServersCount: null };
 

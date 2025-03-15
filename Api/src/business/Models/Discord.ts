@@ -1,4 +1,4 @@
-interface IGlobalStats {
+export default interface IGlobalStats {
   statsCount: number;
   guildsCount: number;
   potentialMembersCount: number;
@@ -6,14 +6,9 @@ interface IGlobalStats {
   lastCreatedAt: Date;
 }
 
-interface IInteractionStatsByWeekOnLastFiveWeeks {
+export interface IInteractionStatsByWeekOnLastFiveWeeks {
   count: number;
   startOfWeek: string;
   endOfWeek: string;
   weekNumber: string;
 }
-
-export {
-  IGlobalStats,
-  IInteractionStatsByWeekOnLastFiveWeeks,
-};

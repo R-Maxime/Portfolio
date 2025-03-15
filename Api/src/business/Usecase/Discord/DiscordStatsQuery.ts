@@ -1,4 +1,4 @@
-import { IGlobalStats, IInteractionStatsByWeekOnLastFiveWeeks } from '../../Models/Discord';
+import IGlobalStats, { IInteractionStatsByWeekOnLastFiveWeeks } from '../../Models/Discord';
 import IDiscordBotRepository from '../../Ports/IDiscordBotRepository';
 
 export default class DiscordStatsQuery {

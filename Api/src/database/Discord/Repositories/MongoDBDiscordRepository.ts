@@ -4,12 +4,14 @@ import DBClient from '../../client';
 import IDiscordBotRepository from '../../../business/Ports/IDiscordBotRepository';
 import DiscordStatsCollection from '../Collections/DiscordStats';
 import DiscordGuildsCollection from '../Collections/DiscordGuilds';
-import { IDiscordStats } from '../../../business/Models/DiscordStats';
-import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
+import IDiscordStats from '../../../business/Models/DiscordStats';
+import IDiscordGuilds from '../../../business/Models/DiscordGuilds';
 import { IInteractionStatsByWeekOnLastFiveWeeks } from '../../../business/Models/Discord';
 import Logger from '../../../utils/Logger';
 import { IDBMessageStats } from '../../../business/Models/MessageStats';
 import MessageStatsCollection from '../Collections/MessageStats';
+import { ModulesTypesEnum } from '../../../business/Models/ModuleChannel';
+import ModuleChannelsCollection from '../Collections/ModuleChannels';
 
 export default class MongoDBDiscordRepository implements IDiscordBotRepository {
   private readonly discordStatsRepository: mongoose.mongo.Collection<IDiscordStats>;
@@ -18,16 +20,17 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
 
   private readonly discordMessageStatsRepository: mongoose.mongo.Collection<IDBMessageStats>;
 
+  private readonly moduleChannelStatsRepository: ModuleChannelsCollection;
+
   private readonly botDB: DBClient;
 
   constructor(botDB: DBClient) {
     this.botDB = botDB;
 
     this.discordStatsRepository = new DiscordStatsCollection(this.botDB).getCollection();
-
     this.discordGuildsRepository = new DiscordGuildsCollection(this.botDB).getCollection();
-
     this.discordMessageStatsRepository = new MessageStatsCollection(this.botDB).getCollection();
+    this.moduleChannelStatsRepository = new ModuleChannelsCollection(this.botDB);
   }
 
   public async getStatsQuantity(): Promise<number> {
@@ -223,28 +226,8 @@ export default class MongoDBDiscordRepository implements IDiscordBotRepository {
 
   public async getTotalAlmanaxServersCount(): Promise<number> {
     try {
-      const totalAlmanaxServersCount = await this.discordGuildsRepository.aggregate([
-        {
-          $match: {
-            Almanax: {
-              $ne: [],
-            },
-          },
-        },
-        {
-          $project: {
-            almanaxCount: { $size: '$Almanax' },
-          },
-        },
-        {
-          $group: {
-            _id: null,
-            total: { $sum: '$almanaxCount' },
-          },
-        },
-      ]).toArray();
-
-      return totalAlmanaxServersCount && totalAlmanaxServersCount.length ? totalAlmanaxServersCount[0].total : 0;
+      const totalAlmanaxServersCount = (await this.moduleChannelStatsRepository.getAllByModule(ModulesTypesEnum.Almanax)).reduce((acc: number, channel) => acc + (channel.modules.filter((module) => module.type === ModulesTypesEnum.Almanax).length), 0);
+      return totalAlmanaxServersCount || 0;
     } catch (error) {
       Logger.error('Error while getting total almanax servers count', error);
       return 0;

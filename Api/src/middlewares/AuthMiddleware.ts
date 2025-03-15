@@ -36,3 +36,10 @@ export default function AuthMiddleware(req: Request, res: Response, next: NextFu
     res.status(500).json({ message: 'Error while authenticating user', error });
   }
 }
+
+export function generateToken(userId: string): string {
+  return jwt.sign(
+    { userId },
+    process.env.JWT_SECRET as string,
+  );
+}

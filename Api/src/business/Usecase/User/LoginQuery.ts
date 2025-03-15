@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import createHttpError, { HttpError } from 'http-errors';
 import HttpStatusCode from '../../../enums/HttpStatusCode';
 import IUserRepository from '../../Ports/IUserRepository';
+import { generateToken } from '../../../middlewares/AuthMiddleware';
 
 interface ILoginResponse {
   token: string,
@@ -12,13 +12,10 @@ interface ILoginResponse {
 export default class LoginQuery {
   private readonly userRepository: IUserRepository;
 
-  private readonly jwt: typeof jwt;
-
   private readonly bcrypt: typeof bcrypt;
 
   constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository;
-    this.jwt = jwt;
     this.bcrypt = bcrypt;
   }
 
@@ -39,7 +36,7 @@ export default class LoginQuery {
       return createHttpError(HttpStatusCode.BAD_REQUEST, 'Login or password incorrect');
     }
 
-    const token = this.generateToken(user.id);
+    const token = generateToken(user.id);
 
     if (!token) {
       return createHttpError(HttpStatusCode.INTERNAL_SERVER_ERROR, 'Error while generating token');
@@ -53,12 +50,5 @@ export default class LoginQuery {
 
   private comparePassword(password: string, hash: string): Promise<boolean> {
     return this.bcrypt.compare(password, hash);
-  }
-
-  private generateToken(userId: string): string {
-    return this.jwt.sign(
-      { userId },
-      process.env.JWT_SECRET as string,
-    );
   }
 }

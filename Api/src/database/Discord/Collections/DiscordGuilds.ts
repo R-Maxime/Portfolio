@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import DBClient from '../../client';
-import { IDiscordGuilds } from '../../../business/Models/DiscordGuilds';
+import IDiscordGuilds from '../../../business/Models/DiscordGuilds';
 
 export default class DiscordGuildsCollection {
   private readonly DiscordDB: DBClient;

@@ -1,4 +1,4 @@
-export interface IDiscordGuilds {
+export default interface IDiscordGuilds {
   name: string;
   memberCount: number;
   createdAt: Date;

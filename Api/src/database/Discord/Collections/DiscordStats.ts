@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import DBClient from '../../client';
-import { IDiscordStats } from '../../../business/Models/DiscordStats';
+import IDiscordStats from '../../../business/Models/DiscordStats';
 
 export default class DiscordStatsCollection {
   private readonly DiscordDB: DBClient;
